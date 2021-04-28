@@ -4,7 +4,7 @@
       class="container is-white"
       :fixed-top="true"
     >
-      
+
       <template slot="start">
 
         <div class="imglogo" v-for="fit in fits" :key="fit">
@@ -98,7 +98,7 @@
             个人中心
           </b-navbar-item>
           <hr class="dropdown-divider">
-          <b-navbar-item> 
+          <b-navbar-item>
             退出登录
           </b-navbar-item>
         </b-navbar-dropdown>
