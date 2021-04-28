@@ -26,6 +26,9 @@ import noticeLayout from '@/views/admin/notice/notice.vue'
 //发布通知
 import createnoticeLayout from '@/views/admin/notice/createnotice.vue'
 
+//发布官方文章
+import createpostLayout from '@/views/admin/ofBlog/createpost.vue'
+
 //文章操作
 //文章详情
 import detail from '@/views/post/Detail.vue'
@@ -162,6 +165,13 @@ export default new Router({
               //     meta: { title: "官方博客列表"}
               //   },
               // ]
+            },
+            //发布官方文章
+            {
+              path: 'createpost',
+              component: createpostLayout,
+              name: 'createpostLayout',
+              meta: { title: "发布官方文章"},
             },
             //通知管理
             {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-createnotice></v-createnotice>
+    <v-table></v-table>
   </div>
 </template>
 
@@ -14,10 +14,10 @@ p{
 </style>
 
 <script>
-import createnotice from "@/components/admin/notice/createnotice";
+import table from "@/components/admin/ofBlog/createpost";
 export default {
   components: {
-    "v-createnotice": createnotice,
+    "v-table": table,
   },
 };
 </script>
