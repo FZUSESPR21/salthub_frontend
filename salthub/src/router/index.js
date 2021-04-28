@@ -23,8 +23,13 @@ import ofBlogLayout from '@/views/admin/ofBlog/ofBlog.vue'
 //通知管理
 import noticeLayout from '@/views/admin/notice/notice.vue'
 
+//文章操作
 //文章详情
 import detail from '@/views/post/Detail.vue'
+//用户发布文章
+import usercreatepost from '@/views/post/UserCreatePost.vue'
+//管理员发布文章
+import admincreatepost from '@/views/post/AdminCreatePost.vue'
 
 //组件测试
 //后台页头
@@ -172,11 +177,24 @@ export default new Router({
       name: 'Home',
       component: () => import("@/views/client/Home"),
     },
+    //文章操作
     //文章详情
     {
       path: '/Detail',
       name: 'Detail',
       component: detail
+    },
+    //用户发布文章
+    {
+      path: '/UserCreatePost',
+      name: 'UserCreatePost',
+      component: usercreatepost
+    },
+    //管理员发布文章
+    {
+      path: '/AdminCreatePost',
+      name: 'AdminCreatePost',
+      component: admincreatepost
     },
     // 访问路径不存在，则重定向到首页
     {
