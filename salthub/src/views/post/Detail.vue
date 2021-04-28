@@ -103,7 +103,7 @@ import Header from '@/components/Layout/Header'
   };
 </script>
 
-<style>
+<style scoped>
   .title{
   font-size: 30px;
   text-align: center;

@@ -107,7 +107,7 @@ import Header from '@/components/Layout/Header'
   };
 </script>
 
-<style>
+<style scoped>
   .createpost{
     background-color: white;
     width: 75%;
