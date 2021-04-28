@@ -61,6 +61,10 @@ export default new Router({
   routes: [
     //组件测试
     {
+      path: '/test',
+      component: () => import('@/components/HelloWorld')
+    },
+    {
       path: '/header',
       component: header,
       meta: { title: "后台页头" }
