@@ -39,7 +39,6 @@ import indexCard from '@/views/admin/index/indexCard'
 //用户列表
 import accountTable from '@/components/admin/account/table'
 
-
 Vue.use(Router)
 Vue.use(ElementUI);
 Vue.use(axios)
@@ -164,7 +163,12 @@ export default new Router({
         },
       ]
     },
-
+    //前台论坛首页
+    {
+      path: '/home',
+      name: 'Home',
+      component: () => import("@/views/client/Home"),
+    },
     // 访问路径不存在，则重定向到首页
     {
       path: '*',
