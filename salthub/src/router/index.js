@@ -23,8 +23,19 @@ import ofBlogLayout from '@/views/admin/ofBlog/ofBlog.vue'
 //通知管理
 import noticeLayout from '@/views/admin/notice/notice.vue'
 
+//发布通知
+import createnoticeLayout from '@/views/admin/notice/createnotice.vue'
+
+//发布官方文章
+import createpostLayout from '@/views/admin/ofBlog/createpost.vue'
+
+//文章操作
 //文章详情
 import detail from '@/views/post/Detail.vue'
+//用户发布文章
+import usercreatepost from '@/views/post/UserCreatePost.vue'
+//管理员发布文章
+import admincreatepost from '@/views/post/AdminCreatePost.vue'
 
 //组件测试
 //后台页头
@@ -155,6 +166,13 @@ export default new Router({
               //   },
               // ]
             },
+            //发布官方文章
+            {
+              path: 'createpost',
+              component: createpostLayout,
+              name: 'createpostLayout',
+              meta: { title: "发布官方文章"},
+            },
             //通知管理
             {
               path: 'notice',
@@ -162,6 +180,13 @@ export default new Router({
               name: 'noticeLayout',
               meta: { title: "通知管理"},
             },
+            //发布通知
+            {
+              path: 'createnotice',
+              component: createnoticeLayout,
+              name: 'createnoticeLayout',
+              meta: { title: "发布通知"},
+            }
           ]
         },
       ]
@@ -172,11 +197,24 @@ export default new Router({
       name: 'Home',
       component: () => import("@/views/client/Home"),
     },
+    //文章操作
     //文章详情
     {
       path: '/Detail',
       name: 'Detail',
       component: detail
+    },
+    //用户发布文章
+    {
+      path: '/UserCreatePost',
+      name: 'UserCreatePost',
+      component: usercreatepost
+    },
+    //管理员发布文章
+    {
+      path: '/AdminCreatePost',
+      name: 'AdminCreatePost',
+      component: admincreatepost
     },
     // 访问路径不存在，则重定向到首页
     {
