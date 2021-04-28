@@ -1681,6 +1681,7 @@
     "anymatch" "^2.0.0"
     "async-each" "^1.0.1"
     "braces" "^2.3.2"
+    "fsevents" "^1.2.7"
     "glob-parent" "^3.1.0"
     "inherits" "^2.0.3"
     "is-binary-path" "^1.0.0"
@@ -1699,6 +1700,7 @@
   dependencies:
     "anymatch" "~3.1.1"
     "braces" "~3.0.2"
+    "fsevents" "~2.3.1"
     "glob-parent" "~5.1.0"
     "is-binary-path" "~2.1.0"
     "is-glob" "~4.0.1"
@@ -1798,6 +1800,16 @@
     "string-width" "^2.1.1"
     "strip-ansi" "^4.0.0"
     "wrap-ansi" "^2.0.0"
+
+"clone-deep@^2.0.1":
+  "integrity" "sha1-ANs6Hhc2VnMNEYjD1qztbX6pdxM="
+  "resolved" "https://registry.npm.taobao.org/clone-deep/download/clone-deep-2.0.2.tgz"
+  "version" "2.0.2"
+  dependencies:
+    "for-own" "^1.0.0"
+    "is-plain-object" "^2.0.4"
+    "kind-of" "^6.0.0"
+    "shallow-clone" "^1.0.0"
 
 "clone@^1.0.2":
   "integrity" "sha1-2jCcwmPfFZlMaIypAheco8fNfH4="
@@ -3006,6 +3018,7 @@
     "estraverse" "^4.2.0"
     "esutils" "^2.0.2"
     "optionator" "^0.8.1"
+    "source-map" "~0.6.1"
   optionalDependencies:
     "source-map" "~0.6.1"
 
@@ -3462,6 +3475,11 @@
   dependencies:
     "is-callable" "^1.1.3"
 
+"for-in@^0.1.3":
+  "integrity" "sha1-2Hc5COMSVhCZUrH9ubP6hn0ndeE="
+  "resolved" "https://registry.npm.taobao.org/for-in/download/for-in-0.1.8.tgz"
+  "version" "0.1.8"
+
 "for-in@^1.0.1", "for-in@^1.0.2":
   "integrity" "sha1-gQaNKVqBQuwKxybG4iAMMPttXoA="
   "resolved" "https://registry.nlark.com/for-in/download/for-in-1.0.2.tgz"
@@ -3471,6 +3489,13 @@
   "integrity" "sha1-UmXGgaTylNq78XyVCbZ2OqhFEM4="
   "resolved" "https://registry.npm.taobao.org/for-own/download/for-own-0.1.5.tgz"
   "version" "0.1.5"
+  dependencies:
+    "for-in" "^1.0.1"
+
+"for-own@^1.0.0":
+  "integrity" "sha1-xjMy9BXO3EsE2/5wz4NklMU8tEs="
+  "resolved" "https://registry.nlark.com/for-own/download/for-own-1.0.0.tgz"
+  "version" "1.0.0"
   dependencies:
     "for-in" "^1.0.1"
 
@@ -3721,6 +3746,7 @@
     "minimist" "^1.2.5"
     "neo-async" "^2.6.0"
     "source-map" "^0.6.1"
+    "uglify-js" "^3.1.4"
     "wordwrap" "^1.0.0"
   optionalDependencies:
     "uglify-js" "^3.1.4"
@@ -5247,7 +5273,7 @@
     "json5" "^0.5.0"
     "object-assign" "^4.0.1"
 
-"loader-utils@^1.0.2", "loader-utils@^1.1.0":
+"loader-utils@^1.0.1", "loader-utils@^1.0.2", "loader-utils@^1.1.0":
   "integrity" "sha1-xXm140yzSxp07cbB+za/o3HVphM="
   "resolved" "https://registry.npm.taobao.org/loader-utils/download/loader-utils-1.4.0.tgz"
   "version" "1.4.0"
@@ -5417,6 +5443,11 @@
   "integrity" "sha1-7dFMgk4sycHgsKG0K7UhBRakJDg="
   "resolved" "https://registry.nlark.com/lodash.sortby/download/lodash.sortby-4.7.0.tgz"
   "version" "4.7.0"
+
+"lodash.tail@^4.1.1":
+  "integrity" "sha1-0jM6NtnncXyK0vfKyv7HwytERmQ="
+  "resolved" "https://registry.nlark.com/lodash.tail/download/lodash.tail-4.1.1.tgz"
+  "version" "4.1.1"
 
 "lodash.uniq@^4.5.0":
   "integrity" "sha1-0CJTc662Uq3BvILklFM5qEJ1R3M="
@@ -5750,6 +5781,14 @@
   dependencies:
     "for-in" "^1.0.2"
     "is-extendable" "^1.0.1"
+
+"mixin-object@^2.0.1":
+  "integrity" "sha1-T7lJRB2rGCVA8f4DW6YOGUel5X4="
+  "resolved" "https://registry.npm.taobao.org/mixin-object/download/mixin-object-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "for-in" "^0.1.3"
+    "is-extendable" "^0.1.1"
 
 "mkdirp@^0.5.0", "mkdirp@^0.5.1", "mkdirp@^0.5.4", "mkdirp@^0.5.5", "mkdirp@~0.5.0", "mkdirp@~0.5.1":
   "integrity" "sha1-2Rzv1i0UNsoPQWIOJRKI1CAJne8="
@@ -6497,7 +6536,7 @@
 
 "pify@^3.0.0":
   "integrity" "sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY="
-  "resolved" "https://registry.npm.taobao.org/pify/download/pify-3.0.0.tgz"
+  "resolved" "https://registry.npm.taobao.org/pify/download/pify-3.0.0.tgz?cache=0&sync_timestamp=1593529716831&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpify%2Fdownload%2Fpify-3.0.0.tgz"
   "version" "3.0.0"
 
 "pinkie-promise@^2.0.0":
@@ -7965,12 +8004,24 @@
     "capture-exit" "^1.2.0"
     "exec-sh" "^0.2.0"
     "fb-watchman" "^2.0.0"
+    "fsevents" "^1.2.3"
     "micromatch" "^3.1.4"
     "minimist" "^1.1.1"
     "walker" "~1.0.5"
     "watch" "~0.18.0"
   optionalDependencies:
     "fsevents" "^1.2.3"
+
+"sass-loader@^7.0.1":
+  "integrity" "sha1-/ZNyWcy6Opz+DV+KmHRtSK38wmE="
+  "resolved" "https://registry.nlark.com/sass-loader/download/sass-loader-7.0.1.tgz"
+  "version" "7.0.1"
+  dependencies:
+    "clone-deep" "^2.0.1"
+    "loader-utils" "^1.0.1"
+    "lodash.tail" "^4.1.1"
+    "neo-async" "^2.5.0"
+    "pify" "^3.0.0"
 
 "sax@^1.2.4", "sax@~1.2.1", "sax@~1.2.4":
   "integrity" "sha1-KBYjTiN4vdxOU1T6tcqold9xANk="
@@ -8103,6 +8154,15 @@
   dependencies:
     "inherits" "^2.0.1"
     "safe-buffer" "^5.0.1"
+
+"shallow-clone@^1.0.0":
+  "integrity" "sha1-RIDNBuiC72iyrYij6lSDLixItXE="
+  "resolved" "https://registry.npm.taobao.org/shallow-clone/download/shallow-clone-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "is-extendable" "^0.1.1"
+    "kind-of" "^5.0.0"
+    "mixin-object" "^2.0.1"
 
 "shebang-command@^1.2.0":
   "integrity" "sha1-RKrGW2lbAzmJaMOfNj/uXer98eo="
@@ -8884,6 +8944,7 @@
   "version" "2.8.29"
   dependencies:
     "source-map" "~0.5.1"
+    "uglify-to-browserify" "~1.0.0"
     "yargs" "~3.10.0"
   optionalDependencies:
     "uglify-to-browserify" "~1.0.0"
@@ -9234,8 +9295,10 @@
   "resolved" "https://registry.nlark.com/watchpack/download/watchpack-1.7.5.tgz"
   "version" "1.7.5"
   dependencies:
+    "chokidar" "^3.4.1"
     "graceful-fs" "^4.1.2"
     "neo-async" "^2.5.0"
+    "watchpack-chokidar2" "^2.0.1"
   optionalDependencies:
     "chokidar" "^3.4.1"
     "watchpack-chokidar2" "^2.0.1"
@@ -9329,7 +9392,7 @@
     "source-list-map" "^2.0.0"
     "source-map" "~0.6.1"
 
-"webpack@^1.0.0 || ^2.0.0 || ^3.0.0", "webpack@^1.9 || ^2 || ^2.1.0-beta || ^2.2.0-rc || ^3.0.0", "webpack@^2.0.0 || ^3.0.0 || ^4.0.0", "webpack@^2.2.0 || ^3.0.0", "webpack@^3.1.0", "webpack@^3.6.0", "webpack@1 || ^2 || ^2.1.0-beta || ^2.2.0-rc || ^3", "webpack@2 || 3 || 4":
+"webpack@^1.0.0 || ^2.0.0 || ^3.0.0", "webpack@^1.9 || ^2 || ^2.1.0-beta || ^2.2.0-rc || ^3.0.0", "webpack@^2.0.0 || ^3.0.0 || ^4.0.0", "webpack@^2.2.0 || ^3.0.0", "webpack@^3.0.0 || ^4.0.0", "webpack@^3.1.0", "webpack@^3.6.0", "webpack@1 || ^2 || ^2.1.0-beta || ^2.2.0-rc || ^3", "webpack@2 || 3 || 4":
   "integrity" "sha1-P540NgNwYC/PY56Xk520hvTsDXQ="
   "resolved" "https://registry.nlark.com/webpack/download/webpack-3.12.0.tgz?cache=0&sync_timestamp=1619203188436&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwebpack%2Fdownload%2Fwebpack-3.12.0.tgz"
   "version" "3.12.0"
