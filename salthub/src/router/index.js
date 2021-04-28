@@ -23,6 +23,9 @@ import ofBlogLayout from '@/views/admin/ofBlog/ofBlog.vue'
 //通知管理
 import noticeLayout from '@/views/admin/notice/notice.vue'
 
+//文章详情
+import detail from '@/views/post/Detail.vue'
+
 //组件测试
 //后台页头
 import header from '@/components/admin/header'
@@ -168,6 +171,12 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: () => import("@/views/client/Home"),
+    },
+    //文章详情
+    {
+      path: '/Detail',
+      name: 'Detail',
+      component: detail
     },
     // 访问路径不存在，则重定向到首页
     {
