@@ -14,6 +14,12 @@
   </el-card>
 </template>
 
+<style scoped>
+  .el-card{
+    margin-bottom: 16px;
+  }
+</style>
+
 <script>
 
 export default {

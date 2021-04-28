@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-5">
+    <div class="front-head">
       <Header></Header>
     </div>
     <div class="container context">
@@ -16,10 +16,17 @@
   </div>
 </template>
 
+<style scoped>
+.front-head{
+  margin-bottom: 20px;
+}
+</style>
+
 <script>
 import CardBar from "@/views/client/card/CardBar"
 import Header from "@/components/Layout/Header";
 import PostList from "@/views/client/postlist/postlist";
+import '@/assets/app.css'
 
 export default {
   name: "Home",
