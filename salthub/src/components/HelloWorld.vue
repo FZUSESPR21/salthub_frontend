@@ -84,11 +84,40 @@
 </template>
 
 <script>
+import { login,hello } from '@/api/auth'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  created() {
+    // console.log(process.env)
+    this.testHello()
+    // this.testAxios()
+  },
+  methods: {
+    async testAxios(){
+      var user = {
+        "avatar": "",
+        "mailbox": "",
+        "name": "123456",
+        "password": "123456",
+        "status": 0,
+      }
+      login(user).then((data)=>{
+        // console.log(data)
+      }
+      )
+    },
+    async testHello(){
+      hello().then((data)=>{
+        console.log("hello")
+        console.log(data)
+      }
+      )
     }
   }
 }

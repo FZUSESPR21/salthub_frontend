@@ -4,7 +4,7 @@
       class="container is-white"
       :fixed-top="true"
     >
-      
+
       <template slot="start">
 
         <div class="imglogo" v-for="fit in fits" :key="fit">
@@ -51,20 +51,22 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <b-field position="is-centered">
-            <b-input
+            <el-input
               v-model="searchKey"
               class="s_input mx-5"
-              width="80%"
               placeholder="搜索帖子、标签"
               rounded
               clearable
-            />
+            ></el-input>
 
             <p class="control">
-              <b-button
-                class="is-info"
+              <el-button
+                type="primary" 
+                size="medium"
+                round
+                icon="el-icon-search"
               >搜索
-              </b-button>
+              </el-button>
             </p>
           </b-field>
         </b-navbar-item>
@@ -98,7 +100,7 @@
             个人中心
           </b-navbar-item>
           <hr class="dropdown-divider">
-          <b-navbar-item> 
+          <b-navbar-item>
             退出登录
           </b-navbar-item>
         </b-navbar-dropdown>
