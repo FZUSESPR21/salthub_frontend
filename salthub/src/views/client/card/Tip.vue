@@ -1,11 +1,14 @@
 <template>
-  <el-card class="box-card" shadow="never">
+  <el-card class="box-card" shadow="never" :body-style="{ padding: '0px' }">
     <div slot="header">
       <span>加盐鸡汤</span>
     </div>
     <div>
-      <div class="has-text-centered block">
-        <span class="is-size-6 has-text-info">{{ tip.content }}</span>
+      <el-image :src="sunImg"></el-image>
+      <div class="tip-content">
+        <div class="has-text-centered block">
+          <span >{{ tip.content }}</span>
+        </div>
       </div>
     </div>
   </el-card>
@@ -19,7 +22,8 @@ export default {
     return {
       tip: {
           content: "我努力奔跑是为了追上那个曾经被寄予厚望的自己!"//暂时静态
-      }
+      },
+      sunImg: require('@/assets/client/sun.jpg'),
     }
   },
   created() {
@@ -34,5 +38,9 @@ export default {
 </script>
 
 <style scoped>
+.tip-content{
+  padding: 14px;
+  font-size: 17px;
+}
 
 </style>

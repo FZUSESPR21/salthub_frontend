@@ -6,6 +6,7 @@
     <div class="container context">
       <div class="columns">
         <div class="column is-three-quarters">
+          <TopicList></TopicList>
         </div>
         <div class="column">
           <CardBar></CardBar>
@@ -18,10 +19,11 @@
 <script>
 import CardBar from "@/views/client/card/CardBar"
 import Header from "@/components/Layout/Header";
+import PostList from "@/views/client/postlist/postlist";
 
 export default {
   name: "Home",
-  components: {CardBar,Header},
+  components: {CardBar,Header,TopicList:PostList},
   data() {
     return {
       
