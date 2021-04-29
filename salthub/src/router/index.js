@@ -201,18 +201,22 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: () => import("@/views/client/Home"),
-      meta: { title: '晒研论坛' }
+      meta: { title: '晒研论坛-首页' }
     },
-    
+    //社区
+    {
+      path: '/community',
+      name: 'Community',
+      component: () => import('@/views/client/community/Community'),
+      meta: { title: '晒研论坛-社区' }
+    },
     // 检索
-    /*
     {
       path: '/search',
       name: 'Search',
       component: () => import('@/views/client/Search'),
-      meta: { title: '搜索结果' }
+      meta: { title: '晒研论坛-搜索结果' }
     },
-    */
     //文章操作
     //文章详情
     {

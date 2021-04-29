@@ -3,11 +3,11 @@
     <div class="front-head" v-if="refresh">
       <Header></Header>
     </div>
-    <div class="front-main">
+    <div class="front-body">
       <div class="container context">
         <div class="columns">
           <div class="column is-three-quarters">
-            <TopicList></TopicList>
+            <CommunityList></CommunityList>
           </div>
           <div class="column">
             <CardBar></CardBar>
@@ -25,14 +25,14 @@
 </style>
 
 <script>
-import CardBar from "@/views/client/card/CardBar";
 import Header from "@/components/Layout/Header";
-import PostList from "@/views/client/postlist/postlist";
+import CardBar from "@/views/client/card/CardBar";
+import CommunityList from "@/views/client/postlist/communitylist";
 import "@/assets/app.css";
 
 export default {
-  name: "Home",
-  components: { CardBar, Header, TopicList: PostList },
+  name: "Community",
+  components: { Header, CardBar, CommunityList },
   data() {
     return {
       refresh: true,
@@ -42,7 +42,6 @@ export default {
     this.refreshComp();
   },
   methods: {
-    //解决vue页头懒加载导致组件错位的问题
     refreshComp() {
       // 移除组件
       this.refresh = false;
