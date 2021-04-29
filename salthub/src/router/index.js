@@ -111,7 +111,7 @@ export default new Router({
       path: "/",
       component: App,
       // redirect:'/client',
-      redirect:'/admin',
+      redirect: '/admin',
       meta: { title: "SaltHub" },
       children: [
         // {
@@ -131,75 +131,76 @@ export default new Router({
         //     },
         //   ]
         // },
+        ,
+      ]
+    },
+    {
+      path: '/admin',
+      component: adminLayout,
+      meta: { title: "首页" },
+      children: [
         {
-          path: 'admin',
-          component: adminLayout,
-          meta: { title: "首页" },
-          children: [
-            {
-              path: '',
-              component: adminIndex,
-              name: 'adminIndex',
-              meta: { title: "首页" }
-            },
-            //用户管理
-            {
-              path: 'account',
-              component: accountLayout,
-              name: 'accountLayout',
-              meta: { title: "用户管理"},
-            },
-            //文章管理
-            {
-              path: 'blog',
-              component: blogLayout,
-              name: 'blogLayout',
-              meta: { title: "文章管理"},
-              // children: [
-              //   {
-              //     path: '',
-              //     component: blogTable,
-              //     meta: { title: "博客列表"}
-              //   },
-              // ]
-            },
-            //官方文章管理
-            {
-              path: 'ofBlog',
-              component: ofBlogLayout,
-              name: 'ofBlogLayout',
-              meta: { title: "官方文章管理"},
-              // children: [
-              //   {
-              //     path: '',
-              //     component: ofBlogTable,
-              //     meta: { title: "官方博客列表"}
-              //   },
-              // ]
-            },
-            //发布官方文章
-            {
-              path: 'createpost',
-              component: createpostLayout,
-              name: 'createpostLayout',
-              meta: { title: "发布官方文章"},
-            },
-            //通知管理
-            {
-              path: 'notice',
-              component: noticeLayout,
-              name: 'noticeLayout',
-              meta: { title: "通知管理"},
-            },
-            //发布通知
-            {
-              path: 'createnotice',
-              component: createnoticeLayout,
-              name: 'createnoticeLayout',
-              meta: { title: "发布通知"},
-            }
-          ]
+          path: '',
+          component: adminIndex,
+          name: 'adminIndex',
+          meta: { title: "首页" }
         },
+        //用户管理
+        {
+          path: 'account',
+          component: accountLayout,
+          name: 'accountLayout',
+          meta: { title: "用户管理" },
+        },
+        //文章管理
+        {
+          path: 'blog',
+          component: blogLayout,
+          name: 'blogLayout',
+          meta: { title: "文章管理" },
+          // children: [
+          //   {
+          //     path: '',
+          //     component: blogTable,
+          //     meta: { title: "博客列表"}
+          //   },
+          // ]
+        },
+        //官方文章管理
+        {
+          path: 'ofBlog',
+          component: ofBlogLayout,
+          name: 'ofBlogLayout',
+          meta: { title: "官方文章管理" },
+          // children: [
+          //   {
+          //     path: '',
+          //     component: ofBlogTable,
+          //     meta: { title: "官方博客列表"}
+          //   },
+          // ]
+        },
+        //发布官方文章
+        {
+          path: 'createpost',
+          component: createpostLayout,
+          name: 'createpostLayout',
+          meta: { title: "发布官方文章" },
+        },
+        //通知管理
+        {
+          path: 'notice',
+          component: noticeLayout,
+          name: 'noticeLayout',
+          meta: { title: "通知管理" },
+        },
+        //发布通知
+        {
+          path: 'createnotice',
+          component: createnoticeLayout,
+          name: 'createnoticeLayout',
+          meta: { title: "发布通知" },
+        }
       ]
     },
     //前台界面
@@ -247,6 +248,19 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
+    },
+    //登录注册
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/auth/login'),
+      meta: { title: "登录" },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/views/auth/register'),
+      meta: { title: "注册" },
     }
   ]
 })
