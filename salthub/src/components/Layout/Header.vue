@@ -17,7 +17,7 @@
 
         <b-navbar-item
           tag="router-link"
-          :to="{ path: '/' }"
+          :to="{ path: '/home' }"
           class="px-5"
         >
            首页

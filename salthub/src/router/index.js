@@ -195,12 +195,24 @@ export default new Router({
         },
       ]
     },
+    //前台界面
     //前台论坛首页
     {
       path: '/home',
       name: 'Home',
       component: () => import("@/views/client/Home"),
+      meta: { title: '晒研论坛' }
     },
+    
+    // 检索
+    /*
+    {
+      path: '/search',
+      name: 'Search',
+      component: () => import('@/views/client/Search'),
+      meta: { title: '搜索结果' }
+    },
+    */
     //文章操作
     //文章详情
     {
