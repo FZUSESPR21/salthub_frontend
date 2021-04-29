@@ -48,6 +48,8 @@ import data from '@/components/admin/index/data'
 import noticeCard from '@/components/admin/index/noticeCard'
 //后台数据可视化卡片
 import dataVisual from '@/components/admin/index/dataVisual'
+//后台echarts
+import echarts from '@/components/admin/index/echarts'
 //后台卡片组合
 import indexCard from '@/views/admin/index/indexCard'
 //用户列表
@@ -88,6 +90,11 @@ export default new Router({
       path: '/dataVisual',
       component: dataVisual,
       meta: { title: "后台数据可视化卡片" }
+    },
+    {
+      path: '/echarts',
+      component: echarts,
+      meta: { title: "后台echarts" }
     },
     {
       path: '/indexCard',
