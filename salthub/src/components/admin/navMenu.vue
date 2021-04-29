@@ -22,10 +22,14 @@
         <i class="el-icon-menu"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
-      <el-menu-item index="4" @click="jumpNotice()">
-        <i class="el-icon-message-solid"></i>
-        <span slot="title">通知管理</span>
-      </el-menu-item>
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="el-icon-message-solid"></i>
+          <span>通知管理</span>
+        </template>
+        <el-menu-item :class="'active-item'" index="4-1"  @click="jumpNotice()">通知管理</el-menu-item>
+        <el-menu-item :class="'active-item'" index="4-2" @click="jumpCreateNotice()">发布通知</el-menu-item>
+      </el-submenu>
       <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -69,11 +73,15 @@ export default {
       this.$router.push("/admin/account");
     },
     jumpNotice() {
-      this.activeIndex = "4";
+      this.activeIndex = "4-1";
       this.$router.push("/admin/notice");
     },
+        jumpCreateNotice() {
+      this.activeIndex = "4-2";
+      this.$router.push("/admin/createnotice");
+    },
     jumpOfBlog() {
-      this.activeIndex = "5";
+      this.activeIndex = "5-1";
       this.$router.push("/admin/ofBlog");
     },
     jumpBlog() {
@@ -83,7 +91,7 @@ export default {
     jumpCreateBlog() {
       this.activeIndex = "5-2";
       this.$router.push("/admin/createpost");
-    }
+    },
   },
 };
 </script>
