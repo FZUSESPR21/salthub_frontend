@@ -1,5 +1,5 @@
 <template style="height:100%">
-  <el-col :span="2" :class="'nav'">
+  <el-col :span="3" :class="'nav'">
     <el-menu
       :class="'nav'"
       default-active="1"

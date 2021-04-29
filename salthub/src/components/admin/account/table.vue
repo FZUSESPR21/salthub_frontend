@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <el-col :span="22">
+    <el-col :span="21">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
@@ -66,7 +66,7 @@
       </el-table>
     </el-col>
 
-    <el-col :span="22" :class="'center'">
+    <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
           layout="prev, pager, next"
