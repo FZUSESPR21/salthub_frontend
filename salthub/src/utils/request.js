@@ -1,5 +1,7 @@
 import axios from 'axios'
+import store from '@/store'
 import { Message, MessageBox } from 'element-ui'
+import { getToken } from '@/utils/auth'
 
 // 1.创建axios实例
 const service = axios.create({
@@ -16,13 +18,10 @@ service.interceptors.request.use(
   config => {
     // 发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
     // 注意使用token的时候需要引入cookie方法或者用本地localStorage等方法，推荐js-cookie
-    // if (store.getters.token) {
+    if (store.getters.token) {
       // config.params = {'token': token}    // 如果要求携带在参数中
-      // config.headers.token = token;       // 如果要求携带在请求头中
-      // bearer：w3c规范
-    //   config.headers['Authorization'] = 'Bearer ' + getToken()
-      config.headers['saToken'] = 'ca2428fa-6446-45a5-bbd1-1b89e6b630fb'
-    // }0
+      config.headers['saToken'] = store.getters.token   //请求头中携带saToken
+    }
     return config
   },
   error => {
@@ -62,9 +61,8 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      console.log(response)  
-      
-      return res
+      //调试获取响应头token
+      return response
     }
   },
   error => {

@@ -95,11 +95,13 @@ export default {
   },
   created() {
     // console.log(process.env)
+    // this.testAxios() 
+    // this.testHello()
+    this.submitForm()
     this.testHello()
-    // this.testAxios()
   },
   methods: {
-    async testAxios(){
+    async testLogin(){
       var user = {
         "avatar": "",
         "mailbox": "",
@@ -118,7 +120,40 @@ export default {
         console.log(data)
       }
       )
-    }
+    },
+    submitForm() {
+      // this.$refs[formName].validate((valid) => {
+      //   if (valid) {
+          this.loading = true;
+          var user = {
+            "avatar": "",
+            "mailbox": "",
+            "name": "123456",
+            "password": "123456",
+            "status": 0,
+          }
+          this.$store
+            .dispatch("user/login", user)
+            .then(() => {
+              console.log(this)
+              this.$message({
+                message: "恭喜你，登录成功",
+                type: "success",
+                duration: 2000,
+              });
+              setTimeout(() => {
+                this.loading = false;
+                // this.$router.push({ path: this.redirect || "/" });
+              }, 0.1 * 1000);
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+      //   } else {
+      //     return false;
+      //   }
+      // });
+    },
   }
 }
 </script>

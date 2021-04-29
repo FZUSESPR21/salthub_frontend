@@ -8,6 +8,14 @@ export function login(data) {
     })
 }
 
+export function getUserInfo() {
+
+}
+
+export function logout() {
+
+}
+
 export function hello() {
     return request({
         url: '/hello',
