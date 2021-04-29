@@ -9,7 +9,7 @@
           slot="header"
           class="clearfix"
         >
-          <span><i class="fa fa fa-book"> 发布官方文章</i></span>
+          <span><i class="fa fa fa-book" style="font-size:24px;font-weight: bold;font-style:normal"> 发布官方文章</i></span>
         </div>
         <div>
           <el-form
@@ -199,5 +199,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>
