@@ -1,4 +1,4 @@
-import { getUserInfo, login, logout } from "@/api/auth";
+import { login, logout } from "@/api/auth";
 import { getToken, setToken, removeToken } from "@/utils/auth";
 
 const state = {
@@ -25,9 +25,13 @@ const actions = {
         .then((response) => {
         //   console.log(response)
           const token = response.headers.satoken
+          // console.log(response.data)
+          //测试  vuex存入user信息
+          const user = response.data
         //   console.log(token)
           setToken(token);
           commit("SET_TOKEN_STATE", token);
+          commit("SET_USER_STATE", );
           resolve();
         })
         .catch((error) => {

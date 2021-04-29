@@ -117,7 +117,7 @@ export default {
     async testHello(){
       hello().then((data)=>{
         console.log("hello")
-        console.log(data)
+        // console.log(data)
       }
       )
     },
@@ -130,12 +130,11 @@ export default {
             "mailbox": "",
             "name": "123456",
             "password": "123456",
-            "status": 0,
+            "status": 1,
           }
           this.$store
             .dispatch("user/login", user)
             .then(() => {
-              console.log(this)
               this.$message({
                 message: "恭喜你，登录成功",
                 type: "success",
