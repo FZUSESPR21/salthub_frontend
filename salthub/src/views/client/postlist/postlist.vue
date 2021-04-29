@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-首页-帖子列表组件
+ * @fileName: postlist.vue 
+ * @author: 肖寒 
+ * @date: 2021-04-29 23:02:25 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.0 
+!-->
 <template>
   <div>
     <el-card>

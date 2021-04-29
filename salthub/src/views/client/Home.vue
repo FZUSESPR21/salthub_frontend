@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-首页
+ * @fileName: Home.vue 
+ * @author: 肖寒 
+ * @date: 2021-04-29 22:57:17 
+ * @后台人员:  
+ * @path:  /home
+ * @version: V1.0.0 
+!-->
 <template>
   <div>
     <div class="front-head" v-if="refresh">

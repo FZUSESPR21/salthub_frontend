@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-侧边栏-倒计时
+ * @fileName: CountDown.vue 
+ * @author: 肖寒 
+ * @date: 2021-04-29 23:04:19 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.0 
+!-->
 <template>
   <el-card class="box-card" shadow="never">
     <div slot="header">
