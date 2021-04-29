@@ -1,54 +1,146 @@
 <template>
- <div class="usercreatepost">
-    <div class="createpost" style="padding-left:3%;padding-right:3%;padding-bottom:8%">
-      <div>
-        <p style="font-size:45px;font-weight:bold">发布通知</p>
-      </div>
-      <div style="margin-top:20px">
-        <p style="font-size:22px">标题</p>
-        <el-input v-model="input" placeholder="请输入内容"></el-input>
-        <p style="font-size:22px">正文</p>
-        <el-input
-          type="textarea"
-          :rows="30"
-          placeholder="请输入内容"
-          v-model="textarea">
-        </el-input>
-        <br>
-        <div style="margin-top:30px">
-          <el-button type="primary">立即发布</el-button>
-          <el-button>取消</el-button>
+  <div class="columns">
+    <div class="column is-full">
+      <el-card
+        class="box-card"
+        shadow="never"
+      >
+        <div
+          slot="header"
+          class="clearfix"
+        >
+          <span><i class="fa fa fa-book"> 发布通知</i></span>
         </div>
-      </div>
+        <div>
+          <el-form
+            ref="ruleForm"
+            :model="ruleForm"
+            :rules="rules"
+            class="demo-ruleForm"
+          >
+            <el-form-item prop="title">
+              <el-input
+                v-model="ruleForm.title"
+                placeholder="输入通知名称"
+              />
+            </el-form-item>
+
+            <!--Markdown-->
+            <div id="vditor" />
+
+            <div style="padding-top:20px">
+              <el-form-item>
+                <el-button
+                  type="primary"
+                  @click="submitForm('ruleForm')"
+                >立即发布
+                </el-button>
+                <el-button @click="resetForm('ruleForm')">重置</el-button>
+              </el-form-item>
+            </div>
+          </el-form>
+        </div>
+      </el-card>
     </div>
- </div>
+  </div>
 </template>
 
 <script>
-import Header from '@/components/Layout/Header'
-  export default {
-    name: 'Detail',
-    components: {
-      Header,
-    },
-    data() {
-      const item = {
+import { post } from '@/api/post'
+import Vditor from 'vditor'
+import 'vditor/dist/index.css'
 
-      };
-      return {
-        input: '',
-        textarea: '',
-      }
+export default {
+  name: 'createnotice',
+
+  data() {
+    return {
+      contentEditor: {},
+      ruleForm: {
+        title: '', // 标题
+        tags: [], // 标签
+        content: '' // 内容
+      },
+      rules: {
+        title: [
+          { required: true, message: '请输入通知名称', trigger: 'blur' },
+          {
+            min: 1,
+            max: 25,
+            message: '长度在 1 到 25 个字符',
+            trigger: 'blur'
+          }
+        ]
+      },
+    }
+  },
+  mounted() {
+    this.contentEditor = new Vditor('vditor', {
+      height: 500,
+      placeholder: '此处为通知内容……',
+      theme: 'classic',
+      counter: {
+        enable: true,
+        type: 'markdown'
+      },
+      preview: {
+        delay: 0,
+        hljs: {
+          style: 'monokai',
+          lineNumber: true
+        }
+      },
+      tab: '\t',
+      typewriterMode: true,
+      toolbarConfig: {
+        pin: true
+      },
+      cache: {
+        enable: false
+      },
+      mode: 'sv'
+    })
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          if (
+            this.contentEditor.getValue().length === 1 ||
+            this.contentEditor.getValue() == null ||
+            this.contentEditor.getValue() === ''
+          ) {
+            alert('话题内容不可为空')
+            return false
+          }
+          if (this.ruleForm.tags == null || this.ruleForm.tags.length === 0) {
+            alert('标签不可以为空')
+            return false
+          }
+          this.ruleForm.content = this.contentEditor.getValue()
+          post(this.ruleForm).then((response) => {
+            const { data } = response
+            setTimeout(() => {
+              this.$router.push({
+                name: 'post-detail',
+                params: { id: data.id }
+              })
+            }, 800)
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
-    methods: {
-    },
-  };
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+      this.contentEditor.setValue('')
+      this.ruleForm.tags = ''
+    }
+  }
+}
 </script>
 
-<style scoped>
-  .createpost{
-    background-color: white;
-    width: 75%;
-    margin:auto;
-  }
+<style>
 </style>

@@ -32,7 +32,7 @@
           <span>官方文章</span>
         </template>
         <el-menu-item :class="'active-item'" index="5-1"  @click="jumpOfBlog()">官方文章管理</el-menu-item>
-        <el-menu-item :class="'active-item'" index="5-2">发布官方文章</el-menu-item>
+        <el-menu-item :class="'active-item'" index="5-2" @click="jumpCreateBlog()">发布官方文章</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item index="5" @click="jumpOfBlog()">
         <i class="el-icon-document"></i>
@@ -80,6 +80,10 @@ export default {
       this.activeIndex = "2";
       this.$router.push("/admin/blog");
     },
+    jumpCreateBlog() {
+      this.activeIndex = "5-2";
+      this.$router.push("/admin/createpost");
+    }
   },
 };
 </script>
