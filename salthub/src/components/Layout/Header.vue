@@ -25,7 +25,7 @@
 
         <b-navbar-item
           tag="router-link"
-          :to="{ path: '/' }"
+          :to="{ path: '/community' }"
           class="px-5"
         >
            社区
@@ -33,7 +33,7 @@
 
         <b-navbar-item
           tag="router-link"
-          :to="{ path: '/' }"
+          :to="{ path: '/home' }"
           class="px-5"
         >
            资讯
@@ -41,7 +41,7 @@
 
         <b-navbar-item
           tag="router-link"
-          :to="{ path: '/' }"
+          :to="{ path: '/home' }"
           class="px-5"
         >
            树洞

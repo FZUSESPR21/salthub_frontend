@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <div slot="header" class="clearfix">
+      <div slot="header">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="推荐" name="commendest">
             <article v-for="(item, index) in articleList" :key="index" class="media">
@@ -78,8 +78,8 @@
   margin-top: 15px;
 }
 .post-main{
-  margin-right: 20px;
-  margin-left: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 </style>
 
@@ -139,7 +139,7 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
-        console.log(tab, event);
+      console.log(tab, event);
     }
   }
 };
