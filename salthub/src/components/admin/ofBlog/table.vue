@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <el-col :span="22">
+    <el-col :span="21">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
