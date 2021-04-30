@@ -34,8 +34,6 @@ import createpostLayout from '@/views/admin/ofBlog/createpost.vue'
 import detail from '@/views/post/Detail.vue'
 //用户发布文章
 import usercreatepost from '@/views/post/UserCreatePost.vue'
-//管理员发布文章
-import admincreatepost from '@/views/post/AdminCreatePost.vue'
 
 //组件测试
 //后台页头
@@ -237,12 +235,6 @@ export default new Router({
       path: '/UserCreatePost',
       name: 'UserCreatePost',
       component: usercreatepost
-    },
-    //管理员发布文章
-    {
-      path: '/AdminCreatePost',
-      name: 'AdminCreatePost',
-      component: admincreatepost
     },
     // 访问路径不存在，则重定向到首页
     {
