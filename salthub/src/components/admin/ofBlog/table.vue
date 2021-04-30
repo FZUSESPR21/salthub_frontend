@@ -62,7 +62,7 @@
       </el-table>
     </el-col>
 
-    <el-col :span="22" :class="'center'">
+    <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
           layout="prev, pager, next"
