@@ -24,6 +24,9 @@
         </div>
       </div>
     </div>
+    <div>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -37,11 +40,12 @@
 import Header from "@/components/Layout/Header";
 import CardBar from "@/views/client/card/CardBar";
 import CommunityList from "@/views/client/postlist/communitylist";
+import Footer from "@/components/Layout/Footer";
 import "@/assets/app.css";
 
 export default {
   name: "Community",
-  components: { Header, CardBar, CommunityList },
+  components: { Header, CardBar, CommunityList ,Footer},
   data() {
     return {
       refresh: true,

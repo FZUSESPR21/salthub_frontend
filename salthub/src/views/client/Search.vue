@@ -22,6 +22,9 @@
         </div>
       </div>
     </div>
+    <div>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -35,11 +38,12 @@
 import CardBar from "@/views/client/card/CardBar"
 import Header from "@/components/Layout/Header";
 import SearchList from '@/views/client/postlist/searchlist'
+import Footer from "@/components/Layout/Footer";
 import '@/assets/app.css'
 
 export default {
   name: "Home",
-  components: {CardBar, Header,SearchList},
+  components: {CardBar, Header,SearchList,Footer},
   data() {
     return {
       refresh: true,
