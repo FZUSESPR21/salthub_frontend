@@ -1,3 +1,12 @@
+<!--
+ * @description: 晒研论坛-用户发布文章
+ * @fileName: UserCreatePost.vue
+ * @author: 庄威龙
+ * @date: 2021-04-30 17:28:15
+ * @后台人员:
+ * @path:
+ * @version: V1.0.0
+!-->
 <template>
   <div class="columns">
     <div class="column is-full">
