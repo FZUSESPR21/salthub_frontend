@@ -27,9 +27,9 @@
 }
 
 .box-card {
-  width: 580px;
+  width: 595px;
   height: auto;
-  margin: 30px;
+  margin: 30px 15px;
 }
 
 .title {

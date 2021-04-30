@@ -25,9 +25,9 @@
 }
 
 .box-card {
-  width: 260px;
+  width: 275px;
   height: auto;
-  margin: 30px;
+  margin: 30px 15px;
 }
 .wrap {
   margin-top: 20px;
