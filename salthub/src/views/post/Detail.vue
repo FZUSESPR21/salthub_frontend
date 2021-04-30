@@ -42,7 +42,7 @@
         </el-container>
         <hr>
       </el-container>
-      <div v-for="comment in comments">
+      <div v-for="comment in comments" :key="comment.id">
         <el-container>
           <el-aside width="200px">
             <div>
