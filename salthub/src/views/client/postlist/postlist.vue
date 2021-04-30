@@ -210,14 +210,13 @@ export default {
           this.articleList.push(this.articleListPage2[i]);
           console.log("page2");
         }
-        //测试下第二页的数据接上去没有
-        console.log(this.articleList[10]);
+        //测试下第二页的数据是否接上
+        //console.log(this.articleList[5]);
       }
     },
     load() {
       let vm = this;
       if (getScrollTop() + getWindowHeight() >= getScrollHeight()) {
-        console.log("滚动到底啦");
         if (vm.page.current < (vm.page.total/vm.page.size)) {
           //先判断下一页是否有数据
           vm.page.current += 1; //查询条件的页码+1
