@@ -17,6 +17,15 @@ const mutations = {
 
 const actions = {
   // 用户登录
+  /**
+   *@functionName:  login 
+   *@params1: commit对象 vuex
+   *@params2: userInfo 用户信息
+   *@description: 验证登录，验证成功后，token保存至vuex,localstorage
+   *@author: lw
+   *@date: 2021-04-30 08:56:26
+   *@version: V1.0.0
+  */
   login({ commit }, userInfo) {
     // console.log(userInfo);
     // const { name, pass, rememberMe } = userInfo;

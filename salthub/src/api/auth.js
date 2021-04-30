@@ -1,11 +1,13 @@
 import request from '@/utils/request'
 
 /**
- * 登录 
- * @author lw
- * @param {*} data 登录表单 
- * @returns 
- */
+ *@functionName: login 
+ *@param:  data 登录表单
+ *@description:
+ *@author: lw 
+ *@date: 2021-04-30 08:22:39
+ *@version: V1.0.0
+*/
 export function login(data) {
     return request({
         url: `/account/login/${data.status}`,   //data.status 是否记住密码 参数
@@ -15,11 +17,13 @@ export function login(data) {
 }
 
 /**
- * 注册 
- * @author lw
- * @param {*} data 注册表单 
- * @returns 
- */
+ *@functionName: register 
+ * @param data 注册表单 
+ *@description:
+ *@author: lw
+ *@date: 2021-04-30 08:26:17
+ *@version: V1.0.0
+*/
 export function register(data) {
     return request({
         url: '/account/register',
@@ -29,11 +33,13 @@ export function register(data) {
 }
 
 /**
- * 登出 
- * @author lw
- * @param {*} data 账号
- * @returns 
- */
+ *@functionName: logout 
+ * @param data 账号
+ *@description:
+ *@author: lw
+ *@date: 2021-04-30 08:27:57
+ *@version: V1.0.0
+*/
 export function logout(data) {
     return request({
         url: '/account/logout',
@@ -43,11 +49,13 @@ export function logout(data) {
 }
 
 /**
- * 获取邮箱验证码
- * @author lw
- * @param {*} data 邮箱地址 
- * @returns 
- */
+ *@functionName: getMailCode 
+ * @param data 邮箱地址 
+ *@description:
+ *@author: lw
+ *@date: 2021-04-30 08:28:36
+ *@version: V1.0.0
+*/
 export function getMailCode(data) {
     return request({
         url: '/account/code',
@@ -57,11 +65,13 @@ export function getMailCode(data) {
 }
 
 /**
- * 上传头像 
- * @author lw
- * @param {*} data 上传头像参数 
- * @returns 
- */
+ *@functionName: uploadAvatar 
+ * @param data 上传头像参数 
+ *@description:
+ *@author: lw
+ *@date: 2021-04-30 08:29:14
+ *@version: V1.0.0
+*/
 export function uploadAvatar(data) {
     return request({
         url: '/account/avatar',

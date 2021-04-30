@@ -14,6 +14,12 @@ const service = axios.create({
 })
 
 // 2.请求拦截器request interceptor
+/**
+ *@description: 请求拦截器,处理所有请求头
+ *@author: lw
+ *@date: 2021-04-30 09:04:33
+ *@version: V1.0.0
+*/
 service.interceptors.request.use(
   config => {
     // 发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
@@ -34,6 +40,12 @@ service.interceptors.request.use(
 // 设置cross跨域 并设置访问权限 允许跨域携带cookie信息,使用JWT可关闭
 service.defaults.withCredentials = false
 
+/**
+ *@description: 响应拦截器,处理所有响应头
+ *@author: lw
+ *@date: 2021-04-30 09:06:24
+ *@version: V1.0.0
+*/
 service.interceptors.response.use(
   // 接收到响应数据并成功后的一些共有的处理，关闭loading等
   response => {
