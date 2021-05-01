@@ -56,11 +56,11 @@ export function logout(data) {
  *@date: 2021-04-30 08:28:36
  *@version: V1.0.0
 */
-export function getMailCode(data) {
+export function getMailCode(params) {
     return request({
         url: '/account/code',
         method: 'get',
-        data
+        params
     })
 }
 
