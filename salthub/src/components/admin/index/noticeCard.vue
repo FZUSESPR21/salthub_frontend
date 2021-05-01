@@ -15,7 +15,8 @@
   </el-card>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+$white: #dcdfe6;
 .text {
   font-size: 14px;
 }
@@ -31,11 +32,11 @@
 }
 .wrap {
   margin-top: 20px;
-}
-.divider {
-  width: 100%;
-  height: 1px;
-  background: #dcdfe6;
-  margin: 5px 0;
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: $white;
+    margin: 5px 0;
+  }
 }
 </style>

@@ -14,7 +14,7 @@
     </div>
     <div>
       <div class="has-text-centered block" >
-        <span class="is-size-1 " >{{ date.time }}</span>
+        <span class="is-size-1 " >{{ time }}</span>
       </div>
     </div>
   </el-card>
@@ -33,18 +33,18 @@ export default {
   name: 'CountDown',
   data() {
     return {
-      date: {
-          time: "242"//暂时静态
-      }
+      time: " ",
     }
   },
   created() {
-    this.fetchCountDown()
+    //根据国家考试院公布考研时间修改newDate数据即可更新正确的倒计时
+    this.time = this.fetchCountDown(Date.now(), (new Date(2021, 11, 25)).getTime())
   },
   methods: {
-    fetchCountDown() {
-        //获取倒计时的方法
-    }
+    fetchCountDown(time1, time2) {
+      var offsetTime = Math.abs(time1 - time2);
+      return Math.floor(offsetTime / (3600 * 24 * 1e3));
+    },
   }
 }
 </script>

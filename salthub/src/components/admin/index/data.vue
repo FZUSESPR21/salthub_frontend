@@ -17,36 +17,33 @@
   </el-card>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+$grey: #dddddd;
 .text {
   font-size: 14px;
-}
-
-.item {
-  padding: 18px 0;
 }
 
 .box-card {
   width: 595px;
   height: auto;
   margin: 30px 15px;
+  .title {
+    margin: 18px;
+  }
 }
 
-.title {
-  margin: 18px;
-}
-.wrap {
-}
 .rowcard {
   display: flex;
   justify-content: center;
-}
-.item {
-  margin: 5px 10px;
-  border-radius: 3px;
-  background: #dddddd;
-  width: 240px;
-  height: 60px;
-  display: inline-block;
+
+  .item {
+    padding: 18px 0;
+    margin: 5px 10px;
+    border-radius: 3px;
+    background: $grey;
+    width: 240px;
+    height: 60px;
+    display: inline-block;
+  }
 }
 </style>

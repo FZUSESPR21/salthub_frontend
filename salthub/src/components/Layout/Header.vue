@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 可复用的前台页眉
+ * @fileName: Header.vue 
+ * @author: 肖寒 
+ * @date: 2021-05-01 17:05:44 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.0
+!-->
 <template>
   <header class="header has-background-white has-text-black">
     <b-navbar
@@ -82,11 +91,13 @@
         >
           <div class="buttons">
             <b-button
-              class="is-light">
+              class="is-light"
+              @click="toRegister()">
               注册
             </b-button>
             <b-button
-              class="is-light">
+              class="is-light"
+              @click="toLogin()">
               登录
             </b-button>
           </div>
@@ -127,7 +138,26 @@ export default {
 
   },
   methods: {
-
+    /**
+     *@functionName:    toRegister 
+     *@description: 跳转注册页面
+     *@author: lw
+     *@date: 2021-05-01 14:59:52
+     *@version: V1.0.0
+    */
+    toRegister() {
+      this.$router.push({ path: this.redirect || "/register" });
+    },
+    /**
+     *@functionName:    toLogin 
+     *@description: 跳转登录页面
+     *@author: xiaohan
+     *@date: 2021-05-01 17:00:03
+     *@version: V1.0.0
+    */
+    toLogin() {
+      this.$router.push({ path: this.redirect || "/login" });
+    },
   },
 }
 </script>
