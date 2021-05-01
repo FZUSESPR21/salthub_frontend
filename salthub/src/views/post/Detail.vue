@@ -124,46 +124,46 @@ import Header from '@/components/Layout/Header'
   text-align: center;
   }
   .header{
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     width: 85%;
     margin: auto;
     margin-top: 5%;
   }
   .main{
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     margin: auto;
     width: 75%;
   }
   .footer{
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     margin: auto;
     width: 75%;
     text-align: left;
     padding: 20px;
   }
  .el-header {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     color: #333;
     text-align: center;
     line-height: 200px;
     font-size: 30px;
   }
   .el-footer {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     color: #333;
     text-align: center;
     line-height: 60px;
     font-size: 30px;
   }
   .el-aside {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     color: #333;
     text-align: center;
     line-height: 200px;
   }
 
   .el-main {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     color: #333;
     text-align: left;
   }
