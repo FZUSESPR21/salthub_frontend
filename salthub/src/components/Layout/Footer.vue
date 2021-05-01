@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import BackTop from "@/components/Layout/backtop";
+import BackTop from "@/components/Layout/BackTop";
 
 export default {
   name: "Footer",

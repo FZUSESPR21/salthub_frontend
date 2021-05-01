@@ -37,7 +37,7 @@
 <script>
 import CardBar from "@/views/client/card/CardBar"
 import Header from "@/components/Layout/Header";
-import SearchList from '@/views/client/postlist/searchlist'
+import SearchList from '@/views/client/postlist/SearchList'
 import Footer from "@/components/Layout/Footer";
 import '@/assets/app.css'
 

@@ -39,7 +39,7 @@
 <script>
 import Header from "@/components/Layout/Header";
 import CardBar from "@/views/client/card/CardBar";
-import CommunityList from "@/views/client/postlist/communitylist";
+import CommunityList from "@/views/client/postlist/CommunityList";
 import Footer from "@/components/Layout/Footer";
 import "@/assets/app.css";
 
