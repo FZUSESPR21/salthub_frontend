@@ -86,6 +86,14 @@ export default {
     };
   },
   methods: {
+    /**
+     *@functionName:    submitForm 
+     *@params: formName 表单名称
+     *@description: 提交表单进行登录验证
+     *@author: lw
+     *@date: 2021-05-01 14:58:59
+     *@version: V1.0.0
+    */
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -102,7 +110,7 @@ export default {
               setTimeout(() => {
                 this.loading = false;
                 this.$router.push({ path: this.redirect || "/home" });
-              }, 0.1 * 1000);
+              }, 0.5 * 1000);
             })
             .catch(() => {
               this.loading = false;
@@ -112,6 +120,13 @@ export default {
         }
       });
     },
+    /**
+     *@functionName:    toRegister 
+     *@description: 跳转注册页面
+     *@author: lw
+     *@date: 2021-05-01 14:59:52
+     *@version: V1.0.0
+    */
     toRegister() {
       this.$router.push({ path: this.redirect || "/register" });
     },
