@@ -15,11 +15,12 @@
           class="demo-ruleForm"
         >
           <el-form-item label="账号" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
+            <el-input style="width:85%" v-model="ruleForm.name"></el-input>
           </el-form-item>
 
           <el-form-item label="密码" prop="password">
             <el-input
+              style="width:85%"
               type="password"
               v-model="ruleForm.password"
               autocomplete="off"
@@ -40,7 +41,7 @@
               class="submit"
               type="primary"
               @click="submitForm('ruleForm')"
-              >提交</el-button
+              >登录</el-button
             >
             <!-- 注册待跳转 -->
             <el-button @click="toRegister()">注册</el-button>

@@ -15,12 +15,13 @@
             class="demo-ruleForm"
           >
             <el-form-item label="账号" prop="name">
-              <el-input v-model="ruleForm.name" />
+              <el-input style="width:85%" v-model="ruleForm.name" />
             </el-form-item>
 
-            <el-form-item label="密码" prop="pass">
+            <el-form-item label="密码" prop="password">
               <el-input
-                v-model="ruleForm.pass"
+                style="width:85%"
+                v-model="ruleForm.password"
                 type="password"
                 autocomplete="off"
               />
@@ -28,23 +29,31 @@
 
             <el-form-item label="确认密码" prop="checkPass">
               <el-input
+                style="width:85%"
                 v-model="ruleForm.checkPass"
                 type="password"
                 autocomplete="off"
               />
             </el-form-item>
             
-            <el-form-item label="邮箱" prop="email">
-              <el-input v-model="ruleForm.email" autocomplete="off" />
+            
+            <el-form-item label="邮箱" prop="mailbox">
+              <el-input style="width:55%" v-model="ruleForm.mailbox" autocomplete="off" />          
+              <el-button  class="code" type="primary" @click="onsubmit()">获取验证码</el-button>
+            </el-form-item>
+           
+            <el-form-item label="验证码">
+              <el-input style="width:55%" v-model="ruleForm.code" />
             </el-form-item>
 
             <el-form-item>
               <el-button
-                class="zhuce"
+                class="register-button"
                 type="primary"
+                style="margin-left:20px"
                 @click="submitForm('ruleForm')">注册</el-button>
               <el-button 
-                class="chongzhi" 
+                style="margin-left:100px" 
                 @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
           </el-form>
@@ -72,9 +81,10 @@ export default {
       loading: false,
       ruleForm: {
         name: '',
-        pass: '',
+        password: '',
         checkPass: '',
-        email:''
+        mailbox:'',
+        code:''
       },
       rules: {
         name: [
@@ -86,7 +96,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        pass: [
+        password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           {
             min: 6,
@@ -99,7 +109,7 @@ export default {
           { required: true, message: '请再次输入密码', trigger: 'blur' },
           { validator: validatePass, trigger: 'blur' }
         ],
-        email: [
+        mailbox: [
           { required: true, message: '请输入邮箱地址', trigger: 'blur' },
           {
             type: 'email',
@@ -141,19 +151,15 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
+    },
+    onsubmit() {
+       console.log('submit!');
     }
   }
 }
 </script>
 
 <style scoped>
-.el-button.zhuce{
-   margin-left: 20px;
-}
-.el-button{
-  margin-left: 100px;
-}
-
 .register-container{
     background-image: url("../../assets/study3.jpeg");
     background-size: 100% 100%;
@@ -166,7 +172,7 @@ export default {
 
 .register-card {
     width: 530px;
-    height: 500px;
+    height: 600px;
 }
 
 
