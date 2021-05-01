@@ -38,8 +38,9 @@
             
             
             <el-form-item label="邮箱" prop="mailbox">
-              <el-input style="width:55%" v-model="ruleForm.mailbox" autocomplete="off" />          
-              <el-button  class="code" type="primary" @click="onsubmit()">获取验证码</el-button>
+              <el-input style="width:55%" ref="mailboxAdd" v-model="ruleForm.mailbox" autocomplete="off" />          
+              <el-button v-if="!waitMailCode" class="code" type="primary" @click="getCode()">获取验证码</el-button>
+              <el-button v-if="waitMailCode" class="code" type="primary" disabled>{{waitTime}} 秒后重新获取</el-button>
             </el-form-item>
            
             <el-form-item label="验证码">
@@ -63,7 +64,7 @@
 </template>
 
 <script>
-// import { userRegister } from '@/api/auth/auth'
+import { register,getMailCode } from '@/api/auth'
 
 export default {
   name: 'Register',
@@ -71,7 +72,7 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pass) {
+      } else if (value !== this.ruleForm.password) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -79,6 +80,8 @@ export default {
     }
     return {
       loading: false,
+      waitMailCode: false,
+      waitTime: 6,
       ruleForm: {
         name: '',
         password: '',
@@ -125,7 +128,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.loading = true
-          userRegister(this.ruleForm)
+          register(this.ruleForm)
             .then((value) => {
               const { code, message } = value
               if (code === 200) {
@@ -152,8 +155,40 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-    onsubmit() {
-       console.log('submit!');
+    /**
+     *@functionName: getCode 
+     *@description: 获取邮箱验证码
+     *@author: lw
+     *@date: 2021-05-01 22:00:18
+     *@version: V1.0.0
+    */
+    getCode() {
+      var verify = /^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
+      console.log(this.waitMailCode)
+      if (verify.test(this.ruleForm.mailbox)) {
+        // console.log('验证成功')
+        this.waitTime = 60,
+        this.waitMailCode = true 
+        var timer = setInterval(() => {
+          this.waitTime--
+          if (this.waitTime <= 0) {
+            this.waitMailCode = false
+            clearInterval(timer) 
+          }
+        },1000)
+        var email = {
+          email: this.ruleForm.mailbox
+        }
+        getMailCode(email)
+          .then((response) => {
+            console.log(response)
+          })
+          .catch(() => {})
+      }
+      else {
+      console.log(this.waitMailCode)
+        console.log('验证失败')
+      }
     }
   }
 }
