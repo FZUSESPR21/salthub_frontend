@@ -66,6 +66,7 @@
               placeholder="搜索帖子、标签"
               rounded
               clearable
+              @keyup.enter.native="search()"
             ></el-input>
 
             <p class="control">
@@ -74,6 +75,7 @@
                 size="medium"
                 round
                 icon="el-icon-search"
+                @click="search()"
               >搜索
               </el-button>
             </p>
@@ -158,6 +160,17 @@ export default {
     toLogin() {
       this.$router.push({ path: this.redirect || "/login" });
     },
+    search(){
+      if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
+        this.$message.info({
+          showClose: true,
+          message: '请输入关键字搜索！',
+          type: 'warning'
+        })
+        return false
+      }
+      this.$router.push({ path: '/Search?key=' + this.searchKey })
+    }
   },
 }
 </script>

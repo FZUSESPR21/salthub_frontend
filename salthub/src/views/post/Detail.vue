@@ -8,25 +8,21 @@
  * @version: V1.0.0
 !-->
 <template>
-  <div class="detail">
-
-    <div class="header">
-      <Header></Header>
-    </div>
-
+  <div class="detail" style="background-color:#f3f3f3;position:absolute;top:0">
+    <Header></Header>
     <div class="main">
-      <el-container>
-        <el-header height="180px" style="font-size:50px">{{title}}</el-header>
+      <el-container style="background-color:white;">
+        <el-header height="150px" style="font-size:30px">{{title}}</el-header>
         <hr>
         <el-container>
           <el-aside width="200px">
             <div>
              <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-             <span style="font-size:20px">{{authorName}}</span>
+             <span style="font-size:18px">{{authorName}}</span>
             </div>
           </el-aside>
           <el-container>
-            <el-main style="font-size:20px">
+            <el-main style="font-size:18px">
               {{content}}
             </el-main>
             <el-footer height="120px">
@@ -40,9 +36,8 @@
             </el-footer>
           </el-container>
         </el-container>
-        <hr>
       </el-container>
-      <div v-for="comment in comments" :key="comment.id">
+      <div v-for="comment in comments" :key="comment.id" style="background-color:white;border:solid #f3f3f3 1px">
         <el-container>
           <el-aside width="200px">
             <div>
@@ -65,11 +60,14 @@
             </el-footer>
           </el-container>
         </el-container>
-        <hr>
+      </div>
+      <hr>
+      <div>
+        <v-CreateComment></v-CreateComment>
       </div>
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <span>评论</span>
       <el-input
         type="textarea"
@@ -81,18 +79,19 @@
         <div style="float:right">
           <el-button type="primary" round>发送</el-button>
         </div>
-      </div>
+      </div> -->
     </div>
-
   </div>
 </template>
 
 <script>
 import Header from '@/components/Layout/Header'
+import CreateComment from '@/components/Comment/CreateComment'
   export default {
     name: 'Detail',
     components: {
       Header,
+      'v-CreateComment': CreateComment
     },
     data() {
       const item = {
@@ -124,46 +123,39 @@ import Header from '@/components/Layout/Header'
   text-align: center;
   }
   .header{
-    background-color: #f3f3f3;
     width: 85%;
     margin: auto;
     margin-top: 5%;
   }
   .main{
-    background-color: #f3f3f3;
     margin: auto;
     width: 75%;
   }
   .footer{
-    background-color: #f3f3f3;
     margin: auto;
     width: 75%;
     text-align: left;
     padding: 20px;
   }
  .el-header {
-    background-color: #f3f3f3;
     color: #333;
     text-align: center;
     line-height: 200px;
     font-size: 30px;
   }
   .el-footer {
-    background-color: #f3f3f3;
     color: #333;
     text-align: center;
     line-height: 60px;
     font-size: 30px;
   }
   .el-aside {
-    background-color: #f3f3f3;
     color: #333;
     text-align: center;
     line-height: 200px;
   }
 
   .el-main {
-    background-color: #f3f3f3;
     color: #333;
     text-align: left;
   }
