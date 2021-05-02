@@ -17,13 +17,13 @@
 
 <style lang="scss" scoped>
 $white: #dcdfe6;
-.text {
-  font-size: 14px;
-}
+// .text {
+//   font-size: 14px;
+// }
 
-.item {
-  padding: 18px 0;
-}
+// .item {
+//   padding: 18px 0;
+// }
 
 .box-card {
   width: 275px;
