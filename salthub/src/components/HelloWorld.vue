@@ -85,6 +85,7 @@
 
 <script>
 import { login,hello } from '@/api/auth'
+import store from '@/store'
 
 export default {
   name: 'HelloWorld',
@@ -97,8 +98,9 @@ export default {
     // console.log(process.env)
     // this.testAxios() 
     // this.testHello()
-    this.submitForm()
-    this.testHello()
+    // this.submitForm()
+    // this.testHello()
+    console.log(store.getters.user)
   },
   methods: {
     async testLogin(){

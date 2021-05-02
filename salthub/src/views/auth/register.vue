@@ -35,13 +35,16 @@
                 autocomplete="off"
               />
             </el-form-item>
-            
+
             
             <el-form-item label="邮箱" prop="mailbox">
               <el-input style="width:55%" ref="mailboxAdd" v-model="ruleForm.mailbox" autocomplete="off" />          
               <el-button v-if="!waitMailCode" class="code" type="primary" @click="getCode()">获取验证码</el-button>
               <el-button v-if="waitMailCode" class="code" type="primary" disabled>{{waitTime}} 秒后重新获取</el-button>
             </el-form-item>
+            <transition name="fade">
+              <SliderCheck v-show="sliderShown" class="formItem" :successFun="successVerified" :errorFun="errorVerified"></SliderCheck>
+            </transition>
            
             <el-form-item label="验证码">
               <el-input style="width:55%" v-model="ruleForm.code" />
@@ -65,9 +68,13 @@
 
 <script>
 import { register,getMailCode } from '@/api/auth'
+import SliderCheck from '@/components/auth/SliderCheck'
 
 export default {
   name: 'Register',
+  components: {
+    SliderCheck,
+  },
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -81,6 +88,8 @@ export default {
     return {
       loading: false,
       waitMailCode: false,
+      isVerified: false,  //是否通过人机验证
+      sliderShown: false, //显示人机验证滑块
       waitTime: 6,
       ruleForm: {
         name: '',
@@ -128,9 +137,21 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.loading = true
-          register(this.ruleForm)
+          var code = {
+            code: this.ruleForm.code,
+          }
+          var data = {
+            // avatar: "",
+            email: this.ruleForm.mailbox,
+            name: this.ruleForm.name,
+            // nickname: "",
+            password: this.ruleForm.password,
+            // status: "",
+          }
+          register(code, data)
             .then((value) => {
-              const { code, message } = value
+              // console.log(value)
+              const { code, message } = value.data
               if (code === 200) {
                 this.$message({
                   message: '账号注册成功',
@@ -141,6 +162,7 @@ export default {
                   this.$router.push({ path: this.redirect || '/login' })
                 }, 0.1 * 1000)
               } else {
+                // console.log(code)
                 this.$message.error('注册失败，' + message)
               }
             })
@@ -157,15 +179,16 @@ export default {
     },
     /**
      *@functionName: getCode 
-     *@description: 获取邮箱验证码
+     *@description: 通过人机验证后，获取邮箱验证码
      *@author: lw
-     *@date: 2021-05-01 22:00:18
-     *@version: V1.0.0
+     *@date: 2021-05-02 20:00:18
+     *@version: V1.0.1
     */
     getCode() {
       var verify = /^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
       console.log(this.waitMailCode)
-      if (verify.test(this.ruleForm.mailbox)) {
+      this.sliderShown = true;
+      if (verify.test(this.ruleForm.mailbox) && this.isVerified) { //通过邮箱格式验证且通过人机验证
         // console.log('验证成功')
         this.waitTime = 60,
         this.waitMailCode = true 
@@ -189,6 +212,30 @@ export default {
       console.log(this.waitMailCode)
         console.log('验证失败')
       }
+    },
+
+    /**
+     *@functionName:    successVerified 
+     *@description: 滑块验证成功函数
+     *@author: lw
+     *@date: 2021-05-02 20:18:19
+     *@version: V1.0.0
+    */
+    successVerified() {
+      console.log("成功验证")
+      this.isVerified = true
+      // this.submitForm(this.ruleForm)
+    },
+    /**
+     *@functionName:    errorVerified 
+     *@description: 滑块验证失败函数
+     *@author: lw
+     *@date: 2021-05-02 20:18:19
+     *@version: V1.0.0
+    */
+    errorVerified() {
+      // console.log("验证失败")
+      this.isVerified = false 
     }
   }
 }
@@ -210,5 +257,20 @@ export default {
     height: 600px;
 }
 
+.formItem {
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 20%;
+  width: 68%;
+  margin-bottom: 20px;
+  transition: 1s;
+}
+
+.fade-enter-active .fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
+    opacity: 0
+}
 
 </style>

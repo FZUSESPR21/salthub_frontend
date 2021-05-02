@@ -33,14 +33,13 @@ const actions = {
       login(userInfo)
         .then((response) => {
         //   console.log(response)
-          const token = response.headers.satoken
-          // console.log(response.data)
-          //测试  vuex存入user信息
-          const user = response.data
+          const token = response.headers.jwt
+          // console.log(response.data.data)
+          const user = response.data.data
         //   console.log(token)
           setToken(token);
           commit("SET_TOKEN_STATE", token);
-          commit("SET_USER_STATE", );
+          commit("SET_USER_STATE", user);
           resolve();
         })
         .catch((error) => {

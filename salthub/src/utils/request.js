@@ -6,9 +6,13 @@ import { getToken } from '@/utils/auth'
 // 1.创建axios实例
 const service = axios.create({
   // 公共接口--这里注意后面会讲,url = base url + request url
-//   baseURL: process.env.VUE_APP_URL,
+  //   baseURL: process.env.VUE_APP_URL,
 
+  //demo接口url
   baseURL: 'https://47.100.89.20',
+  //新接口url
+  // baseURL: 'https://'
+
   // 超时时间 单位是ms，这里设置了5s的超时时间
   timeout: 5 * 1000
 })
@@ -24,9 +28,10 @@ service.interceptors.request.use(
   config => {
     // 发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
     // 注意使用token的时候需要引入cookie方法或者用本地localStorage等方法，推荐js-cookie
+    // console.log(store.getters)
     if (store.getters.token) {
       // config.params = {'token': token}    // 如果要求携带在参数中
-      config.headers['saToken'] = store.getters.token   //请求头中携带saToken
+      config.headers['jwt'] = store.getters.token   //请求头中携带saToken
     }
     return config
   },

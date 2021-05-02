@@ -24,10 +24,11 @@ export function login(data) {
  *@date: 2021-04-30 08:26:17
  *@version: V1.0.0
 */
-export function register(data) {
+export function register(code, data) {
     return request({
         url: '/account/register',
         method: 'post',
+        params:code,
         data
     })
 }

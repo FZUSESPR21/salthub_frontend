@@ -36,11 +36,14 @@
             </el-switch>
           </el-form-item>
 
+          <transition name="fade">
+            <SliderCheck v-show="sliderShown" class="formItem" :successFun="successVerified" :errorFun="errorVerified"></SliderCheck>
+          </transition>
           <el-form-item>
             <el-button
               class="submit"
               type="primary"
-              @click="submitForm('ruleForm')"
+              @click="submit('ruleForm')"
               >登录</el-button
             >
             <!-- 注册待跳转 -->
@@ -53,12 +56,18 @@
 </template>
 
 <script>
+import SliderCheck from '@/components/auth/SliderCheck'
 export default {
   name: "login",
+  components:{ 
+    SliderCheck,
+  },
   data() {
     return {
       redirect: undefined,
       loading: false,
+      isVerified: false,  //是否通过人机验证
+      sliderShown: false, //显示人机验证滑块
       ruleForm: {
         name: "",
         password: "",
@@ -131,6 +140,43 @@ export default {
     toRegister() {
       this.$router.push({ path: this.redirect || "/register" });
     },
+    /**
+     *@functionName:    显示slider 
+     *@description: 点击登录 显示slider进行人机验证
+     *@author: lw
+     *@date: 2021-05-02 17:50:39
+     *@version: V1.0.0
+    */
+    submit(form) {
+      this.sliderShown = true
+      console.log(this.isVerified)
+      if (this.isVerified == true) {
+        this.submitForm(form)
+      }
+    },
+    /**
+     *@functionName:    successVerified 
+     *@description: 滑块验证成功函数
+     *@author: lw
+     *@date: 2021-05-02 20:18:19
+     *@version: V1.0.0
+    */
+    successVerified() {
+      // console.log("成功验证")
+      this.isVerified = true
+      // this.submitForm(this.ruleForm)
+    },
+    /**
+     *@functionName:    errorVerified 
+     *@description: 滑块验证失败函数
+     *@author: lw
+     *@date: 2021-05-02 20:18:19
+     *@version: V1.0.0
+    */
+    errorVerified() {
+      // console.log("验证失败")
+      this.isVerified = false 
+    }
   },
 };
 </script>
@@ -156,5 +202,21 @@ export default {
 .login-card {
   width: 530px;
   height: 500px;
+}
+
+.formItem {
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 10%;
+  width: 80%;
+  margin-bottom: 20px;
+  transition: 1s;
+}
+
+.fade-enter-active .fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
+    opacity: 0
 }
 </style>
