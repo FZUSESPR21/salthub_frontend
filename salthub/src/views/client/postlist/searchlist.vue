@@ -15,57 +15,29 @@
         <code class="has-text-info">{{ query.keyword }}</code> 的记录
       </div>
       <div>
-        <article v-for="(item, index) in list" :key="index" class="media">
-          <div class="media-content">
-            <div class="post-main">
-              <p class="post-title">
-                <span class="is-size-4">{{ item.title }}</span>
-              </p>
-              <p class="post-content">
-                <span class="is-size-6">{{ item.content }}</span>
-              </p>
-              <div class="act-buttons">
-                <el-button type="primary" round size="small">点赞</el-button>
-                <el-button
-                  type="warning"
-                  icon="el-icon-star-off"
-                  circle
-                  size="small"
-                ></el-button>
-                <el-button type="info" round size="small">{{
-                  item.tag
-                }}</el-button>
-              </div>
-            </div>
-          </div>
-          <div class="media-right" />
-        </article>
+        <article-list
+          v-for="(item, index) in list"
+          :key="index"
+          v-bind:paper="item"
+          @tag="searchByTag"
+        >
+        </article-list>
       </div>
     </el-card>
   </div>
 </template>
 
 <style scoped>
-.act-buttons {
-  margin-top: 15px;
-}
-.post-title {
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-.post-main {
-  margin-right: 20px;
-  margin-left: 20px;
-}
 </style>
 
 <script>
 //检测屏幕滑动高度的 用于无限下拉
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
+import articleList from "@/components/articleframe/ArticleBody";
 export default {
   inject: ["reload"],
   name: "Searchlist",
-  components: {},
+  components: { articleList },
   data() {
     return {
       list: [
@@ -148,9 +120,9 @@ export default {
   //路由监听 解决同一界面跳转vue默认不刷新问题
   watch: {
     $route(to, from) {
-        if(to.name==='Search'){
-          this.reload()
-        }
+      if (to.name === "Search") {
+        this.reload();
+      }
     },
   },
   created() {
@@ -159,6 +131,11 @@ export default {
   methods: {
     fetchList() {
       this.searchByKeyword();
+    },
+    //根据标签检索
+    searchByTag(tag) {
+      console.log(tag);
+      this.$router.push({ path: "/Search?key=" + tag });
     },
     /*
       searchByKeyword(this.query).then(value => {
