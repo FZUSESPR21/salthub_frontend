@@ -42,7 +42,7 @@ import Footer from "@/components/Layout/Footer";
 import '@/assets/app.css'
 
 export default {
-  name: "Home",
+  name: "Search",
   components: {CardBar, Header,SearchList,Footer},
   data() {
     return {
