@@ -27,7 +27,6 @@
 
 <script>
 import echarts from '@/components/admin/index/echarts'
-import axios from "axios";
 export default {
   components: {
     "v-echarts": echarts,

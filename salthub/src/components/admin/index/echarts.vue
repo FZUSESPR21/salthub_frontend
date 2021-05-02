@@ -13,7 +13,6 @@
 <script>
 import * as echarts from "echarts";
 import $ from "jquery";
-import axios from "axios";
 export default {
   data() {
     return {

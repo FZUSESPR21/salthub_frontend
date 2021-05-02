@@ -27,11 +27,11 @@
             </el-main>
             <el-footer height="120px">
               <div style="float:right">
-                <el-button round style="background-color:red;color:white">点赞</el-button>
+                <el-button round style="background-color:#ff4949;color:white">点赞</el-button>
                 <el-button type="warning" icon="el-icon-star-off" circle></el-button>
                 <br>
                 <span style="font-size:15px">2021年4月3日</span>
-                <el-button type="text" style="color:red">举报</el-button>
+                <el-button type="text" style="color:black">举报</el-button>
               </div>
             </el-footer>
           </el-container>
@@ -51,11 +51,11 @@
             </el-main>
             <el-footer height="120px">
               <div style="float:right">
-                <el-button round style="background-color:red;color:white">点赞</el-button>
+                <el-button round style="background-color:#ff4949;color:white">点赞</el-button>
                 <el-button type="warning" icon="el-icon-star-off" circle></el-button>
                 <br>
                 <span style="font-size:15px">2021年4月3日</span>
-                <el-button type="text" style="color:red">举报</el-button>
+                <el-button type="text" style="color:black">举报</el-button>
               </div>
             </el-footer>
           </el-container>
@@ -86,12 +86,18 @@
 
 <script>
 import Header from '@/components/Layout/Header'
+import { mapGetters } from 'vuex'
 import CreateComment from '@/components/Comment/CreateComment'
   export default {
     name: 'Detail',
     components: {
       Header,
-      'v-CreateComment': CreateComment
+      'v-CreateComment': CreateComment,
+    },
+    computed: {
+    ...mapGetters([
+      'token','user'
+    ])
     },
     data() {
       const item = {
@@ -106,7 +112,7 @@ import CreateComment from '@/components/Comment/CreateComment'
           {name: '王小虎', content: '66666666666666666'},
           {name: '烤盐人', content: '收藏了'},
         ],
-        textarea: '',
+
       }
     },
     created: {
