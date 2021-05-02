@@ -14,17 +14,17 @@
     </div>
     <div class="main">
       <el-container>
-        <el-header height="180px" style="font-size:50px">{{title}}</el-header>
+        <el-header height="150px" style="font-size:30px">{{title}}</el-header>
         <hr>
         <el-container>
           <el-aside width="200px">
             <div>
              <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-             <span style="font-size:20px">{{authorName}}</span>
+             <span style="font-size:18px">{{authorName}}</span>
             </div>
           </el-aside>
           <el-container>
-            <el-main style="font-size:20px">
+            <el-main style="font-size:18px">
               {{content}}
             </el-main>
             <el-footer height="120px">
