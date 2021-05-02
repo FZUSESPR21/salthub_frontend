@@ -8,12 +8,10 @@
  * @version: V1.0.0
 !-->
 <template>
-  <div class="detail">
-
+  <div class="detail" style="background-color:#f3f3f3">
     <div class="header">
-      <Header></Header>
+      <v-Header></v-Header>
     </div>
-
     <div class="main">
       <el-container>
         <el-header height="180px" style="font-size:50px">{{title}}</el-header>
@@ -67,9 +65,12 @@
         </el-container>
         <hr>
       </div>
+      <div>
+        <v-CreateComment></v-CreateComment>
+      </div>
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <span>评论</span>
       <el-input
         type="textarea"
@@ -81,18 +82,19 @@
         <div style="float:right">
           <el-button type="primary" round>发送</el-button>
         </div>
-      </div>
+      </div> -->
     </div>
-
   </div>
 </template>
 
 <script>
 import Header from '@/components/Layout/Header'
+import CreateComment from '@/components/Comment/CreateComment'
   export default {
     name: 'Detail',
     components: {
-      Header,
+      'v-Header': Header,
+      'v-CreateComment': CreateComment,
     },
     data() {
       const item = {
@@ -124,46 +126,45 @@ import Header from '@/components/Layout/Header'
   text-align: center;
   }
   .header{
-    background-color: #f3f3f3;
     width: 85%;
     margin: auto;
     margin-top: 5%;
   }
   .main{
-    background-color: #f3f3f3;
+    background-color: white;
     margin: auto;
     width: 75%;
   }
   .footer{
-    background-color: #f3f3f3;
+    background-color: white;
     margin: auto;
     width: 75%;
     text-align: left;
     padding: 20px;
   }
  .el-header {
-    background-color: #f3f3f3;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 200px;
     font-size: 30px;
   }
   .el-footer {
-    background-color: #f3f3f3;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 60px;
     font-size: 30px;
   }
   .el-aside {
-    background-color: #f3f3f3;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 200px;
   }
 
   .el-main {
-    background-color: #f3f3f3;
+    background-color: white;
     color: #333;
     text-align: left;
   }
