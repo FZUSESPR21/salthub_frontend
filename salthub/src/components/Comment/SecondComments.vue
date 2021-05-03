@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div v-for="comment in comments" :key="comment.id" style="background-color:white;border:solid #e3f3f3 1px;">
+  <div style="">
+    <!-- <div>父评论id:{{firstCommentId}}</div> -->
+    <div v-for="comment in comments" :key="comment.id" style="background-color:white;margin-left:15%;width:80%;border-top:solid #e3f3f3 1px">
       <el-container>
         <el-aside width="200px">
           <div>
@@ -19,23 +20,24 @@
               <br>
               <span style="font-size:15px">2021年4月3日</span>
               <el-button type="text">举报</el-button>
-              <br>
-              <el-button type="text" style="float:right">评论</el-button>
             </div>
           </el-footer>
         </el-container>
       </el-container>
-      <SecondComment :firstCommentId="comment.commentId"></SecondComment>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import SecondComment from '@/components/Comment/SecondComments'
   export default {
       name: 'Detail',
+      props: {
+        firstCommentId: {
+          type: Int32Array,
+          default: 0
+        }
+      },
       components: {
-        SecondComment,
       },
       computed: {
       ...mapGetters([
@@ -48,9 +50,9 @@ import SecondComment from '@/components/Comment/SecondComments'
         };
         return {
           comments: [
-            {name: '烤鸭人', content: '楼主好人', commentId: 1352},
-            {name: '王小虎', content: '66666666666666666', commentId: 1965},
-            {name: '烤盐人', content: '收藏了', commentId: 2000},
+            {name: '张三', content: '顶顶顶'},
+            {name: '王五', content: '点赞'},
+            {name: '李四', content: '收藏'},
           ],
         }
       },
