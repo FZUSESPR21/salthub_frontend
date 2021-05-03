@@ -40,6 +40,7 @@ import Header from "@/components/Layout/Header";
 import SearchList from '@/views/client/postlist/SearchList'
 import Footer from "@/components/Layout/Footer";
 import '@/assets/app.css'
+import 'buefy/dist/buefy.css'
 
 export default {
   name: "Search",

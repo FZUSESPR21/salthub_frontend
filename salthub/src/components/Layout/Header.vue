@@ -123,6 +123,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import 'buefy/dist/buefy.css'
 export default {
   name: 'Header',
   data() {

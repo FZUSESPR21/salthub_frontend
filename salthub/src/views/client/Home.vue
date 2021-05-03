@@ -42,6 +42,7 @@ import Header from "@/components/Layout/Header";
 import PostList from "@/views/client/postlist/PostList";
 import Footer from "@/components/Layout/Footer";
 import "@/assets/app.css";
+import 'buefy/dist/buefy.css'
 
 export default {
   name: "Home",

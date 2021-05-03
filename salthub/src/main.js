@@ -10,7 +10,6 @@ import $ from 'jquery';
 import store from './store'
 // Buefy
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
 // import '@/assets/app.css'
 
 Vue.config.productionTip = false

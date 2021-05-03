@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import 'buefy/dist/buefy.css'
 export default {
   name: "Article",
   props:["paper"],

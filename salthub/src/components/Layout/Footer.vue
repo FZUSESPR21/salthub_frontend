@@ -29,7 +29,7 @@
 
 <script>
 import BackTop from "@/components/Layout/BackTop";
-
+import 'buefy/dist/buefy.css'
 export default {
   name: "Footer",
   components: {
