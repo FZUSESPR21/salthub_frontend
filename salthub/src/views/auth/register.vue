@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { register, getMailCode } from "@/api/auth";
+import { register, getEmailStatus, getMailCode } from "@/api/auth";
 import SliderCheck from "@/components/auth/SliderCheck";
 
 export default {
@@ -107,6 +107,7 @@ export default {
     return {
       loading: false,
       waitMailCode: false,
+      mailAvailable: true,
       isVerified: false, //是否通过人机验证
       sliderShown: false, //显示人机验证滑块
       waitTime: 6,
@@ -153,13 +154,13 @@ export default {
   },
   methods: {
     /**
-     *@functionName:     
+     *@functionName:
      *@params: formName
      *@description: 提交注册表单
      *@author: lw
      *@date: 2021-05-02 22:10:33
      *@version: V1.0.0
-    */
+     */
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -204,6 +205,23 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    checkEmail() {
+      var email = {
+        email: this.ruleForm.mailbox,
+      };
+      getEmailStatus(email)
+        .then((response) => {
+          if (response.code === 200) {
+            console.log("可使用该邮箱")
+            this.mailAvailable = true
+          }
+          else {
+            console.log("邮箱不可使用")
+            this.$message.error("该邮箱不能注册");
+            this.mailAvailable = false
+          }
+        })
+    },
     /**
      *@functionName: getCode
      *@description: 通过人机验证后，获取邮箱验证码
@@ -213,9 +231,10 @@ export default {
      */
     getCode() {
       var verify = /^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
-      console.log(this.waitMailCode);
+      // console.log(this.waitMailCode);
+      this.checkEmail(this.ruleForm.mailbox)
       this.sliderShown = true;
-      if (verify.test(this.ruleForm.mailbox) && this.isVerified) {
+      if (verify.test(this.ruleForm.mailbox) && this.isVerified && this.mailAvailable) {
         //通过邮箱格式验证且通过人机验证
         // console.log('验证成功')
         (this.waitTime = 60), (this.waitMailCode = true);
