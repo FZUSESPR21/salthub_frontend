@@ -2,14 +2,14 @@
  * @description: 晒研论坛-社区-帖子列表
  * @fileName: communitylist.vue 
  * @author: xiaohan 
- * @date: 2021-05-03 22:02:12 
+ * @date: 2021-05-03 23:08:12 
  * @后台人员:  zouyangyi
  * @path:  
- * @version: V1.0.2 
+ * @version: V1.0.3 
 !-->
 <template>
   <div>
-    <div slot="header" class="clearfix">
+    <div slot="header" class="clearfix" v-if="refresh">
       <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
         <el-tab-pane name="school">
           <span slot="label">
@@ -84,10 +84,13 @@ export default {
         total: 0, //后台总的文章数
         totalpage:1,//总的页面数量
       },
-      modules:0,
+      modules:0,//默认的tab是福州大学
+      refresh: true,//用于刷新组件
     };
   },
-  created() {this.init(this.activeName)},
+  created() {
+    this.init(this.activeName)
+  },
   mounted() {
     window.addEventListener("scroll", this.load);
   },
@@ -133,7 +136,6 @@ export default {
           this.page.current = data.data.current;
           if(this.page.current === 1){
             //请求第一页就直接赋值
-            //等式右边的值，之后有接口的话换上接口出来的数据
             this.page.total = data.data.total;
             this.page.totalpage = data.data.pages;
             this.articleList = data.data.records
@@ -143,9 +145,9 @@ export default {
               this.articleList.push(data.data.records[i]);
               console.log("success");
             }
-            console.log(this.articleList[10].title);
           }
       })
+      this.refreshComp();
     },
     load() {
       let vm = this;
@@ -159,6 +161,16 @@ export default {
           //到底了没数据了
         }
       }
+    },
+    //解决vue页头懒加载导致组件错位的问题
+    refreshComp() {
+      // 移除组件
+      this.refresh = false;
+      // 在组件移除后，重新渲染组件
+      // this.$nextTick可实现在DOM 状态更新后，执行传入的方法。
+      this.$nextTick(() => {
+        this.refresh = true;
+      });
     },
   },
 };
