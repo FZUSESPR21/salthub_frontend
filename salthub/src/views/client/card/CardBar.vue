@@ -10,13 +10,13 @@
 <template>
   <section>
     <!--登录注册/发文章-->
-    <LoginWelcome> </LoginWelcome>
+    <login-welcome> </login-welcome>
 
     <!--倒计时-->
-    <CountDownCard></CountDownCard>
+    <count-down-card></count-down-card>
 
     <!--加盐鸡汤-->
-    <TipCard></TipCard>
+    <tip-card></tip-card>
 
   </section>
 </template>

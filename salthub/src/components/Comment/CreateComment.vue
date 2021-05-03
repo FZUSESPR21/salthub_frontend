@@ -2,7 +2,7 @@
   <div class="box comments" style="back-groudcolor:#f3f3f3">
     <h3 class="title is-5">评论</h3>
 
-    <lv-comments-form :slug="slug" v-if="true" @loadComments="fetchComments"/>
+    <lv-comments-form :slug="slug" @loadComments="fetchComments"/>
 
   </div>
 </template>
@@ -34,17 +34,17 @@ export default {
     ])
   },
   async mounted() {
-    await this.fetchComments(this.slug)
+    // await this.fetchComments(this.slug)
   },
   methods: {
     // 初始化
-    async fetchComments(topic_id) {
-      console.log(topic_id)
-      fetchCommentsByTopicId(topic_id).then(response => {
-        const { data } = response
-        this.comments = data
-      })
-    }
+    // async fetchComments(topic_id) {
+    //   console.log(topic_id)
+    //   fetchCommentsByTopicId(topic_id).then(response => {
+    //     const { data } = response
+    //     this.comments = data
+    //   })
+    // }
   }
 }
 </script>

@@ -55,7 +55,7 @@ import accountTable from '@/components/admin/account/table'
 
 Vue.use(Router)
 Vue.use(ElementUI);
-Vue.use(axios)
+Vue.prototype.axios = axios
 
 export default new Router({
   routes: [

@@ -13,100 +13,31 @@
       <div slot="header">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="推荐" name="commendest">
-            <article
+            <article-list
               v-for="(item, index) in articleList"
               :key="index"
-              class="media"
+              v-bind:paper="item"
+              @tag='searchByTag'
             >
-              <div class="media-content">
-                <div class="post-main">
-                  <p class="post-title">
-                    <span class="is-size-4">{{ item.title }}</span>
-                  </p>
-                  <p class="post-content">
-                    <span class="is-size-6">{{ item.content }}</span>
-                  </p>
-                  <div class="act-buttons">
-                    <el-button type="primary" round size="small"
-                      >点赞</el-button
-                    >
-                    <el-button
-                      type="warning"
-                      icon="el-icon-star-off"
-                      circle
-                      size="small"
-                    ></el-button>
-                    <el-button type="info" round size="small">{{
-                      item.tag
-                    }}</el-button>
-                  </div>
-                </div>
-              </div>
-            </article>
+            </article-list>
           </el-tab-pane>
           <el-tab-pane label="热榜" name="hotest">
-            <article
+            <article-list
               v-for="(item, index) in articleList"
               :key="index"
-              class="media"
+              v-bind:paper="item"
+              @tag='searchByTag'
             >
-              <div class="media-content">
-                <div class="post-main">
-                  <p class="post-title">
-                    <span class="is-size-4">{{ item.title }}</span>
-                  </p>
-                  <p class="post-content">
-                    <span class="is-size-6">{{ item.content }}</span>
-                  </p>
-                  <div class="act-buttons">
-                    <el-button type="primary" round size="small"
-                      >点赞</el-button
-                    >
-                    <el-button
-                      type="warning"
-                      icon="el-icon-star-off"
-                      circle
-                      size="small"
-                    ></el-button>
-                    <el-button type="info" round size="small">{{
-                      item.tag
-                    }}</el-button>
-                  </div>
-                </div>
-              </div>
-            </article>
+            </article-list>
           </el-tab-pane>
           <el-tab-pane label="精品" name="best">
-            <article
+            <article-list
               v-for="(item, index) in articleList"
               :key="index"
-              class="media"
+              v-bind:paper="item"
+              @tag='searchByTag'
             >
-              <div class="media-content">
-                <div class="post-main">
-                  <p class="post-title">
-                    <span class="is-size-4">{{ item.title }}</span>
-                  </p>
-                  <p class="post-content">
-                    <span class="is-size-6">{{ item.content }}</span>
-                  </p>
-                  <div class="act-buttons">
-                    <el-button type="primary" round size="small"
-                      >点赞</el-button
-                    >
-                    <el-button
-                      type="warning"
-                      icon="el-icon-star-off"
-                      circle
-                      size="small"
-                    ></el-button>
-                    <el-button type="info" round size="small">{{
-                      item.tag
-                    }}</el-button>
-                  </div>
-                </div>
-              </div>
-            </article>
+            </article-list>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -115,25 +46,17 @@
 </template>
 
 <style scoped>
-.act-buttons {
-  margin-top: 15px;
-}
-.post-title {
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-.post-main {
-  margin-right: 10px;
-  margin-left: 10px;
-}
+
 </style>
 
 <script>
 //检测屏幕滑动高度的 用于无限下拉
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
-import { getList } from '@/api/post'
+import { getList } from "@/api/post";
+import  articleList  from "@/components/articleframe/ArticleBody";
 export default {
   name: "TopicList",
+  components: {articleList},
   data() {
     return {
       activeName: "commendest",
@@ -222,6 +145,10 @@ export default {
       this.page.current = 0;
       this.activeName = tab.name;
       this.init(tab.name);
+    },
+    searchByTag(tag) {
+      console.log(tag);
+      this.$router.push({ path: '/Search?key=' + tag })
     },
     //加载帖子列表
     init(tab) {
