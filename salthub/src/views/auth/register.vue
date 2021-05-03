@@ -215,6 +215,9 @@ export default {
             console.log("可使用该邮箱")
             this.mailAvailable = true
           }
+          else if (this.ruleForm.mailbox === "") {
+            this.$message.error("邮箱不能为空");
+          }
           else {
             console.log("邮箱不可使用")
             this.$message.error("该邮箱不能注册");
