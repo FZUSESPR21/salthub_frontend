@@ -18,12 +18,22 @@ p {
 
 <script>
 import { getBlog } from "@/api/blog";
-import axios from 'axios'
+import request from "@/utils/request";
+import store from "@/store";
+import axios from "axios";
 import table from "@/components/admin/blog/table";
 export default {
   components: {
     "v-table": table,
   },
-  
+  data() {
+    return {};
+  },
+  mounted() {
+    // getBlog();
+  },
+  methods: {
+    
+  },
 };
 </script>
