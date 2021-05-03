@@ -8,7 +8,7 @@
 </template>
 
 <style scoped>
-p{
+p {
   font-size: 24px;
   margin: 10px 20px;
   display: inline-block;
@@ -17,10 +17,13 @@ p{
 </style>
 
 <script>
+import { getBlog } from "@/api/blog";
+import axios from 'axios'
 import table from "@/components/admin/blog/table";
 export default {
   components: {
     "v-table": table,
   },
+  
 };
 </script>
