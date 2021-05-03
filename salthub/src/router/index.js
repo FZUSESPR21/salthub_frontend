@@ -253,6 +253,12 @@ export default new Router({
       name: 'register',
       component: () => import('@/views/auth/register'),
       meta: { title: "注册" },
+    },
+    {
+      path: '/backlogin',
+      name: 'backlogin',
+      component: () => import('@/views/auth/backlogin'),
+      meta: { title: "后台登录" },
     }
   ]
 })
