@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-后台-通知列表
+ * @fileName: table.vue 
+ * @author: NoMornings 
+ * @date: 2021-04-28 12:13:12 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.1 
+!-->
 <template>
   <div>
     <!-- search -->
