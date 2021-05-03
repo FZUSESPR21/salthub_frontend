@@ -152,6 +152,14 @@ export default {
     };
   },
   methods: {
+    /**
+     *@functionName:     
+     *@params: formName
+     *@description: 提交注册表单
+     *@author: lw
+     *@date: 2021-05-02 22:10:33
+     *@version: V1.0.0
+    */
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
