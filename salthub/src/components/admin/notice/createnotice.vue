@@ -46,9 +46,9 @@
 </template>
 
 <script>
-/*
-import { post } from '@/api/post'
-*/
+
+import { postBlog } from '@/api/blog'
+
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 
@@ -120,8 +120,8 @@ export default {
             return false
           }
           this.ruleForm.content = this.contentEditor.getValue()
-          /*
-          post(this.ruleForm).then((response) => {
+
+          postBlog(this.ruleForm).then((response) => {
             const { data } = response
             setTimeout(() => {
               this.$router.push({
@@ -130,7 +130,7 @@ export default {
               })
             }, 800)
           })
-          */
+
         } else {
           console.log('error submit!!')
           return false
