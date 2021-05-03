@@ -5,7 +5,7 @@
  * @date: 2021-05-03 00:28:10
  * @后台人员:  
  * @path:  
- * @version: V1.0.1
+ * @version: V1.0.2
 !-->
 <template>
   <header class="header has-background-white has-text-black">
@@ -13,9 +13,7 @@
       class="container is-white"
       :fixed-top="true"
     >
-
-      <template slot="start">
-
+      <template slot="brand">
         <div class="imglogo" v-for="fit in fits" :key="fit">
           <el-image
             style="width: 150px; height: 40px"
@@ -23,7 +21,8 @@
             :src="logoImg"
             :fit="fit"></el-image>
         </div>
-
+      </template>
+      <template slot="start">
         <b-navbar-item
           tag="router-link"
           :to="{ path: '/home' }"
@@ -82,7 +81,7 @@
           </b-field>
         </b-navbar-item>
 
-        <b-navbar-item tag="not">
+        <b-navbar-item tag="div">
             <el-button type="info" icon="el-icon-message" circle></el-button>
         </b-navbar-item>
 
@@ -123,7 +122,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   data() {
@@ -134,7 +133,7 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters(['token', 'user'])
   },
   created() {
 

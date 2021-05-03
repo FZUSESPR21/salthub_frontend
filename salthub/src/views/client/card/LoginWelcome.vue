@@ -13,17 +13,13 @@
       <span>发帖</span>
 
     </div>
-    <!--判定是否有token，有则判断登陆成功允许发布帖子-->
-    <!--
     <div v-if="token != null && token !== ''" class="has-text-centered">
       <el-button type="primary" plain @click="toUserCreatePost()" outlined>✍ 发表想法</el-button>
     </div>
-    !-->
-    <!--否则显示登陆注册-->
-    <!--<div v-else class="has-text-centered">-->
+    <div v-else class="has-text-centered">
       <el-button type="primary" plain @click="toRegister()" outlined>马上入驻</el-button>
       <el-button type="warning" plain @click="toLogin()" outlined class="ml-2"> 论坛登录</el-button>
-    <!--</div>-->
+    </div>
   </el-card>
 </template>
 
@@ -34,9 +30,14 @@
 </style>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'LoginWelcome',
+  computed: {
+    ...mapGetters([
+      'token'
+    ])
+  },
   data() {
     return {}
   },
