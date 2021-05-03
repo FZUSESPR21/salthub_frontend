@@ -52,7 +52,7 @@
 <script>
 //检测屏幕滑动高度的 用于无限下拉
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
-import { getList } from "@/api/post";
+//import { getList } from "@/api/post";
 import  articleList  from "@/components/articleframe/ArticleBody";
 export default {
   name: "TopicList",

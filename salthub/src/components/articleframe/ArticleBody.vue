@@ -2,10 +2,10 @@
  * @description: 文章列表文章概要组件
  * @fileName: ArticleBody.vue 
  * @author: xiaohan
- * @date: 2021-05-02 23:19:44 
- * @后台人员:  
+ * @date: 2021-05-03 21:02:44 
+ * @后台人员:  zouyangyi
  * @path:  
- * @version: V1.0.0 
+ * @version: V1.0.1 
 !-->
 <template>
   <article class="media">
@@ -29,7 +29,7 @@
             type="info" 
             round 
             size="small"
-            @click="emitTag(item.tag)">{{ item.tag }}</el-button>
+            @click="emitTag(tag)">{{ this.tag }}</el-button>
         </div>
       </div>
     </div>
@@ -42,9 +42,24 @@ import 'buefy/dist/buefy.css'
 export default {
   name: "Article",
   props:["paper"],
+  mounted(){
+    if(this.paper.moduleId===0){
+      this.tag = "福州大学"
+    }
+    else if(this.paper.moduleId===1){
+      this.tag = "外校"
+    }
+    else if(this.paper.moduleId===2){
+      this.tag = "杂谈"
+    }
+    else if(this.paper.moduleId===3){
+      this.tag = "拼课"
+    }
+  },
   data(){
     return{
       item:this.paper,
+      tag:""
     }
   },
   methods:{
