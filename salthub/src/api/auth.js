@@ -50,6 +50,22 @@ export function logout(data) {
 }
 
 /**
+ *@functionName: getEmailStatus 
+ *@params1: 获取当前邮箱是否注册状态
+ *@description:
+ *@author: lw
+ *@date: 2021-05-03 19:57:09
+ *@version: V1.0.0
+*/
+export function getEmailStatus(params) {
+    return request({
+        url: '/account/email',
+        method: 'get',
+        params
+    })
+}
+
+/**
  *@functionName: getMailCode 
  * @param data 邮箱地址 
  *@description:
