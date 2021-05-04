@@ -169,11 +169,10 @@ export default {
     */
     search(){
       if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
-        this.$message.info({
-          showClose: true,
-          message: '请输入关键字搜索！',
-          type: 'warning'
-        })
+        this.$message({
+          message: '请输入关键字搜索',
+          type: 'error'
+        });
         return false
       }
       this.$router.push({ path: '/Search?key=' + this.searchKey })
@@ -186,7 +185,7 @@ export default {
      *@version: V1.0.0
     */
     async logout() {
-      this.$store.dispatch('/account/logout').then(() => {
+      this.$store.dispatch("user/logout").then(() => {
         this.$message.info('退出登录成功')
         setTimeout(() => {
           this.$router.push({ path: this.redirect || '/home' })

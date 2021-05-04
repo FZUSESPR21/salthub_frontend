@@ -41,11 +41,10 @@ export function register(code, data) {
  *@date: 2021-04-30 08:27:57
  *@version: V1.0.0
 */
-export function logout(data) {
+export function logout() {
     return request({
         url: '/account/logout',
         method: 'get',
-        data
     })
 }
 
