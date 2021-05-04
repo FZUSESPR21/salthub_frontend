@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-for="comment in comments" :key="comment.id" style="background-color:white;border:solid #e3f3f3 1px;">
+    <div v-for="comment in comments" :key="comment.id" style="background:white;border:solid #e3f3f3 1px;">
       <el-container>
         <el-aside width="200px">
-          <div>
+          <div style="padding-left:20px;padding-top:20px">
             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
             <span style="font-size:20px">{{comment.name}}</span>
           </div>
@@ -26,7 +26,7 @@
       </el-container>
       <transition name="slide-fade">
         <div v-if="comment.SecondComment">
-          <div style="width:84%;margin-left:15%">
+          <div style="width:79%;margin-left:20%">
             <CreateSecondComment :firstCommentId="comment.commentId"></CreateSecondComment>
           </div>
         </div>
