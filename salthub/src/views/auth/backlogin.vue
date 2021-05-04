@@ -81,6 +81,14 @@ export default {
     };
   },
   methods: {
+    /*
+     *@functionName: submitForm
+     *@params: formName 表单名称
+     *@description: 提交表单进行登录验证
+     *@author: lw
+     *@date: 2021-05-04 15:06:49 
+     *@version: V1.0.0
+    */
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -95,7 +103,7 @@ export default {
               });
               setTimeout(() => {
                 this.loading = false;
-                this.$router.push({ path: this.redirect || "/home" });
+                this.$router.push({ path: this.redirect || "/admin" });
               }, 0.5 * 1000);
             })
             .catch(() => {
