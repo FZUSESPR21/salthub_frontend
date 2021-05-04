@@ -18,7 +18,7 @@ export function login(data) {
 
 /**
  *@functionName: register 
- * @param data 注册表单 
+ *@param data 注册表单 
  *@description:
  *@author: lw
  *@date: 2021-04-30 08:26:17
@@ -66,7 +66,7 @@ export function getEmailStatus(params) {
 
 /**
  *@functionName: getMailCode 
- * @param data 邮箱地址 
+ *@param data 邮箱地址 
  *@description:
  *@author: lw
  *@date: 2021-04-30 08:28:36
@@ -82,7 +82,7 @@ export function getMailCode(params) {
 
 /**
  *@functionName: uploadAvatar 
- * @param data 上传头像参数 
+ *@param data 上传头像参数 
  *@description:
  *@author: lw
  *@date: 2021-04-30 08:29:14

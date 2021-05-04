@@ -5,7 +5,7 @@
         <el-input
           v-model.lazy="commentText"
           type="textarea"
-          :rows="10"
+          :rows="5"
           placeholder="请输入内容"
           :disabled="isLoading"
           v-model="textarea">

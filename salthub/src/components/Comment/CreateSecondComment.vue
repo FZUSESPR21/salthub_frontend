@@ -1,5 +1,6 @@
 <template>
-  <div class="box comments" style="back-groudcolor:#f3f3f3">
+  <!-- <div>父评论id:{{firstCommentId}}</div> -->
+  <div class="box comments" style="background:#f3f3f3">
     <h3 class="title is-5">评论</h3>
 
     <!-- <lv-comments-form :slug="slug" @loadComments="fetchComments"/> -->
@@ -11,7 +12,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { fetchCommentsByTopicId } from '@/api/comment'
-import LvCommentsForm from './CommentsForm'
+import LvCommentsForm from './SecondCommentsForm'
 
 export default {
   name: 'LvComments',
@@ -27,6 +28,10 @@ export default {
     slug: {
       type: String,
       default: null
+    },
+    firstCommentId: {
+      type: Number,
+      default: 1
     }
   },
   computed: {

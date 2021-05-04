@@ -27,6 +27,15 @@
             ></el-input>
           </el-form-item>
 
+          <el-form-item label="记住" prop="status">
+            <el-switch
+              v-model="ruleForm.status"
+              :active-value="1"
+              :inactive-value="0"
+            >
+            </el-switch>
+          </el-form-item>
+
           <el-form-item>
             <el-button style="width: 85%" class="submit" type="primary" @click="submitForm('ruleForm')"
               >登录</el-button
@@ -43,9 +52,11 @@ export default {
   name: "backlogin",
   data() {
     return {
+      loading: false,
       ruleForm: {
         name: '',
         password: '',
+        status: true,
       },
       rules: {
         name: [
@@ -70,9 +81,18 @@ export default {
     };
   },
   methods: {
+    /*
+     *@functionName: submitForm
+     *@params: formName 表单名称
+     *@description: 提交表单进行登录验证
+     *@author: lw
+     *@date: 2021-05-04 15:06:49 
+     *@version: V1.0.0
+    */
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.loading=true
           this.$store
             .dispatch("user/login", this.ruleForm)
             .then(() => {
@@ -83,7 +103,7 @@ export default {
               });
               setTimeout(() => {
                 this.loading = false;
-                this.$router.push({ path: this.redirect || "/home" });
+                this.$router.push({ path: this.redirect || "/admin" });
               }, 0.5 * 1000);
             })
             .catch(() => {
@@ -111,7 +131,7 @@ export default {
 
 .login-card {
   width: 530px;
-  height: 500px;
+  height: 550px;
   background-color:rgba(236, 236, 236, 0.949019607843137)
 }
 

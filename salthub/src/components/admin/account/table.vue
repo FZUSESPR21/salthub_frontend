@@ -34,7 +34,8 @@
     </div>
 
     <el-col :span="21">
-      <el-table :data="tableData" style="width: 100%">
+      <!-- <el-table :data="tableData" style="width: 100%"> -->
+      <el-table :data="tableDataTest" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -129,10 +130,23 @@
 </style>
 
 <script>
+//测试用blog接口，待后期替换为管理员获取用户列表接口
+import { getBlogByAccount } from "@/api/blog";
+import store from "@/store";
+
 export default {
   data() {
     return {
       input: "",
+      //用blog接口的测试数据
+      tableDataTest: [
+        {
+          nickname: "wxh",
+          id: "王小虎",
+          blog: "福大计算机考研复试之人工智能分析篇",
+          status: "正常",
+        },
+      ],
       tableData: [
         {
           nickname: "wxh",
@@ -165,6 +179,39 @@ export default {
       pageSize: 10,
     };
   },
+  mounted() {
+    getBlogByAccount({
+      // 管理员测试帐号
+      account: "123456",
+      current: 1,
+    }).then((response) => {
+      var len = response.data.data.records.length;
+      for (var i = 0; i < len; i++) {
+        this.tableDataTest.push({
+          nickname: "",
+          id: "",
+          blog: "",
+          status: "",
+        });
+        // 用户昵称
+        this.tableDataTest[i].nickname = response.data.data.records[i].author;
+        // 用户ID
+        this.tableDataTest[i].id = response.data.data.records[i].id;
+        // 最新发帖
+        this.tableDataTest[i].blog = response.data.data.records[i].title;
+        // 状态（ 正常 | 封禁 ）
+        this.tableDataTest[i].status = response.data.data.records[i].moduleId
+          ? "封禁"
+          : "正常";
+        console.log(this.tableDataTest[i].nickname);
+        console.log(this.tableDataTest[i].id);
+        console.log(this.tableDataTest[i].blog);
+        console.log(this.tableDataTest[i].status);
+      }
+      this.tableDataTest.pop();
+    });
+    console.log("token=>", store.getters.token);
+  },
   methods: {
     handleDetail(index, row) {
       console.log(index, row);
@@ -175,7 +222,8 @@ export default {
     convert() {},
     handleCurrentChange: function (currentPage) {
       console.log("handleCurrentChange()\n");
-      this.tableData = [];
+      // this.tableData = [];
+      this.tableDataTest = [];
       this.currentPage = currentPage;
       console.log("currentPage=" + currentPage + "\n");
       var i;
@@ -187,13 +235,15 @@ export default {
         j++, i++
       ) {
         console.log("i=" + i + "\n");
-        this.tableData.push(this.tableDataAll[i]);
+        // this.tableData.push(this.tableDataAll[i]);
+        this.tableDataTest.push(this.tableDataAll[i]);
         console.log(
           "this.tableDataAll[i]" + JSON.stringify(this.tableDataAll[i]) + "\n"
         );
       }
       if (this.tableDataAll.length == 0) {
-        this.tableData = [];
+        // this.tableData = [];
+        this.tableDataTest = [];
       }
     },
   },

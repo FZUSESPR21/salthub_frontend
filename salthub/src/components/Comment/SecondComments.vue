@@ -1,7 +1,7 @@
 <template>
   <div style="">
     <!-- <div>父评论id:{{firstCommentId}}</div> -->
-    <div v-for="comment in comments" :key="comment.id" style="background-color:white;margin-left:15%;width:80%;border-top:solid #e3f3f3 1px">
+    <div v-for="comment in comments" :key="comment.id" style="background-color:#f3f3f3;margin-left:15%;width:84%;border-top:solid #e3f3f3 1px;padding-left:20px;padding-top:20px">
       <el-container>
         <el-aside width="200px">
           <div>
@@ -15,8 +15,7 @@
           </el-main>
           <el-footer height="120px">
             <div style="float:right">
-              <el-button round style="background-color:#ff4949;color:white">点赞</el-button>
-              <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+              <el-button round style="background-color:#ff4949;color:white;font-size:3px;">点赞</el-button>
               <br>
               <span style="font-size:15px">2021年4月3日</span>
               <el-button type="text">举报</el-button>
@@ -33,8 +32,8 @@ import { mapGetters } from 'vuex'
       name: 'Detail',
       props: {
         firstCommentId: {
-          type: Int32Array,
-          default: 0
+          type: Number,
+          default: 1
         }
       },
       components: {
@@ -55,9 +54,6 @@ import { mapGetters } from 'vuex'
             {name: '李四', content: '收藏'},
           ],
         }
-      },
-      created: {
-
       },
       methods: {
       },

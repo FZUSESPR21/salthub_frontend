@@ -205,13 +205,21 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    /**
+     *@functionName:  checkEmail 
+     *@description: 检查邮箱可用性
+     *@author: lw
+     *@date: 2021-05-04 14:48:47
+     *@version: V1.0.0
+    */
     checkEmail() {
       var email = {
         email: this.ruleForm.mailbox,
       };
-      getEmailStatus(email)
+      getEmailStatus(email)   //调用接口，传入参数
         .then((response) => {
-          if (response.code === 200) {
+          var res = response.data
+          if (res.data === false) {
             console.log("可使用该邮箱")
             this.mailAvailable = true
           }
