@@ -50,7 +50,7 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
 
         };
         return {
-          firstCommentId: 1321,
+          firstCommentId: 0,
           showCreateSecondComment: true,
           comments: [
             {name: '烤鸭人', content: '楼主好人', commentId: 1352},

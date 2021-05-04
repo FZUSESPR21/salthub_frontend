@@ -33,7 +33,7 @@ import { mapGetters } from 'vuex'
       name: 'Detail',
       props: {
         firstCommentId: {
-          type: Int32Array,
+          type: Number,
           default: 0
         }
       },
