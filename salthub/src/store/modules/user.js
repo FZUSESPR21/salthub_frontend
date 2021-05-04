@@ -69,9 +69,10 @@ const actions = {
     });
   },
   // 注销
-  logout({ commit, state }) {
+  logout({ commit }) {
+    console.log("logout")
     return new Promise((resolve, reject) => {
-      logout(state.token)
+      logout()
         .then((response) => {
           console.log(response);
           commit("SET_TOKEN_STATE", "");

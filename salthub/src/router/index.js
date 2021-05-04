@@ -57,6 +57,11 @@ Vue.use(Router)
 Vue.use(ElementUI);
 Vue.prototype.axios = axios
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
+
 export default new Router({
   routes: [
     //组件测试

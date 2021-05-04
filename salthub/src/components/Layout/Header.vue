@@ -185,13 +185,15 @@ export default {
      *@date: 2021-05-03 00:28:03
      *@version: V1.0.0
     */
-    async logout() {
-      this.$store.dispatch('/account/logout').then(() => {
-        this.$message.info('退出登录成功')
-        setTimeout(() => {
-          this.$router.push({ path: this.redirect || '/home' })
-        }, 500)
-      })
+    logout() {
+      this.$store
+        .dispatch("user/logout")
+        .then(() => {
+          this.$message.info('退出登录成功')
+          setTimeout(() => {
+            this.$router.push({ path: this.redirect || '/home' })
+          }, 500)
+        })
     },
   },
 }
