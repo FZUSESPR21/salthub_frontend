@@ -79,7 +79,12 @@ export default {
     collection(){
       collectBlog(this.item.id).then((response) => {
         const { data } = response;
-        console.log(data);
+        if(data.code=="200"){
+          this.$message({
+          message: '收藏成功！',
+          type: 'success'
+        });
+        }
       });
     },
     // 字符串截取 包含对中文处理,str需截取字符串,start开始截取位置,n截取长度
