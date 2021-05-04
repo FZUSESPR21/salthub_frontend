@@ -64,9 +64,9 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
         return {
           firstCommentId: 0,
           comments: [
-            {name: '烤鸭人', content: '楼主好人', commentId: 1352, SecondComment: false},
-            {name: '王小虎', content: '66666666666666666', commentId: 1965, SecondComment: false},
-            {name: '烤盐人', content: '收藏了', commentId: 2000, SecondComment: false},
+            {name: '烤鸭人', content: '楼主好人', commentId: 1352, SecondComment: true},
+            {name: '王小虎', content: '66666666666666666', commentId: 1965, SecondComment: true},
+            {name: '烤盐人', content: '收藏了', commentId: 2000, SecondComment: true},
           ],
           buttonState: '展开'
         }
