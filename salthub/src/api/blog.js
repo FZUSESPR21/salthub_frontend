@@ -55,13 +55,21 @@ export function putBlog(data) {
  *@param: data 博客id
  *@description:
  *@author: lw
- *@date: 2021-04-30 08:53:40
- *@version: V1.0.0
+ *@date: 2021-05-04 08:53:40
+ *@version: V1.0.1
 */
-export function getBlog(data) {
+export function getBlogById(params) {
   return request({
     url: '/blog',
     method: 'get',
-    data
+    params 
+  })
+}
+
+export function getBlogByAccount(params) {
+  return request({
+    url: '/blog/account',
+    method: 'post',
+    params
   })
 }
