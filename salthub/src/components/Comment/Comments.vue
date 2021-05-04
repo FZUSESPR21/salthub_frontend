@@ -20,14 +20,14 @@
               <span style="font-size:15px">2021年4月3日</span>
               <el-button type="text">举报</el-button>
               <br>
-              <el-button type="text" style="float:right" @click="showForm(comment)">评论</el-button>
-            </div>
-            <div style="width:50%;margin-left:30%;">
-              <CreateSecondComment v-if="comment.createSecondComment" :firstCommentId="comment.commentId"></CreateSecondComment>
+              <el-button type="text" style="float:right;" @click="showForm(comment)">{{buttonState}}</el-button>
             </div>
           </el-footer>
         </el-container>
       </el-container>
+      <div style="width:85%;margin-left:15%">
+              <CreateSecondComment v-if="comment.createSecondComment" :firstCommentId="comment.commentId"></CreateSecondComment>
+      </div>
       <SecondComment :firstCommentId="comment.commentId"></SecondComment>
     </div>
   </div>
@@ -64,11 +64,19 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
             {name: '王小虎', content: '66666666666666666', commentId: 1965, createSecondComment: false},
             {name: '烤盐人', content: '收藏了', commentId: 2000, createSecondComment: false},
           ],
+          buttonState: '评论'
         }
       },
       methods: {
         showForm:function(comment) {
-          comment.createSecondComment = true
+          if (this.buttonState === '评论') {
+            comment.createSecondComment = true
+            this.buttonState = '收起'
+          }
+          else {
+            comment.createSecondComment = false
+             this.buttonState = '评论'
+          }
         }
       },
     };
