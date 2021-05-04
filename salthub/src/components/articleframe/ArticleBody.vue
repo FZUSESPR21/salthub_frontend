@@ -3,7 +3,7 @@
  * @fileName: ArticleBody.vue 
  * @author: xiaohan
  * @date: 2021-05-03 23:08:44 
- * @后台人员:  zouyangyi
+ * @后台人员: 
  * @path:  
  * @version: V1.0.2 
 !-->
@@ -18,12 +18,17 @@
           <span class="is-size-6">{{ this.content }}</span>
         </p>
         <div class="act-buttons">
-          <el-button type="primary" round size="small">点赞</el-button>
+          <el-button 
+            type="primary" 
+            round 
+            size="small"
+            >点赞</el-button>
           <el-button
             type="warning"
             icon="el-icon-star-off"
             circle
             size="small"
+            @click="collection()"
           ></el-button>
           <el-button 
             type="info" 
@@ -39,6 +44,7 @@
 
 <script>
 import 'buefy/dist/buefy.css'
+import { collectBlog } from "@/api/blog";
 export default {
   name: "Article",
   props:["paper"],
@@ -69,6 +75,12 @@ export default {
   methods:{
     emitTag(value){
       this.$emit('tag',value)
+    },
+    collection(){
+      collectBlog(this.item.id).then((response) => {
+        const { data } = response;
+        console.log(data);
+      });
     },
     // 字符串截取 包含对中文处理,str需截取字符串,start开始截取位置,n截取长度
     Substr(str, start, n) { // eslint-disable-line

@@ -11,18 +11,7 @@
   <div>
     <div slot="header" class="clearfix">
       <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card" :key="componentKey">
-        <el-tab-pane name="school">
-          <span slot="label">
-            <el-dropdown @command="handleCommand">
-              <span class="el-dropdown-link">
-                院校<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="a">福大</el-dropdown-item>
-                <el-dropdown-item command="b">外校</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </span>
+        <el-tab-pane label="福大" name="school">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
@@ -31,7 +20,15 @@
             >
             </article-list>
         </el-tab-pane>
-
+        <el-tab-pane label="外校" name="otherschool">
+            <article-list
+              v-for="(item, index) in articleList"
+              :key="index"
+              v-bind:paper="item"
+              @tag="searchByTag"
+            >
+            </article-list>
+        </el-tab-pane>
         <el-tab-pane label="杂谈" name="nonsense">
           <article-list
             v-for="(item, index) in articleList"
@@ -69,7 +66,7 @@
 //检测屏幕滑动高度的 用于无限下拉
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
 import articleList from "@/components/articleframe/ArticleBody";
-import { getListInCommunity } from "@/api/post";
+import { getListInCommunity } from "@/api/postlist";
 export default {
   name: "CommunityList",
   components: { articleList },
@@ -105,21 +102,16 @@ export default {
       this.init(tab.name);
       this.forceRerender();
     },
-    //下拉院校操作
-    handleCommand(command) {
-      this.init(command);
-      this.forceRerender();
-    },
     searchByTag(tag) {
       console.log(tag);
       this.$router.push({ path: "/Search?key=" + tag });
     },
     //加载帖子列表
     init(tab) {
-      if (tab === "school" || tab === "a") {
+      if (tab === "school") {
         this.modules = 0;
         console.log(this.modules);
-      } else if (tab === "b") {
+      } else if (tab === "otherschool") {
         this.modules = 1;
         console.log(this.modules);
       } else if (tab === "nonsense") {

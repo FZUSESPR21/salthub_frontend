@@ -3,7 +3,7 @@
  * @fileName: postlist.vue 
  * @author: 肖寒 
  * @date: 2021-05-04 14:08:14 
- * @后台人员:  
+ * @后台人员:  lixingyuan
  * @path:  
  * @version: V1.0.2 
 !-->
@@ -52,7 +52,7 @@
 <script>
 //检测屏幕滑动高度的 用于无限下拉
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
-import { getListInCommend } from "@/api/post";
+import { getListInCommend } from "@/api/postlist";
 import  articleList  from "@/components/articleframe/ArticleBody";
 export default {
   name: "TopicList",

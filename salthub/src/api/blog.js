@@ -73,3 +73,19 @@ export function getBlogByAccount(params) {
     params
   })
 }
+
+/**
+ *@functionName: collectBlog
+ *@param: data 文章id 
+ *@description:收藏文章
+ *@author: lw
+ *@date: 2021-05-04 20:50:41
+ *@version: V1.0.0
+*/
+export function collectBlog(id) {
+  return request({
+    url: '/collection',
+    method: 'post',
+    params:{id:id}
+  })
+}
