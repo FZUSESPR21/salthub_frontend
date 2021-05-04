@@ -34,7 +34,7 @@ import { mapGetters } from 'vuex'
       props: {
         firstCommentId: {
           type: Number,
-          default: 0
+          default: 1
         }
       },
       components: {

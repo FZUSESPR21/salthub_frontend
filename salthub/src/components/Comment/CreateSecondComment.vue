@@ -1,4 +1,5 @@
 <template>
+  <!-- <div>父评论id:{{firstCommentId}}</div> -->
   <div class="box comments" style="back-groudcolor:#f3f3f3">
     <h3 class="title is-5">评论</h3>
 
@@ -27,6 +28,10 @@ export default {
     slug: {
       type: String,
       default: null
+    },
+    firstCommentId: {
+      type: Number,
+      default: 1
     }
   },
   computed: {

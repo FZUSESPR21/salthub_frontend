@@ -39,6 +39,7 @@
       </el-container>
       <div>
         <v-Comments></v-Comments>
+        <!-- <v-Comments :blogId=""></v-Comments> -->
       </div>
       <hr>
       <div>
@@ -86,7 +87,7 @@ import Comments from '@/components/Comment/Comments'
     },
     methods: {
       /**
-       *@functionName:  getBlogDetails 
+       *@functionName:  getBlogDetails
        *@description: 获取文章详细信息   !!接口还没换 !!数据还是写死 需要到时候父子传参调整
        *@author: lw
        *@date: 2021-05-04 16:29:41

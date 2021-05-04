@@ -20,9 +20,11 @@
               <span style="font-size:15px">2021年4月3日</span>
               <el-button type="text">举报</el-button>
               <br>
-              <el-button type="text" style="float:right">评论</el-button>
+              <el-button type="text" style="float:right" @click="showForm(comment)">评论</el-button>
             </div>
-            <div style="width:50%;margin-left:30%;"><CreateSecondComment></CreateSecondComment></div>
+            <div style="width:50%;margin-left:30%;">
+              <CreateSecondComment v-if="comment.createSecondComment" :firstCommentId="comment.commentId"></CreateSecondComment>
+            </div>
           </el-footer>
         </el-container>
       </el-container>
@@ -40,6 +42,12 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
         SecondComment,
         CreateSecondComment
       },
+      props: {
+        blogId: {
+          type: Number,
+          default: 0
+        }
+      },
       computed: {
       ...mapGetters([
         'token','user'
@@ -51,15 +59,17 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
         };
         return {
           firstCommentId: 0,
-          showCreateSecondComment: true,
           comments: [
-            {name: '烤鸭人', content: '楼主好人', commentId: 1352},
-            {name: '王小虎', content: '66666666666666666', commentId: 1965},
-            {name: '烤盐人', content: '收藏了', commentId: 2000},
+            {name: '烤鸭人', content: '楼主好人', commentId: 1352, createSecondComment: false},
+            {name: '王小虎', content: '66666666666666666', commentId: 1965, createSecondComment: false},
+            {name: '烤盐人', content: '收藏了', commentId: 2000, createSecondComment: false},
           ],
         }
       },
       methods: {
+        showForm:function(comment) {
+          comment.createSecondComment = true
+        }
       },
     };
 </script>
