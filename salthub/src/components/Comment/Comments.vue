@@ -25,10 +25,10 @@
           </el-footer>
         </el-container>
       </el-container>
+      <SecondComment v-if="comment.createSecondComment" :firstCommentId="comment.commentId"></SecondComment>
       <div style="width:85%;margin-left:15%">
-              <CreateSecondComment v-if="comment.createSecondComment" :firstCommentId="comment.commentId"></CreateSecondComment>
+        <CreateSecondComment v-if="comment.createSecondComment" :firstCommentId="comment.commentId"></CreateSecondComment>
       </div>
-      <SecondComment :firstCommentId="comment.commentId"></SecondComment>
     </div>
   </div>
 </template>
@@ -64,18 +64,18 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
             {name: '王小虎', content: '66666666666666666', commentId: 1965, createSecondComment: false},
             {name: '烤盐人', content: '收藏了', commentId: 2000, createSecondComment: false},
           ],
-          buttonState: '评论'
+          buttonState: '展开'
         }
       },
       methods: {
         showForm:function(comment) {
-          if (this.buttonState === '评论') {
+          if (this.buttonState === '展开') {
             comment.createSecondComment = true
             this.buttonState = '收起'
           }
           else {
             comment.createSecondComment = false
-             this.buttonState = '评论'
+             this.buttonState = '展开'
           }
         }
       },
