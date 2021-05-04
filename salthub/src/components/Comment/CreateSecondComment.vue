@@ -1,6 +1,6 @@
 <template>
   <!-- <div>父评论id:{{firstCommentId}}</div> -->
-  <div class="box comments" style="back-groudcolor:#f3f3f3">
+  <div class="box comments" style="background:#f3f3f3">
     <h3 class="title is-5">评论</h3>
 
     <!-- <lv-comments-form :slug="slug" @loadComments="fetchComments"/> -->

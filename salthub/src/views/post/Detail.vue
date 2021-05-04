@@ -8,7 +8,7 @@
  * @version: V1.0.0
 !-->
 <template>
-  <div class="detail" style="background-color:#f3f3f3;position:absolute;top:0">
+  <div class="detail" style="background-color:#f3f3f3;position:absolute;top:0;width:100%">
     <Header></Header>
     <div class="main">
       <el-container style="background-color:white;">
