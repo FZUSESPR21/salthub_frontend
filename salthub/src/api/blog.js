@@ -73,3 +73,11 @@ export function getBlogByAccount(params) {
     params
   })
 }
+
+export function getBlogByAccount(params) {
+  return request({
+    url: '/blog/account',
+    method: 'post',
+    params
+  })
+}

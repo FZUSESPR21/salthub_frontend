@@ -22,6 +22,7 @@
               <br>
               <el-button type="text" style="float:right">评论</el-button>
             </div>
+            <div style="width:50%;margin-left:30%;"><CreateSecondComment></CreateSecondComment></div>
           </el-footer>
         </el-container>
       </el-container>
@@ -32,10 +33,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import SecondComment from '@/components/Comment/SecondComments'
+import CreateSecondComment from '@/components/Comment/CreateSecondComment'
   export default {
       name: 'Detail',
       components: {
         SecondComment,
+        CreateSecondComment
       },
       computed: {
       ...mapGetters([
@@ -47,6 +50,8 @@ import SecondComment from '@/components/Comment/SecondComments'
 
         };
         return {
+          firstCommentId: 1321,
+          showCreateSecondComment: true,
           comments: [
             {name: '烤鸭人', content: '楼主好人', commentId: 1352},
             {name: '王小虎', content: '66666666666666666', commentId: 1965},
