@@ -15,7 +15,7 @@
           </el-main>
           <el-footer height="120px">
             <div style="float:right">
-              <el-button round style="background-color:#ff4949;color:white">点赞</el-button>
+              <el-button round style="background-color:#ff4949;color:white;font-size:3px;">点赞</el-button>
               <br>
               <span style="font-size:15px">2021年4月3日</span>
               <el-button type="text">举报</el-button>
