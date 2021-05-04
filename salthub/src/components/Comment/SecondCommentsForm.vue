@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       commentText: '',
-      isLoading: false
+      isLoading: false,
+      textarea: ''
     }
   },
   props: {
