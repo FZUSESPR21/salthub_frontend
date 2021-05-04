@@ -1,7 +1,7 @@
 <template>
   <div style="">
     <!-- <div>父评论id:{{firstCommentId}}</div> -->
-    <div v-for="comment in comments" :key="comment.id" style="background-color:#f3f3f3;margin-left:15%;width:80%;border-top:solid #e3f3f3 1px">
+    <div v-for="comment in comments" :key="comment.id" style="background-color:#f3f3f3;margin-left:15%;width:84%;border-top:solid #e3f3f3 1px">
       <el-container>
         <el-aside width="200px">
           <div>
