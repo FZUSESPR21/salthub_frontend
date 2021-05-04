@@ -59,9 +59,6 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
           ],
         }
       },
-      created: {
-
-      },
       methods: {
       },
     };

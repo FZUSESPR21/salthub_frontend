@@ -56,9 +56,6 @@ import { mapGetters } from 'vuex'
           ],
         }
       },
-      created: {
-
-      },
       methods: {
       },
     };
