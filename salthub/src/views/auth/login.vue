@@ -113,6 +113,7 @@ export default {
           // console.log(this.ruleForm)
           this.$store
             .dispatch("user/login", this.ruleForm)
+            // .dispatch("user/logout")
             .then(() => {
               this.$message({
                 message: "恭喜你，登录成功",
