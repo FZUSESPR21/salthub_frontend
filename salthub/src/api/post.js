@@ -18,6 +18,22 @@ export function getListInCommunity(pageNo, tab) {
 }
 
 /*
+ *@functionName: getListInCommend
+ *@params1: pageNo 当前页码
+ *@description:获取首页文章列表
+ *@author: xiaohan
+ *@date: 2021-05-04 11:21:09
+ *@version: V1.0.0
+*/
+export function getListInCommend(params) {
+  return request(({
+    url: `/blog/all/${params.page}`,
+    method: 'get',
+    params
+  }))
+}
+
+/*
  *@functionName: getListByTag
  *@params1: pageNo 当前页码
  *@params2: tag 文章所属tag
