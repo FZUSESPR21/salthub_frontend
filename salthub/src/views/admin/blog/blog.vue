@@ -17,10 +17,6 @@ p {
 </style>
 
 <script>
-import { getBlog } from "@/api/blog";
-import request from "@/utils/request";
-import store from "@/store";
-import axios from "axios";
 import table from "@/components/admin/blog/table";
 export default {
   components: {
@@ -28,12 +24,6 @@ export default {
   },
   data() {
     return {};
-  },
-  mounted() {
-    // getBlog();
-  },
-  methods: {
-    
   },
 };
 </script>

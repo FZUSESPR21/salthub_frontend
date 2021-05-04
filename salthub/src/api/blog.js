@@ -65,3 +65,11 @@ export function getBlog(data) {
     data
   })
 }
+
+export function getBlogByAccount(params) {
+  return request({
+    url: '/blog/account',
+    method: 'post',
+    params
+  })
+}
