@@ -10,7 +10,7 @@
 <template>
   <header class="header has-background-white has-text-black">
     <b-navbar
-      class="container is-white"
+      class="is-white"
       :fixed-top="true"
     >
       <template slot="brand">
