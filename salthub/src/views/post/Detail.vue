@@ -95,12 +95,12 @@ import Comments from '@/components/Comment/Comments'
       */
       getBlogDetails () {
         var params = {
-          blogId: "1",
+          blogId: "39",
         }
         getBlogById(params)
           .then((response) => {
-            console.log(response.data.data.records[0])
-            // this.blog = response.data.data.records[0]
+            console.log(response.data.data)
+            this.blog = response.data.data
           })
       }
     },

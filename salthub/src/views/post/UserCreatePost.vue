@@ -38,7 +38,7 @@
             <div id="vditor" />
 
             <p style="font-size:22px">Tag</p>
-            <el-select v-model="ruleForm.tags" placeholder="请选择">
+            <el-select v-model="ruleForm.moduleId" placeholder="请选择">
               <el-option-group
                 v-for="group in options"
                 :key="group.label"
@@ -71,6 +71,7 @@
 
 <script>
 import { postBlog } from '@/api/blog'
+import { getNowTime } from '@/utils/time'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 
@@ -82,7 +83,7 @@ export default {
       contentEditor: {},
       ruleForm: {
         title: '', // 标题
-        tags: [], // 标签
+        moduleId: [], // 标签
         content: '' // 内容
       },
       rules: {
@@ -99,41 +100,45 @@ export default {
       options: [
           {
             label: '杂谈',
-            options: [{
-              value: 'Shanghai',
-              label: '求助'
-            }, {
-              value: 'Beijing',
-              label: '找研友'
-            }, {
-              value: 'aaaaaa',
-              label: '出清'
-            }
+            options: [
+              {
+                value: '2',
+                label: '求助'
+              },
+              {
+                value: '21',
+                label: '找研友'
+              }
             ]
           },
           {
             label: '拼课',
-            options: [{
-              value: 'Chengdu',
-              label: '数学'
-            }, {
-              value: 'Shenzhen',
-              label: '英语'
-            }, {
-              value: 'Guangzhou',
-              label: '政治'
-            }, {
-              value: 'Dalian',
-              label: '专业课'
-            }]
+            options: [
+              {
+                value: '3',
+                label: '数学'
+              }, 
+              {
+                value: '31',
+                label: '英语'
+              }, 
+              {
+                value: '32',
+                label: '政治'
+              }, 
+              {
+                value: '33',
+                label: '专业课'
+              }
+            ]
           },
           {
             label: '院校',
             options: [{
-              value: 'Chengdu',
+              value: '0',
               label: '福大'
             }, {
-              value: 'Shenzhen',
+              value: '1',
               label: '外校'
             }]
           },
@@ -168,6 +173,14 @@ export default {
     })
   },
   methods: {
+    /**
+     *@functionName:    submitForm 
+     *@params1: 表单名称
+     *@description: 发表文章 发布成功后跳转到文章详情页
+     *@author: lw zwl
+     *@date: 2021-05-05 10:49:35
+     *@version: V1.0.0
+    */
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -179,13 +192,25 @@ export default {
             alert('话题内容不可为空')
             return false
           }
-          if (this.ruleForm.tags == null || this.ruleForm.tags.length === 0) {
+          if (this.ruleForm.moduleId == null || this.ruleForm.moduleId.length === 0) {
             alert('标签不可以为空')
             return false
           }
           this.ruleForm.content = this.contentEditor.getValue()
-          postBlog(this.ruleForm).then((response) => {
+          var blog = {
+            author: '',
+            collectionNumber: '',
+            content: this.ruleForm.content,
+            moduleId: this.ruleForm.moduleId,
+            releaseTime: getNowTime(), 
+            title: this.ruleForm.title,
+          }
+          console.log(blog)
+
+
+          postBlog(blog).then((response) => {
             const { data } = response
+            //展示刚发布的文章详情页  !!先返回首页
             setTimeout(() => {
               this.$router.push({
                 name: 'post-detail',
@@ -202,7 +227,7 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
       this.contentEditor.setValue('')
-      this.ruleForm.tags = ''
+      this.ruleForm.moduleId = ''
     }
   }
 }
