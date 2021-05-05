@@ -45,7 +45,7 @@ export function getListInCommend(params) {
 export function getListByTag(pageNo, tag) {
   return request(({
     url: '/blog/tag',
-    method: 'get',
+    method: 'post',
     params: { current: pageNo, tagId: tag }
   }))
 }

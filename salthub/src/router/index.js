@@ -228,6 +228,13 @@ export default new Router({
       component: () => import('@/views/client/Search'),
       meta: { title: '晒研论坛-搜索结果' }
     },
+    // 标签检索
+    {
+      path: '/searchtag',
+      name: 'Searchtag',
+      component: () => import('@/views/client/SearchByTag'),
+      meta: { title: '晒研论坛-搜索结果' }
+    },
     //文章操作
     //文章详情
     {

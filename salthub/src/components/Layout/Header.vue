@@ -105,6 +105,7 @@
 
         <b-navbar-dropdown
           v-else
+          class="nav-d"
         >
           <b-navbar-item>
             个人中心
@@ -202,6 +203,9 @@ export default {
 input {
   width: 80%;
   height: 86%;
+}
+.nav-d {
+  margin-right: 15%;
 }
 
 </style>
