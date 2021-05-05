@@ -16,9 +16,9 @@
         <hr>
         <el-container>
           <el-aside width="200px">
-            <div>
-             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-             <span style="font-size:18px">{{blog.author}}</span>
+            <div style="padding-left:20px;padding-top:20px;">
+              <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+              <span style="font-size:20px">{{blog.author}}</span>
             </div>
           </el-aside>
           <el-container>
@@ -151,7 +151,7 @@ import 'vditor/dist/index.css'
   }
   .el-aside {
     color: #333;
-    text-align: center;
+    text-align: left;
     line-height: 200px;
   }
 

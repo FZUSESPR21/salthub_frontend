@@ -3,7 +3,7 @@
     <div v-for="comment in comments" :key="comment.id" style="background:white;border:solid #e3f3f3 1px;">
       <el-container>
         <el-aside width="200px">
-          <div style="padding-left:20px;padding-top:20px">
+          <div style="padding-left:20px;padding-top:20px;">
             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
             <span style="font-size:20px">{{comment.name}}</span>
           </div>
@@ -65,7 +65,7 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
           firstCommentId: 0,
           comments: [
             {name: '烤鸭人', content: '楼主好人', commentId: 1352, SecondComment: false},
-            {name: '王小虎', content: '66666666666666666', commentId: 1965, SecondComment: false},
+            {name: '王小虎', content: '666666666666666666666', commentId: 1965, SecondComment: false},
             {name: '烤盐人', content: '收藏了', commentId: 2000, SecondComment: false},
           ],
           buttonState: '评论'
