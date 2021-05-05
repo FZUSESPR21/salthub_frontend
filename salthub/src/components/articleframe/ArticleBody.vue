@@ -12,7 +12,13 @@
     <div class="media-content">
       <div class="post-main">
         <p class="post-title">
-          <span class="is-size-4">{{ this.title }}</span>
+          <el-link 
+            :underline="false"
+            class="is-size-4"
+            @click="emitId(id)"
+          >
+          {{ this.title }}
+          </el-link >
         </p>
         <p class="post-content">
           <span class="is-size-6">{{ this.content }}</span>
@@ -63,6 +69,7 @@ export default {
     }
     this.title = this.paper.title
     this.content = this.Substr(this.paper.content,0,400)
+    this.id = this.paper.id
   },
   data(){
     return{
@@ -70,11 +77,15 @@ export default {
       tag:"",
       title:"",
       content:"",
+      id:""
     }
   },
   methods:{
     emitTag(value){
       this.$emit('tag',value)
+    },
+    emitId(value){
+      this.$emit('id',value)
     },
     collection(){
       collectBlog(this.item.id).then((response) => {

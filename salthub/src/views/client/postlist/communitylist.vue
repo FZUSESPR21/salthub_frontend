@@ -10,42 +10,54 @@
 <template>
   <div>
     <div slot="header" class="clearfix">
-      <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card" :key="componentKey">
-        <el-tab-pane label="福大" name="school">
+      <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
+        <el-tab-pane label="福大" name="fzu">
+          <div v-if="tabRefresh.fzu">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
               v-bind:paper="item"
               @tag="searchByTag"
+              @id="detailById"
             >
             </article-list>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="外校" name="otherschool">
+          <div v-if="tabRefresh.otherschool">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
               v-bind:paper="item"
               @tag="searchByTag"
+              @id="detailById"
             >
             </article-list>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="杂谈" name="nonsense">
+          <div v-if="tabRefresh.nonsense">
           <article-list
             v-for="(item, index) in articleList"
             :key="index"
             v-bind:paper="item"
             @tag="searchByTag"
+            @id="detailById"
           >
           </article-list>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="拼课" name="freeclass">
+          <div v-if="tabRefresh.freeclass">
           <article-list
             v-for="(item, index) in articleList"
             :key="index"
             v-bind:paper="item"
             @tag="searchByTag"
+            @id="detailById"
           >
           </article-list>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -72,7 +84,7 @@ export default {
   components: { articleList },
   data() {
     return {
-      activeName: "school",
+      activeName: "fzu",
       articleList: [],
       //记录页面信息
       page: {
@@ -82,7 +94,12 @@ export default {
         totalpage: 1, //总的页面数量
       },
       modules: 0, //默认的tab是福州大学
-      componentKey: 0,
+      tabRefresh: {
+        fzu: true,
+        otherschool: false,
+        nonsense: false,
+        freeclass:false,
+      },
     };
   },
   created() {
@@ -96,19 +113,45 @@ export default {
   },
   methods: {
     //标签切换操作
-    handleClick(tab, event) {
+    handleClick(tab,) {
       this.page.current = 1;
       this.activeName = tab.name;
+      switch (this.activeName) {
+        case 'fzu':
+          this.switchTab('fzu')
+          break
+        case 'otherschool':
+          this.switchTab('otherschool')
+          break
+        case 'nonsense':
+          this.switchTab('nonsense')
+          break
+        case 'freeclass':
+          this.switchTab('freeclass')
+          break
+      }
       this.init(tab.name);
-      this.forceRerender();
+    },
+    switchTab (tab) {
+      for (let key in this.tabRefresh) {
+        if (key === tab) {
+          this.tabRefresh[key] = true
+        } else {
+          this.tabRefresh[key] = false
+        }
+      }
     },
     searchByTag(tag) {
       console.log(tag);
       this.$router.push({ path: "/searchtag?key=" + tag });
     },
+    detailById(id) {
+      console.log(id);
+      this.$router.push({ path: "/Detail?key=" + id });
+    },
     //加载帖子列表
     init(tab) {
-      if (tab === "school") {
+      if (tab === "fzu") {
         this.modules = 0;
         console.log(this.modules);
       } else if (tab === "otherschool") {
@@ -151,9 +194,6 @@ export default {
           this.$message("到底啦~看看前面的帖子吧");
         }
       }
-    },
-    forceRerender() {
-      this.componentKey += 1;  
     },
   },
 };
