@@ -22,7 +22,7 @@
           <el-aside width="200px">
             <div style="padding-left:20px;padding-top:20px;">
               <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-              <span style="font-size:20px">{{blog.author}}</span>
+              <span style="font-size:15px">{{blog.author}}</span>
             </div>
           </el-aside>
           <el-container>
