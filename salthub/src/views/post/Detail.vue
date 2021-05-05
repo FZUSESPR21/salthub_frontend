@@ -12,7 +12,11 @@
     <Header></Header>
     <div class="main">
       <el-container style="background-color:white;">
-        <el-header height="150px" style="font-size:30px">{{blog.title}}</el-header>
+        <el-header style="font-size:30px;height:100%">
+          <div style="padding-top:20px;padding-bottom:20px;">
+            {{blog.title}}
+          </div>
+        </el-header>
         <hr>
         <el-container>
           <el-aside width="200px">
@@ -74,7 +78,7 @@ import 'vditor/dist/index.css'
     data() {
       const blog = {
         author: "",
-        title: "",
+        title: "2022福州大学考研指导来了，必看！！最强考研经验2022福州大学考研指导来了，必看！！最强考研经验2022福州大学考研指导来了，必看！！最强考研经验2022福州大学考研指导来了，必看！！最强考研经验",
         content: "",
         releaseTime: "",
         likeNumber: "",
@@ -115,7 +119,7 @@ import 'vditor/dist/index.css'
           })
       },
       /**
-       *@functionName:  getRequest 
+       *@functionName:  getRequest
        *@description: 获取请求参数对象
        *               使用方法 getRequest().参数名
        *@author: lw
@@ -163,8 +167,6 @@ import 'vditor/dist/index.css'
  .el-header {
     color: #333;
     text-align: center;
-    line-height: 200px;
-    font-size: 30px;
   }
   .el-footer {
     color: #333;
