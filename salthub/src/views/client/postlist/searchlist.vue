@@ -20,6 +20,7 @@
           :key="index"
           v-bind:paper="item"
           @tag="searchByTag"
+          @id="detailById"
         >
         </article-list>
       </div>
@@ -136,6 +137,15 @@ export default {
     searchByTag(tag) {
       console.log(tag);
       this.$router.push({ path: "/Search?key=" + tag });
+    },
+    //点击标题跳转详情
+    detailById(id) {
+      console.log(id);
+      let routeData = this.$router.resolve({
+        path: "/Detail",
+        query: {key: id}
+      });
+      window.open(routeData.href, '_blank');
     },
     /*
       searchByKeyword(this.query).then(value => {

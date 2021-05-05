@@ -87,9 +87,14 @@ export default {
       console.log(tag);
       this.$router.push({ path: '/Search?key=' + tag })
     },
+    //点击标题跳转详情
     detailById(id) {
       console.log(id);
-      this.$router.push({ path: "/Detail?key=" + id });
+      let routeData = this.$router.resolve({
+        path: "/Detail",
+        query: {key: id}
+      });
+      window.open(routeData.href, '_blank');
     },
     //加载帖子列表
     init(activeName) {

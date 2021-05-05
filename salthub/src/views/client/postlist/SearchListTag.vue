@@ -20,6 +20,7 @@
           :key="index"
           v-bind:paper="item"
           @tag="searchByTag"
+          @id="detailById"
         >
         </article-list>
       </div>
@@ -86,6 +87,15 @@ export default {
           }
         }
       })
+    },
+    //点击标题跳转详情
+    detailById(id) {
+      console.log(id);
+      let routeData = this.$router.resolve({
+        path: "/Detail",
+        query: {key: id}
+      });
+      window.open(routeData.href, '_blank');
     },
     load() {
       let vm = this;
