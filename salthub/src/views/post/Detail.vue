@@ -21,8 +21,8 @@
         <el-container>
           <el-aside width="200px">
             <div style="padding-left:20px;padding-top:20px;">
-              <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" alt="头像" style="width:120px;height:120px;margin:0;padding:0;line-height:0;position:relative;left:25px">
-              <div style="font-size:25px;width:100%;padding:0;margin:0;word-break: break-all;white-space: normal;line-height:20px;position:relative;top:-70px;text-align:center">{{blog.author}}</div>
+              <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" alt="头像" style="width:100px;height:100px;margin:0;padding:0;line-height:0;position:relative;left:35px">
+              <div style="font-size:22px;width:100%;padding:0;margin:0;word-break: break-all;white-space: normal;line-height:20px;position:relative;top:-70px;text-align:center">{{blog.author}}</div>
             </div>
           </el-aside>
           <el-container>
