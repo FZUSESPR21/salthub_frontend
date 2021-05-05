@@ -5,8 +5,8 @@
       <el-container>
         <el-aside width="200px">
           <div>
-            <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-            <span style="font-size:20px">{{comment.name}}</span>
+            <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" alt="头像" style="width:50px;height:50px;margin:0;padding:0;line-height:0;position:relative;left:-10px">
+            <div style="font-size:18px;width:100%;padding:0;margin:0;word-break: break-all;white-space: normal;line-height:20px;position:relative;">{{comment.name}}</div>
           </div>
         </el-aside>
         <el-container>
