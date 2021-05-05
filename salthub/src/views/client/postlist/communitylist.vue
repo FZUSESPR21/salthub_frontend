@@ -104,7 +104,7 @@ export default {
     },
     searchByTag(tag) {
       console.log(tag);
-      this.$router.push({ path: "/Search?key=" + tag });
+      this.$router.push({ path: "/searchtag?key=" + tag });
     },
     //加载帖子列表
     init(tab) {
