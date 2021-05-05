@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     //标签切换操作
-    handleClick(tab,) {
+    handleClick(tab) {
       this.page.current = 1;
       this.activeName = tab.name;
       this.init(tab.name);

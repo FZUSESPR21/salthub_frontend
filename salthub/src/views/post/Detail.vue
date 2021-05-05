@@ -104,7 +104,8 @@ import 'vditor/dist/index.css'
       */
       getBlogDetails () {
         var params = {
-          blogId: "7",
+          blogId: this.getRequest().key,
+          // blogId: "7",
         }
         getBlogById(params)
           .then((response) => {
@@ -112,7 +113,29 @@ import 'vditor/dist/index.css'
             this.blog = response.data.data
             this.renderMarkdown(this.blog.content)
           })
-      }
+      },
+      /**
+       *@functionName:  getRequest 
+       *@description: 获取请求参数对象
+       *               使用方法 getRequest().参数名
+       *@author: lw
+       *@date: 2021-05-05 15:40:46
+       *@version: V1.0.0
+      */
+      getRequest() {
+        let url = location.href; //获取url中"?"符后的字串
+        // console.log(location.href)
+        var theRequest = new Object();
+        // console.log(url.indexOf("?"))
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(url.indexOf("?")+1);
+            var strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+              theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+      },
     },
   };
 </script>
