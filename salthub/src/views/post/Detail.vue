@@ -23,14 +23,15 @@
           </el-aside>
           <el-container>
             <el-main style="font-size:18px">
-              {{blog.content}}
+              <!--Markdown-->
+              <div id="preview" />
             </el-main>
             <el-footer height="120px">
               <div style="float:right">
                 <el-button round style="background-color:#ff4949;color:white">点赞</el-button>
                 <el-button type="warning" icon="el-icon-star-off" circle></el-button>
                 <br>
-                <span style="font-size:15px">2021年4月3日</span>
+                <span style="font-size:15px">{{blog.releaseTime}}</span>
                 <el-button type="text" style="color:black">举报</el-button>
               </div>
             </el-footer>
@@ -55,12 +56,15 @@ import { mapGetters } from 'vuex'
 import { getBlogById } from '@/api/blog'
 import CreateComment from '@/components/Comment/CreateComment'
 import Comments from '@/components/Comment/Comments'
+import Vditor from 'vditor'
+import 'vditor/dist/index.css'
   export default {
     name: 'Detail',
     components: {
       Header,
       'v-CreateComment': CreateComment,
       'v-Comments': Comments,
+      Vditor
     },
     computed: {
     ...mapGetters([
@@ -86,6 +90,11 @@ import Comments from '@/components/Comment/Comments'
       this.getBlogDetails()
     },
     methods: {
+      renderMarkdown(md) {
+        Vditor.preview(document.getElementById('preview'), md, {
+          hljs: { style: 'github' }
+        })
+      },
       /**
        *@functionName:  getBlogDetails
        *@description: 获取文章详细信息   !!接口还没换 !!数据还是写死 需要到时候父子传参调整
@@ -101,6 +110,7 @@ import Comments from '@/components/Comment/Comments'
           .then((response) => {
             console.log(response.data.data)
             this.blog = response.data.data
+            this.renderMarkdown(this.blog.content)
           })
       }
     },
