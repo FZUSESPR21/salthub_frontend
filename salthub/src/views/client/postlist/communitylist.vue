@@ -10,9 +10,8 @@
 <template>
   <div>
     <div slot="header" class="clearfix">
-      <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
+      <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card" :key="componentKey">
         <el-tab-pane label="福大" name="fzu">
-          <div v-if="tabRefresh.fzu">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
@@ -21,10 +20,8 @@
               @id="detailById"
             >
             </article-list>
-          </div>
         </el-tab-pane>
         <el-tab-pane label="外校" name="otherschool">
-          <div v-if="tabRefresh.otherschool">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
@@ -33,10 +30,8 @@
               @id="detailById"
             >
             </article-list>
-          </div>
         </el-tab-pane>
         <el-tab-pane label="杂谈" name="nonsense">
-          <div v-if="tabRefresh.nonsense">
           <article-list
             v-for="(item, index) in articleList"
             :key="index"
@@ -45,10 +40,8 @@
             @id="detailById"
           >
           </article-list>
-          </div>
         </el-tab-pane>
         <el-tab-pane label="拼课" name="freeclass">
-          <div v-if="tabRefresh.freeclass">
           <article-list
             v-for="(item, index) in articleList"
             :key="index"
@@ -57,7 +50,6 @@
             @id="detailById"
           >
           </article-list>
-          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -94,12 +86,7 @@ export default {
         totalpage: 1, //总的页面数量
       },
       modules: 0, //默认的tab是福州大学
-      tabRefresh: {
-        fzu: true,
-        otherschool: false,
-        nonsense: false,
-        freeclass:false,
-      },
+      componentKey: 0,//用于刷新组件
     };
   },
   created() {
@@ -116,20 +103,6 @@ export default {
     handleClick(tab,) {
       this.page.current = 1;
       this.activeName = tab.name;
-      switch (this.activeName) {
-        case 'fzu':
-          this.switchTab('fzu')
-          break
-        case 'otherschool':
-          this.switchTab('otherschool')
-          break
-        case 'nonsense':
-          this.switchTab('nonsense')
-          break
-        case 'freeclass':
-          this.switchTab('freeclass')
-          break
-      }
       this.init(tab.name);
       // console.log(this.articleList)
       // this.forceRerender();
