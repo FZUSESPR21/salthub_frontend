@@ -104,7 +104,7 @@ import 'vditor/dist/index.css'
       */
       getBlogDetails () {
         var params = {
-          blogId: "39",
+          blogId: "7",
         }
         getBlogById(params)
           .then((response) => {
