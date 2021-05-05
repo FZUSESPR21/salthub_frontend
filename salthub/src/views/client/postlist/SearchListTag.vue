@@ -12,7 +12,7 @@
     <el-card shadow="never">
       <div slot="header" class="clearfix">
         检索到 <code>{{ articleList.length }}</code> 条关于
-        <code class="has-text-info">{{ page.tagname }}</code> 的记录
+        <code class="has-text-info">{{ page.tag }}</code> 的记录
       </div>
       <div>
         <article-list
@@ -46,7 +46,6 @@ export default {
         current: 1, //当前页面
         totalpage: 0,//后台总的页数
         total: 0, //后台总的文章数
-        tagname:this.settagname( this.$route.query.key)
       },
     };
   },
@@ -96,21 +95,9 @@ export default {
           this.fetchList(); //拉取数据
         } else {
           //到底了没数据了
-          this.$message("到底啦~看看前面的帖子吧");
         }
       }
     },
-    settagname(tag){
-      if(tag===0){
-        this.tagname = "福州大学"
-      }
-      else if(tag===1){
-        this.tagname = "经验"
-      }
-      else if(tag===2){
-        this.tagname = "资讯"
-      }
-    }
   },
   mounted() {
     window.addEventListener("scroll", this.load);
