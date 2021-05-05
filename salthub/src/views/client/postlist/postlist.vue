@@ -18,6 +18,7 @@
               :key="index"
               v-bind:paper="item"
               @tag='searchByTag'
+              @id="detailById"
             >
             </article-list>
           </el-tab-pane>
@@ -27,6 +28,7 @@
               :key="index"
               v-bind:paper="item"
               @tag='searchByTag'
+              @id="detailById"
             >
             </article-list>
           </el-tab-pane>
@@ -36,6 +38,7 @@
               :key="index"
               v-bind:paper="item"
               @tag='searchByTag'
+              @id="detailById"
             >
             </article-list>
           </el-tab-pane>
@@ -61,7 +64,7 @@ export default {
     return {
       activeName: "commendest",
       articleList: [],
-      //记录页面信息 沿用教程的
+      //记录页面信息
       page: {
         current: 0, //当前页面
         totalpage:1,//总的页面数量
@@ -83,6 +86,10 @@ export default {
     searchByTag(tag) {
       console.log(tag);
       this.$router.push({ path: '/Search?key=' + tag })
+    },
+    detailById(id) {
+      console.log(id);
+      this.$router.push({ path: "/Detail?key=" + id });
     },
     //加载帖子列表
     init(activeName) {

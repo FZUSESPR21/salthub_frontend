@@ -10,7 +10,9 @@
         </el-aside>
         <el-container>
           <el-main style="font-size:20px">
-            {{comment.content}}
+            <div style="word-wrap: break-word;">
+              {{comment.content}}
+            </div>
           </el-main>
           <el-footer height="120px">
             <div style="float:right">
@@ -65,7 +67,7 @@ import CreateSecondComment from '@/components/Comment/CreateSecondComment'
           firstCommentId: 0,
           comments: [
             {name: '烤鸭人', content: '楼主好人', commentId: 1352, SecondComment: false},
-            {name: '王小虎', content: '666666666666666666666', commentId: 1965, SecondComment: false},
+            {name: '王小虎', content: '66666666666666666aaaaasfasfasfasgsdag3333333333333333333333333333333333333333sadgagagsdagasgdsagsdagasdgsadgasgdsagagretrtwere6666', commentId: 1965, SecondComment: false},
             {name: '烤盐人', content: '收藏了', commentId: 2000, SecondComment: false},
           ],
           buttonState: '评论'
