@@ -131,15 +131,8 @@ export default {
           break
       }
       this.init(tab.name);
-    },
-    switchTab (tab) {
-      for (let key in this.tabRefresh) {
-        if (key === tab) {
-          this.tabRefresh[key] = true
-        } else {
-          this.tabRefresh[key] = false
-        }
-      }
+      // console.log(this.articleList)
+      // this.forceRerender();
     },
     searchByTag(tag) {
       console.log(tag);
@@ -173,6 +166,8 @@ export default {
           this.page.total = data.data.total;
           this.page.totalpage = data.data.pages;
           this.articleList = data.data.records;
+          //异步加载完文章列表之后 重新渲染tab pane
+          this.forceRerender()
         } else {
           //将后面页码的数据和之前的数据拼合
           for (let i in data.data.records) {
@@ -194,6 +189,16 @@ export default {
           this.$message("到底啦~看看前面的帖子吧");
         }
       }
+    },
+    /**
+     *@functionName:  forceRerender 
+     *@description: 改变key值，重新渲染组件
+     *@author: xiaohan
+     *@date: 2021-05-05 13:31:54
+     *@version: V1.0.0
+    */
+    forceRerender() {
+      this.componentKey += 1;  
     },
   },
 };
