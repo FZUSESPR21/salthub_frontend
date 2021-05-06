@@ -45,11 +45,11 @@
               <el-form-item label="用户 ID">
                 <span>{{ props.row.id }}</span>
               </el-form-item>
-              <el-form-item label="状态">
-                <span>{{ props.row.status }}</span>
+              <el-form-item label="email">
+                <span>{{ props.row.email }}</span>
               </el-form-item>
-              <el-form-item label="最新发帖">
-                <span>{{ props.row.blog }}</span>
+              <el-form-item label="权限">
+                <span>{{ props.row.auth }}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -132,7 +132,7 @@
 <script>
 //测试用blog接口，待后期替换为管理员获取用户列表接口
 import { getBlogByAccount } from "@/api/blog";
-// import { getAccount } from "@/api/account";
+import { getAccount } from "@/api/account";
 import store from "@/store";
 
 export default {
@@ -146,6 +146,8 @@ export default {
           id: "王小虎",
           blog: "福大计算机考研复试之人工智能分析篇",
           status: "正常",
+          email: "",
+          auth: 4,
         },
       ],
       tableData: [
@@ -181,11 +183,10 @@ export default {
     };
   },
   mounted() {
-    getBlogByAccount({
-      // 管理员测试帐号
-      account: "123456",
+    getAccount({
       current: 1,
     }).then((response) => {
+      console.log("account=>", response.data.data.records);
       var len = response.data.data.records.length;
       for (var i = 0; i < len; i++) {
         this.tableDataTest.push({
@@ -195,15 +196,18 @@ export default {
           status: "",
         });
         // 用户昵称
-        this.tableDataTest[i].nickname = response.data.data.records[i].author;
+        this.tableDataTest[i].nickname = response.data.data.records[i].nickname;
         // 用户ID
-        this.tableDataTest[i].id = response.data.data.records[i].id;
+        this.tableDataTest[i].id = response.data.data.records[i].name;
         // 最新发帖
-        this.tableDataTest[i].blog = response.data.data.records[i].title;
+        this.tableDataTest[i].blog = response.data.data.records[i].slogan;
         // 状态（ 正常 | 封禁 ）
-        this.tableDataTest[i].status = response.data.data.records[i].moduleId
-          ? "封禁"
-          : "正常";
+        this.tableDataTest[i].status = "正常";
+        // 邮箱
+        this.tableDataTest[i].email = response.data.data.records[i].email;
+        // 权限
+        this.tableDataTest[i].auth =
+          response.data.data.records[i].auth == 4 ? "管理员" : "普通用户";
         // console.log(this.tableDataTest[i].nickname);
         // console.log(this.tableDataTest[i].id);
         // console.log(this.tableDataTest[i].blog);
@@ -212,9 +216,6 @@ export default {
       this.tableDataTest.pop();
     });
     console.log("token=>", store.getters.token);
-    // getAccount(1).then((res)=>{
-    //   console.log("account=>",res);
-    // })
   },
   methods: {
     handleDetail(index, row) {

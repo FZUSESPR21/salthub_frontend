@@ -8,10 +8,10 @@ import request from '@/utils/request'
  *@date: 2021-05-07 01:51:41
  *@version: V1.0.0
 */
-export function getAccount(data) {
+export function getAccount(params) {
   return request({
     url: '/admin/all',
     method: 'get',
-    data
+    params
   })
 }
