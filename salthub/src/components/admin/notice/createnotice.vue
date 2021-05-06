@@ -18,6 +18,7 @@
             :rules="rules"
             class="demo-ruleForm"
           >
+            <p style="font-size:18px">标题</p>
             <el-form-item prop="title">
               <el-input
                 v-model="ruleForm.title"
@@ -25,6 +26,7 @@
               />
             </el-form-item>
 
+            <p style="font-size:18px">内容</p>
             <!--Markdown-->
             <div id="vditor" />
 
