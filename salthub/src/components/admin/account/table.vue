@@ -132,6 +132,7 @@
 <script>
 //测试用blog接口，待后期替换为管理员获取用户列表接口
 import { getBlogByAccount } from "@/api/blog";
+// import { getAccount } from "@/api/account";
 import store from "@/store";
 
 export default {
@@ -211,6 +212,9 @@ export default {
       this.tableDataTest.pop();
     });
     console.log("token=>", store.getters.token);
+    // getAccount(1).then((res)=>{
+    //   console.log("account=>",res);
+    // })
   },
   methods: {
     handleDetail(index, row) {

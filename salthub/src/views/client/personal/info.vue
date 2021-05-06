@@ -31,13 +31,18 @@
 .front-head {
   margin-bottom: 20px;
 }
+
+body,
+html {
+  background-color: #f3f3f3;
+}
 </style>
 
 <script>
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import card from "@/components/personal/card";
-import "@/assets/app.css";
+// import "@/assets/app.css";
 import "buefy/dist/buefy.css";
 
 export default {
