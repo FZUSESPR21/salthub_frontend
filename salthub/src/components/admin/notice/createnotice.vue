@@ -30,6 +30,21 @@
             <!--Markdown-->
             <div id="vditor" />
 
+            <p style="font-size:18px">通知对象</p>
+            <el-select v-model="ruleForm.moduleId" placeholder="请选择">
+              <el-option-group
+                v-for="group in options"
+                :key="group.label"
+                :label="group.label">
+                <el-option
+                  v-for="item in group.options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-option-group>
+            </el-select>
+
             <div style="padding-top:20px">
               <el-form-item>
                 <el-button
@@ -76,6 +91,55 @@ export default {
           }
         ]
       },
+      options: [
+          {
+            label: '学院',
+            options: [{
+              value: 'Shanghai',
+              label: '计算机学院'
+            }, {
+              value: 'Beijing',
+              label: '电子信息学院'
+            }, {
+              value: 'aaaaaa',
+              label: '化学学院'
+            }, {
+              value: 'aaaaaa',
+              label: '电气学院'
+            },{
+              value: 'aaaaaa',
+              label: '法学院'
+            }, {
+              value: 'aaaaaa',
+              label: '物理与信息工程学院'
+            }, {
+              value: 'aaaaaa',
+              label: '马克思学院'
+            }
+            ]
+          },
+          {
+            label: '学校',
+            options: [{
+              value: 'Chengdu',
+              label: '福大'
+            }, {
+              value: 'Shenzhen',
+              label: '外校'
+            }
+            ]
+          },
+          {
+            label: '身份',
+            options: [{
+              value: 'VIP',
+              label: ''
+            }, {
+              value: 'Shenzhen',
+              label: '普通用户'
+            }]
+          },
+        ],
     }
   },
   mounted() {
