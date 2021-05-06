@@ -64,7 +64,9 @@
 
 <script>
 
-import { postBlog } from '@/api/blog'
+import { postNotice } from '@/api/notice'
+import store from '@/store'
+import { getNowTime } from '@/utils/time'
 
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
@@ -77,7 +79,6 @@ export default {
       contentEditor: {},
       ruleForm: {
         title: '', // 标题
-        tags: [], // 标签
         content: '' // 内容
       },
       rules: {
@@ -181,20 +182,34 @@ export default {
             alert('话题内容不可为空')
             return false
           }
-          if (this.ruleForm.tags == null || this.ruleForm.tags.length === 0) {
-            alert('标签不可以为空')
-            return false
-          }
           this.ruleForm.content = this.contentEditor.getValue()
 
-          postBlog(this.ruleForm).then((response) => {
+          // console.log(this.ruleForm)
+          // console.log(store.getters.user.name)
+          var params = {
+            name: store.getters.user.name
+          }
+          var data = {
+            accountName: "***",
+            author: store.getters.user.name,
+            // author: "123456",
+            content: this.ruleForm.content,
+            releaseTime: getNowTime(),
+            title: this.ruleForm.title,
+          }
+          console.log(params)
+          console.log(data)
+          postNotice(params, data).then((response) => {
             const { data } = response
+            this.$message({
+              message: "发布成功",
+              type: "success",
+              duration: 2000,
+            });
             setTimeout(() => {
-              this.$router.push({
-                name: 'post-detail',
-                params: { id: data.id }
-              })
-            }, 800)
+              this.loading = false;
+              this.$router.push({ path: this.redirect || "/admin/notice" });
+            }, 0.5 * 1000);
           })
 
         } else {

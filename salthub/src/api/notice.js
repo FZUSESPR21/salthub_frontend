@@ -24,10 +24,11 @@ export function getNotice(params) {
  *@date: 2021-05-05 21:12:48
  *@version: V1.0.0
 */
-export function postNotice(data) {
+export function postNotice(params, data) {
     return request({
         url: '/notice',
         method: 'post',
+        params,
         data
     })
 }
