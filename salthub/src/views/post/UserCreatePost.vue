@@ -210,15 +210,23 @@ export default {
 
           postBlog(blog).then((response) => {
             const { data } = response
+            console.log(data.data)
             //展示刚发布的文章详情页  !!先返回首页
             setTimeout(() => {
-              this.$router.push({
-                name: 'post-detail',
-                params: { id: data.id }
-              })
+              this.$message({
+                message: "成功发表",
+                type: "success",
+                duration: 1000,
+              });
+              this.detailById(data.data)
             }, 800)
           })
         } else {
+          this.$message({
+            message: "发表失败",
+            type: "error",
+            duration: 1000,
+          });
           console.log('error submit!!')
           return false
         }
@@ -228,7 +236,15 @@ export default {
       this.$refs[formName].resetFields()
       this.contentEditor.setValue('')
       this.ruleForm.moduleId = ''
-    }
+    },
+    detailById(id) {
+      console.log(id);
+      let routeData = this.$router.resolve({
+        path: "/Detail",
+        query: {key: id}
+      });
+      window.open(routeData.href, '_blank');
+    },
   }
 }
 </script>
