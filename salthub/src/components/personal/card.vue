@@ -42,6 +42,8 @@
           </div>
           <el-divider></el-divider>
         </div>
+        <!-- 收藏到底提示 -->
+        <div :class="'v-end'">收藏已经到底啦</div>
       </div>
 
       <!-- 考研倒计时 -->
@@ -54,6 +56,7 @@
 
 <style lang="scss" scoped>
 $title-color: #03298b;
+$grey: #9b9b9b;
 $opacity: 0.8;
 $size: 50px;
 
@@ -103,6 +106,11 @@ $size: 50px;
       .type-btn {
         padding: 0 15px;
       }
+    }
+    .v-end{
+      color: $grey;
+      text-align: center;
+      padding-bottom: 10px;
     }
   }
 }
