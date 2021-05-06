@@ -28,7 +28,10 @@
             type="primary" 
             round 
             size="small"
-            >点赞</el-button>
+            @click="thumb()"
+            >
+              {{ this.thumbname }}
+            </el-button>
           <el-button
             type="warning"
             icon="el-icon-star-off"
@@ -51,6 +54,7 @@
 <script>
 import 'buefy/dist/buefy.css'
 import { collectBlog } from "@/api/blog";
+import { thumbBlog } from "@/api/blog";
 export default {
   name: "Article",
   props:["paper"],
@@ -77,7 +81,9 @@ export default {
       tag:"",
       title:"",
       content:"",
-      id:""
+      id:"",
+      canthumb:true,
+      thumbname:"点赞"
     }
   },
   methods:{
@@ -95,6 +101,31 @@ export default {
           message: '收藏成功！',
           type: 'success'
         });
+        }
+      });
+    },
+    thumb(){
+      let params = {
+        blogId:this.item.id,
+        flag:this.canthumb
+      }
+      thumbBlog(params).then((response) => {
+        const { data } = response;
+        if(data.code=="200" && this.canthumb===true){
+          this.$message({
+            message: '点赞成功！',
+            type: 'success'
+          });
+          this.canthumb = false
+          this.thumbname = "已点赞"
+        }
+        else if(data.code=="200" && this.canthumb===false){
+          this.$message({
+            message: '取消点赞成功！',
+            type: 'success'
+          });
+          this.canthumb = true
+          this.thumbname = "点赞"
         }
       });
     },

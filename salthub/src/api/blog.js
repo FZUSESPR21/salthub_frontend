@@ -78,7 +78,7 @@ export function getBlogByAccount(params) {
  *@functionName: collectBlog
  *@param: data 文章id 
  *@description:收藏文章
- *@author: lw
+ *@author: xiaohan
  *@date: 2021-05-04 20:50:41
  *@version: V1.0.0
 */
@@ -87,5 +87,21 @@ export function collectBlog(id) {
     url: '/collection',
     method: 'post',
     params:{id:id}
+  })
+}
+
+/**
+ *@functionName: thumbBlog
+ *@param: data 文章id 
+ *@description:点赞文章
+ *@author: xaiohan
+ *@date: 2021-05-06 21:53:41
+ *@version: V1.0.0
+*/
+export function thumbBlog(params) {
+  return request({
+    url: `/blog/like/${params.flag}`,
+    method: 'put',
+    params
   })
 }
