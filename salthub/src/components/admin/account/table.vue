@@ -203,10 +203,10 @@ export default {
         this.tableDataTest[i].status = response.data.data.records[i].moduleId
           ? "封禁"
           : "正常";
-        console.log(this.tableDataTest[i].nickname);
-        console.log(this.tableDataTest[i].id);
-        console.log(this.tableDataTest[i].blog);
-        console.log(this.tableDataTest[i].status);
+        // console.log(this.tableDataTest[i].nickname);
+        // console.log(this.tableDataTest[i].id);
+        // console.log(this.tableDataTest[i].blog);
+        // console.log(this.tableDataTest[i].status);
       }
       this.tableDataTest.pop();
     });

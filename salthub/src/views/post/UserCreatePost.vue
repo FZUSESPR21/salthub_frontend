@@ -27,6 +27,7 @@
             :rules="rules"
             class="demo-ruleForm"
           >
+            <p style="font-size:18px">标题</p>
             <el-form-item prop="title">
               <el-input
                 v-model="ruleForm.title"
@@ -34,6 +35,7 @@
               />
             </el-form-item>
 
+            <p style="font-size:18px">内容</p>
             <!--Markdown-->
             <div id="vditor" />
 
@@ -117,15 +119,15 @@ export default {
               {
                 value: '3',
                 label: '数学'
-              }, 
+              },
               {
                 value: '31',
                 label: '英语'
-              }, 
+              },
               {
                 value: '32',
                 label: '政治'
-              }, 
+              },
               {
                 value: '33',
                 label: '专业课'
@@ -174,7 +176,7 @@ export default {
   },
   methods: {
     /**
-     *@functionName:    submitForm 
+     *@functionName:    submitForm
      *@params1: 表单名称
      *@description: 发表文章 发布成功后跳转到文章详情页
      *@author: lw zwl
@@ -202,7 +204,7 @@ export default {
             collectionNumber: '',
             content: this.ruleForm.content,
             moduleId: this.ruleForm.moduleId,
-            releaseTime: getNowTime(), 
+            releaseTime: getNowTime(),
             title: this.ruleForm.title,
           }
           console.log(blog)
