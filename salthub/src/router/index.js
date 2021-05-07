@@ -53,6 +53,10 @@ import indexCard from '@/views/admin/index/indexCard'
 //用户列表
 import accountTable from '@/components/admin/account/table'
 
+//前台个人信息
+import card from '@/components/personal/card'
+import info from '@/views/client/personal/info'
+
 Vue.use(Router)
 Vue.use(ElementUI);
 Vue.prototype.axios = axios
@@ -108,6 +112,16 @@ export default new Router({
       path: '/accountTable',
       component: accountTable,
       meta: { title: "用户列表" }
+    },
+    {
+      path: '/card',
+      component: card,
+      meta: { title: "前台个人信息" }
+    },
+    {
+      path: '/info',
+      component: info,
+      meta: { title: "前台个人信息页" }
     },
 
     {

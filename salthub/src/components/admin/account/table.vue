@@ -34,8 +34,7 @@
     </div>
 
     <el-col :span="21">
-      <!-- <el-table :data="tableData" style="width: 100%"> -->
-      <el-table :data="tableDataTest" style="width: 100%">
+      <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -45,11 +44,13 @@
               <el-form-item label="用户 ID">
                 <span>{{ props.row.id }}</span>
               </el-form-item>
-              <el-form-item label="状态">
-                <span>{{ props.row.status }}</span>
+              <el-form-item label="email">
+                <span>{{ props.row.email }}</span>
               </el-form-item>
-              <el-form-item label="最新发帖">
-                <span>{{ props.row.blog }}</span>
+              <el-form-item label="权限">
+                <span>
+                  <el-tag :type="judgeAuth(props.row.auth)">{{ props.row.auth }}</el-tag>
+                </span>
               </el-form-item>
             </el-form>
           </template>
@@ -130,47 +131,21 @@
 </style>
 
 <script>
-//测试用blog接口，待后期替换为管理员获取用户列表接口
-import { getBlogByAccount } from "@/api/blog";
+import { getAccount } from "@/api/account";
 import store from "@/store";
 
 export default {
   data() {
     return {
       input: "",
-      //用blog接口的测试数据
-      tableDataTest: [
-        {
-          nickname: "wxh",
-          id: "王小虎",
-          blog: "福大计算机考研复试之人工智能分析篇",
-          status: "正常",
-        },
-      ],
       tableData: [
         {
           nickname: "wxh",
           id: "王小虎",
           blog: "福大计算机考研复试之人工智能分析篇",
           status: "正常",
-        },
-        {
-          nickname: "wxh",
-          id: "王小虎",
-          blog: "2022福州大学考研指导来了，必看！！...",
-          status: "正常",
-        },
-        {
-          nickname: "wxh",
-          id: "王小虎",
-          blog: "考研改怎么准备呢",
-          status: "封禁",
-        },
-        {
-          nickname: "wxh",
-          id: "王小虎",
-          blog: "考研每天应该学多久才能不成为炮灰？",
-          status: "正常",
+          email: "",
+          auth: 4,
         },
       ],
       tableDataAll: [],
@@ -180,37 +155,41 @@ export default {
     };
   },
   mounted() {
-    getBlogByAccount({
-      // 管理员测试帐号
-      account: "123456",
+    getAccount({
       current: 1,
     }).then((response) => {
+      // console.log("account=>", response.data.data.records);
       var len = response.data.data.records.length;
       for (var i = 0; i < len; i++) {
-        this.tableDataTest.push({
+        this.tableData.push({
           nickname: "",
           id: "",
           blog: "",
           status: "",
+          email: "",
+          auth: 4
         });
         // 用户昵称
-        this.tableDataTest[i].nickname = response.data.data.records[i].author;
+        this.tableData[i].nickname = response.data.data.records[i].nickname;
         // 用户ID
-        this.tableDataTest[i].id = response.data.data.records[i].id;
+        this.tableData[i].id = response.data.data.records[i].name;
         // 最新发帖
-        this.tableDataTest[i].blog = response.data.data.records[i].title;
+        this.tableData[i].blog = response.data.data.records[i].slogan;
         // 状态（ 正常 | 封禁 ）
-        this.tableDataTest[i].status = response.data.data.records[i].moduleId
-          ? "封禁"
-          : "正常";
-        // console.log(this.tableDataTest[i].nickname);
-        // console.log(this.tableDataTest[i].id);
-        // console.log(this.tableDataTest[i].blog);
-        // console.log(this.tableDataTest[i].status);
+        this.tableData[i].status = "正常";
+        // 邮箱
+        this.tableData[i].email = response.data.data.records[i].email;
+        // 权限
+        this.tableData[i].auth =
+          response.data.data.records[i].roleId == 4 ? "管理员" : "普通用户";
+        // console.log(this.tableData[i].nickname);
+        // console.log(this.tableData[i].id);
+        // console.log(this.tableData[i].blog);
+        // console.log(this.tableData[i].status);
       }
-      this.tableDataTest.pop();
+      this.tableData.pop();
     });
-    console.log("token=>", store.getters.token);
+    // console.log("token=>", store.getters.token);
   },
   methods: {
     handleDetail(index, row) {
@@ -222,8 +201,7 @@ export default {
     convert() {},
     handleCurrentChange: function (currentPage) {
       console.log("handleCurrentChange()\n");
-      // this.tableData = [];
-      this.tableDataTest = [];
+      this.tableData = [];
       this.currentPage = currentPage;
       console.log("currentPage=" + currentPage + "\n");
       var i;
@@ -235,17 +213,18 @@ export default {
         j++, i++
       ) {
         console.log("i=" + i + "\n");
-        // this.tableData.push(this.tableDataAll[i]);
-        this.tableDataTest.push(this.tableDataAll[i]);
+        this.tableData.push(this.tableDataAll[i]);
         console.log(
           "this.tableDataAll[i]" + JSON.stringify(this.tableDataAll[i]) + "\n"
         );
       }
       if (this.tableDataAll.length == 0) {
-        // this.tableData = [];
-        this.tableDataTest = [];
+        this.tableData = [];
       }
     },
+    judgeAuth(auth) {
+      return auth=="管理员"?'success':'';
+    }
   },
 };
 </script>
