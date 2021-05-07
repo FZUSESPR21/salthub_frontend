@@ -61,6 +61,7 @@ export default {
         }
         pushComment(data)
         this.$message.success('留言成功')
+        this.textarea = ''
         // let postData = {}
         // console.log(this.commentText)
         // postData['content'] = this.commentText
