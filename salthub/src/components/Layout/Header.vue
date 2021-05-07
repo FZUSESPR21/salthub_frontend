@@ -107,7 +107,9 @@
           v-else
           class="nav-d"
         >
-          <b-navbar-item>
+          <b-navbar-item
+            tag="router-link"
+            :to="{ path: '/card' }">
             个人中心
           </b-navbar-item>
           <hr class="dropdown-divider">
