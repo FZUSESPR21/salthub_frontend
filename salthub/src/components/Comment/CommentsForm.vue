@@ -27,7 +27,7 @@
 
 <script>
 import { pushComment } from '@/api/comment'
-
+import store from '@/store'
 export default {
   name: 'LvCommentsForm',
   data() {
@@ -53,7 +53,7 @@ export default {
       try {
         console.log(this.blogId)
         var data = {
-          "author": "zhuangweilong",
+          "author": store.getters.user,
           "blogId": this.blogId,
           "content": this.textarea,
           "id": 0,
