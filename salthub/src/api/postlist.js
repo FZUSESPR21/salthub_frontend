@@ -49,3 +49,19 @@ export function getListByTag(pageNo, tag) {
     params: { current: pageNo, tagId: tag }
   }))
 }
+
+/*
+ *@functionName: getCollectList
+ *@params1: pageNo 当前页码
+ *@description:获取收藏文章列表
+ *@author: xiaohan
+ *@date: 2021-05-07 18:57:19
+ *@version: V1.0.0
+*/
+export function getCollectList(pageNo) {
+  return request(({
+    url: '/collection',
+    method: 'get',
+    params: { current: pageNo}
+  }))
+}

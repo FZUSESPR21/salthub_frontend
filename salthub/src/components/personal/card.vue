@@ -46,8 +46,8 @@
           :key="index"
         >
           <div :class="'type-btn'">
-            <el-tag :type="getType(item.type)">{{ item.type }}</el-tag>
-            {{ item.text }}
+            <el-tag :type="getType(item.type)">{{ getType(item.moduleId) }}</el-tag>
+            {{ Substr(item.title,0,50) }}
           </div>
           <el-divider></el-divider>
         </div>
@@ -132,8 +132,11 @@ $size: 50px;
 <script>
 // 倒计时
 import CountDownCard from "@/views/client/card/CountDown";
+//检测屏幕滑动高度的 用于无限下拉
+import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
+import { getCollectList } from "@/api/postlist";
 import store from "@/store";
 export default {
   components: {
@@ -144,29 +147,43 @@ export default {
       nickname: "烤盐人",
       userId: "123456",
       slogan: "努力！奋斗！",
-      blogList: [
-        { type: "资讯", text: "2022福州大学招生简章" },
-        { type: "资讯", text: "2021福州大学电子信息类复试分数线" },
-        { type: "社区", text: "2022福州大学考研指导来了，必看！！最强考..." },
-        { type: "社区", text: "如何在考研期间保持每天高效地学习" },
-        { type: "资讯", text: "2022福州大学招生简章" },
-        { type: "资讯", text: "2021福州大学电子信息类复试分数线" },
-        { type: "社区", text: "2022福州大学考研指导来了，必看！！最强考..." },
-        { type: "社区", text: "如何在考研期间保持每天高效地学习" },
-        { type: "资讯", text: "2022福州大学招生简章" },
-        { type: "资讯", text: "2021福州大学电子信息类复试分数线" },
-        { type: "社区", text: "2022福州大学考研指导来了，必看！！最强考..." },
-        { type: "社区", text: "如何在考研期间保持每天高效地学习" },
-        { type: "资讯", text: "2022福州大学招生简章" },
-        { type: "资讯", text: "2021福州大学电子信息类复试分数线" },
-        { type: "社区", text: "2022福州大学考研指导来了，必看！！最强考..." },
-        { type: "社区", text: "如何在考研期间保持每天高效地学习" },
-      ],
+      blogList: [],
+      //记录页面信息
+      page: {
+        current: 1, //当前页面
+        totalpage:1,//总的页面数量
+        total: 0, //后台总的文章数
+      },
+      blogListTitle:[],
     };
   },
+  created() {
+    this.init()
+  },
+    mounted() {
+    window.addEventListener("scroll", this.load);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.load, false);
+  },
   methods: {
-    getType(type) {
-      return type == "资讯" ? "warning" : "";
+    getType(typeid) {
+      if(typeid === 0){
+        var type = "福州大学";
+        return type;
+      }
+      else if(typeid === 1){
+        var type = "外校";
+        return type;
+      }
+      else if(typeid === 2){
+        var type = "杂谈";
+        return type;
+      }
+      else if(typeid === 3){
+        var type = "拼课";
+        return type;
+      } 
     },
     /**
      *@functionName: toUpdate
@@ -174,10 +191,71 @@ export default {
      *@author: NoMornings
      *@date: 2021-05-07 15:39:24
      *@version: V1.0.0
-    */
+     */
     toUpdate() {
       this.$router.push({ path: this.redirect || "/updateView" });
-    }
+    },
+    /**
+   *@functionName: init
+   *@description: 显示收藏
+   *@author: xiaohan
+   *@date: 2021-05-07 18:39:24
+   *@version: V1.0.0
+   */
+    init(){
+      getCollectList(this.page.current).then((response) => {
+        const { data } = response;
+        this.page.current = data.data.current;
+        if (this.page.current === 1) {
+          //请求第一页就直接赋值
+          this.page.total = data.data.total;
+          this.page.totalpage = data.data.pages;
+          this.blogList = data.data.records;
+        } else {
+          //将后面页码的数据和之前的数据拼合
+          for (let i in data.data.records) {
+            this.blogList.push(data.data.records[i]);
+          }
+        }
+      });
+    },
+    load() {
+      let vm = this;
+      if (getScrollTop() + getWindowHeight() >= getScrollHeight()) {
+        if (vm.page.current < vm.page.totalpage) {
+          //先判断下一页是否有数据
+          vm.page.current += 1; //查询条件的页码+1
+          console.log(vm.page.current); //打印当前页码
+          this.init(vm.activeName); //拉取数据
+        } else {
+          this.$message("到底啦~看看前面的帖子吧");
+        }
+      }
+    },
+    // 字符串截取 包含对中文处理,str需截取字符串,start开始截取位置,n截取长度
+    Substr(str, start, n) {
+      // eslint-disable-line
+      if (str.replace(/[\u4e00-\u9fa5]/g, "**").length <= n) {
+        return str;
+      }
+      let len = 0;
+      let tmpStr = "";
+      for (let i = start; i < str.length; i++) {
+        // 遍历字符串
+        if (/[\u4e00-\u9fa5]/.test(str[i])) {
+          // 中文 长度为两字节
+          len += 2;
+        } else {
+          len += 1;
+        }
+        if (len > n) {
+          break;
+        } else {
+          tmpStr += str[i];
+        }
+      }
+      return tmpStr + "...";
+    },
   },
 };
 </script>
