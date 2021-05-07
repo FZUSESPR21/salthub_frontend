@@ -149,6 +149,7 @@ export default {
   },
   data() {
     return {
+      userInfo:{},
       nickname: "烤盐人",
       userId: "123456",
       slogan: "努力！奋斗！",
@@ -167,6 +168,10 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.load);
+    this.userInfo=store.getters.user;
+    this.nickname=this.userInfo.nickname;
+    this.userId=this.userInfo.name;
+    this.slogan=this.userInfo.slogan;
   },
   destroyed() {
     window.removeEventListener("scroll", this.load, false);
