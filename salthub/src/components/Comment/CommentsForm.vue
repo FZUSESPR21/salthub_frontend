@@ -52,13 +52,14 @@ export default {
       this.isLoading = true
       try {
         console.log(this.blogId)
-        var params = {
+        var data = {
           "author": "zhuangweilong",
           "blogId": this.blogId,
-          "content": this.commentText,
+          "content": this.textarea,
           "id": 0,
           "releaseTime": ""
         }
+        pushComment(data)
         this.$message.success('留言成功')
         // let postData = {}
         // console.log(this.commentText)

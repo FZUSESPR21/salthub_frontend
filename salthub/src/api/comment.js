@@ -24,11 +24,11 @@ export function getFirstComments(params) {
  *@date: 2021-05-7 15:46
  *@version: V1.0.0
 */
-export function pushComment(params) {
+export function pushComment(data) {
   return request({
     url: '/comment/0',
     method: 'post',
-    params
+    data
   })
 }
 
