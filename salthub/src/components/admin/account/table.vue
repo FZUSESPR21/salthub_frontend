@@ -189,7 +189,7 @@ export default {
       }
       this.tableData.pop();
     });
-    // console.log("token=>", store.getters.token);
+    console.log("token=>", store.getters.token);
   },
   methods: {
     handleDetail(index, row) {

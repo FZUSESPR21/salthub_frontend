@@ -1,10 +1,10 @@
 <!-- 
- * @description: 晒研论坛-个人信息
- * @fileName: info.vue 
+ * @description: 晒研论坛-个人信息修改页
+ * @fileName: update.vue 
  * @author: NoMornings 
- * @date: 2021-05-06 21:42:17 
+ * @date: 2021-05-07 15:41:03 
  * @后台人员:  
- * @path:  /info
+ * @path:  /updateView
  * @version: V1.0.0 
 !-->
 <template>
@@ -16,7 +16,7 @@
       <div class="container context">
         <div class="columns">
           <div class="column is-9 is-offset-1">
-            <v-personal></v-personal>
+            <v-update></v-update>
           </div>
         </div>
       </div>
@@ -31,6 +31,9 @@
 .front-head {
   margin-bottom: 20px;
 }
+.front-main{
+  min-height: 500px;
+}
 
 body,
 html {
@@ -41,13 +44,12 @@ html {
 <script>
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
-import card from "@/components/personal/card";
-// import "@/assets/app.css";
+import updateInfo from "@/components/personal/updateInfo";
 import "buefy/dist/buefy.css";
 
 export default {
   name: "Home",
-  components: { Header, Footer, "v-personal": card },
+  components: { Header, Footer, "v-update": updateInfo },
   data() {
     return {
       refresh: true,

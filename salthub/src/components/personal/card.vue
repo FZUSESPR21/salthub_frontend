@@ -2,7 +2,7 @@
  * @description: 晒研论坛-个人信息
  * @fileName: card.vue 
  * @author: NoMornings 
- * @date: 2021-05-6 21:42:17 
+ * @date: 2021-05-06 21:42:17 
  * @后台人员:  
  * @path:  /card
  * @version: V1.0.0 
@@ -12,15 +12,24 @@
     <!-- 个人信息 -->
     <div :class="'title'">
       <div :class="'p-info'">
-        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" :size="70"></el-avatar>
-        <div :class="['column','info-text']">
+        <el-avatar
+          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          :size="70"
+        ></el-avatar>
+        <div :class="['column', 'info-text']">
           <p :class="'nickname'" v-cloak>昵称：{{ nickname }}</p>
           <p :class="'user-id'" v-cloak>ID：{{ userId }}</p>
           <p :class="'slogan'" v-cloak>个性签名：{{ slogan }}</p>
         </div>
       </div>
       <div :class="'v-edit'">
-        <el-button type="info" icon="el-icon-edit" circle :class="'edit-btn'"></el-button>
+        <el-button
+          type="info"
+          icon="el-icon-edit"
+          circle
+          :class="'edit-btn'"
+          @click="toUpdate()"
+        ></el-button>
       </div>
     </div>
 
@@ -71,13 +80,13 @@ $size: 50px;
   .v-edit {
     display: flex;
     align-items: center;
-    .info-text{
+    .info-text {
       margin-left: 20px;
     }
     p {
       font-size: 18px;
     }
-    .edit-btn{
+    .edit-btn {
       width: $size;
       height: $size;
     }
@@ -107,7 +116,7 @@ $size: 50px;
         padding: 0 15px;
       }
     }
-    .v-end{
+    .v-end {
       color: $grey;
       text-align: center;
       padding-bottom: 10px;
@@ -124,6 +133,8 @@ $size: 50px;
 // 倒计时
 import CountDownCard from "@/views/client/card/CountDown";
 import "buefy/dist/buefy.css";
+import { putInfo } from "@/api/account";
+import store from "@/store";
 export default {
   components: {
     "v-count-down": CountDownCard,
@@ -157,6 +168,16 @@ export default {
     getType(type) {
       return type == "资讯" ? "warning" : "";
     },
+    /**
+     *@functionName: toUpdate
+     *@description: 跳转个人中心修改页
+     *@author: NoMornings
+     *@date: 2021-05-07 15:39:24
+     *@version: V1.0.0
+    */
+    toUpdate() {
+      this.$router.push({ path: this.redirect || "/updateView" });
+    }
   },
 };
 </script>

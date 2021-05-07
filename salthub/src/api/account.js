@@ -15,3 +15,19 @@ export function getAccount(params) {
     params
   })
 }
+
+/**
+ *@functionName: putInfo
+ *@param: data 个人账号信息
+ *@description:
+ *@author: NoMornings
+ *@date: 2021-05-07 14:36:02
+ *@version: V1.0.0
+*/
+export function putInfo(data) {
+  return request({
+    url: '/account',
+    method: 'put',
+    data
+  })
+}

@@ -57,6 +57,10 @@ import accountTable from '@/components/admin/account/table'
 import card from '@/components/personal/card'
 import info from '@/views/client/personal/info'
 
+//修改个人信息
+import updateInfo from '@/components/personal/updateInfo'
+import updateView from '@/views/client/personal/update'
+
 Vue.use(Router)
 Vue.use(ElementUI);
 Vue.prototype.axios = axios
@@ -123,6 +127,17 @@ export default new Router({
       component: info,
       meta: { title: "前台个人信息页" }
     },
+    {
+      path: '/updateInfo',
+      component: updateInfo,
+      meta: { title: "修改个人信息" }
+    },
+    {
+      path: '/updateView',
+      component: updateView,
+      meta: { title: "修改个人信息页面" }
+    },
+    
 
     {
       path: "/",
