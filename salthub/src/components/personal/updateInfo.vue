@@ -78,7 +78,7 @@ $size: 50px;
         display: flex;
         justify-content: center;
         margin: 10px 0;
-        p{
+        p {
           display: flex;
           align-items: center;
         }
@@ -125,7 +125,21 @@ export default {
   methods: {
     updateInfo(account) {
       putInfo(account).then((response) => {
-        console.log("update=>", response);
+        if (response.data.code == 200) {
+          this.$message({
+            message: "修改成功",
+            type: "success",
+            duration: 2000,
+          });
+        }
+        else{
+          this.$message({
+            message: "保存失败，请重试",
+            type: "error",
+            duration: 2000,
+          });
+        }
+        // console.log("update=>", response);
       });
     },
   },
