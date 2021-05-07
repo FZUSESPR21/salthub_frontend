@@ -49,7 +49,9 @@
               </el-form-item>
               <el-form-item label="权限">
                 <span>
-                  <el-tag :type="judgeAuth(props.row.auth)">{{ props.row.auth }}</el-tag>
+                  <el-tag :type="authTag(props.row.auth)">{{
+                    props.row.auth
+                  }}</el-tag>
                 </span>
               </el-form-item>
             </el-form>
@@ -58,7 +60,13 @@
         <el-table-column label="用户昵称" prop="nickname"> </el-table-column>
         <el-table-column label="用户 ID" prop="id"> </el-table-column>
         <el-table-column label="最新发帖" prop="blog"> </el-table-column>
-        <el-table-column label="状态" prop="status"> </el-table-column>
+        <el-table-column label="状态" prop="status">
+          <template slot-scope="scope">
+            <el-tag :type="statusTag(scope.row.status)">{{
+              scope.row.status
+            }}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -140,8 +148,8 @@ export default {
       input: "",
       tableData: [
         {
-          nickname: "wxh",
-          id: "王小虎",
+          nickname: "烤盐人",
+          id: "KaoYanRen",
           blog: "福大计算机考研复试之人工智能分析篇",
           status: "正常",
           email: "",
@@ -160,6 +168,7 @@ export default {
     }).then((response) => {
       // console.log("account=>", response.data.data.records);
       var len = response.data.data.records.length;
+      var info = response.data.data.records;
       for (var i = 0; i < len; i++) {
         this.tableData.push({
           nickname: "",
@@ -167,21 +176,20 @@ export default {
           blog: "",
           status: "",
           email: "",
-          auth: 4
+          auth: 4,
         });
         // 用户昵称
-        this.tableData[i].nickname = response.data.data.records[i].nickname;
+        this.tableData[i].nickname = info[i].nickname;
         // 用户ID
-        this.tableData[i].id = response.data.data.records[i].name;
+        this.tableData[i].id = info[i].name;
         // 最新发帖
-        this.tableData[i].blog = response.data.data.records[i].slogan;
-        // 状态（ 正常 | 封禁 ）
-        this.tableData[i].status = "正常";
+        this.tableData[i].blog = info[i].slogan;
+        // 状态（ 正常 | 封禁 | 注销 ）
+        this.tableData[i].status = this.judgeStatus(info[i].roleId);
         // 邮箱
-        this.tableData[i].email = response.data.data.records[i].email;
+        this.tableData[i].email = info[i].email;
         // 权限
-        this.tableData[i].auth =
-          response.data.data.records[i].roleId == 4 ? "管理员" : "普通用户";
+        this.tableData[i].auth = this.judgeAuth(info[i].roleId);
         // console.log(this.tableData[i].nickname);
         // console.log(this.tableData[i].id);
         // console.log(this.tableData[i].blog);
@@ -222,9 +230,29 @@ export default {
         this.tableData = [];
       }
     },
-    judgeAuth(auth) {
-      return auth=="管理员"?'success':'';
-    }
+    judgeAuth(roleId){
+      if (roleId == 0) return "注销用户";
+      else if (roleId == 1) return "封禁用户";
+      else if (roleId == 2) return "游客用户";
+      else if (roleId == 3) return "普通用户";
+      else if (roleId == 4) return "管理员用户";
+    },
+    authTag(auth) {
+      if (auth == "注销用户") return "info";
+      else if (auth == "封禁用户") return "danger";
+      else if (auth == "管理员用户") return "success";
+      else return "";
+    },
+    judgeStatus(roleId) {
+      if (roleId == 0) return "注销";
+      else if (roleId == 1) return "封禁";
+      else return "正常";
+    },
+    statusTag(status) {
+      if (status == "注销") return "info";
+      else if (status == "封禁") return "danger";
+      else return "success";
+    },
   },
 };
 </script>
