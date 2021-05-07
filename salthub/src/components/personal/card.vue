@@ -56,7 +56,7 @@
           <el-divider></el-divider>
         </div>
         <!-- 收藏到底提示 -->
-        <div :class="'v-end'">收藏已经到底啦</div>
+        <div :class="'v-end'">{{blogList.length==0?"你还没有收藏哦":"收藏已经到底啦"}}</div>
       </div>
 
       <!-- 考研倒计时 -->
@@ -75,6 +75,7 @@ $size: 50px;
 
 .v-box-card {
   height: auto;
+  min-height: 650px;
   margin: 0 30px;
 }
 .title {
