@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
 /**
- *@functionName: fetchCommentsByTopicId
- *@param: topic_id 博客id
+ *@functionName: getFirstComments
+ *@param: id:博客id flag:0
  *@description: 获取一级评论
  *@author: 庄威龙
- *@date: 2021-05-4 11:08
- *@version: V1.0.0
+ *@date: 2021-05-7 11:08
+ *@version: V1.0.1
 */
 export function getFirstComments(params) {
   return request({
@@ -17,18 +17,18 @@ export function getFirstComments(params) {
 }
 
 /**
- *@functionName: pushComment
- *@param: data 发布评论
- *@description:
+ *@functionName: fetchCommentsByBlogId
+ *@param:
+ *@description: 发布一级评论
  *@author: 庄威龙
- *@date: 2021-05-4 11:10
+ *@date: 2021-05-7 15:46
  *@version: V1.0.0
 */
-export function pushComment(data) {
+export function pushComment(params) {
   return request({
-    url: '/comment/add_comment',
+    url: '/comment/0',
     method: 'post',
-    data: data
+    params
   })
 }
 

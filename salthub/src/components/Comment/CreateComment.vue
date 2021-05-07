@@ -3,14 +3,13 @@
     <h3 class="title is-5">评论</h3>
 
     <!-- <lv-comments-form :slug="slug" @loadComments="fetchComments"/> -->
-    <lv-comments-form :slug="slug"/>
+    <lv-comments-form :blogId="blogId"/>
 
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { fetchCommentsByTopicId } from '@/api/comment'
 import LvCommentsForm from './CommentsForm'
 
 export default {
@@ -27,6 +26,10 @@ export default {
     slug: {
       type: String,
       default: null
+    },
+    blogId: {
+      type :String,
+      default: ''
     }
   },
   computed: {
@@ -38,7 +41,6 @@ export default {
     // await this.fetchComments(this.slug)
   },
   methods: {
-    // 初始化
     // async fetchComments(topic_id) {
     //   console.log(topic_id)
     //   fetchCommentsByTopicId(topic_id).then(response => {

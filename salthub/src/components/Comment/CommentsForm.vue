@@ -14,6 +14,7 @@
           <el-button
             type="primary"
             round
+            native-type="submit"
             :disabled="isLoading"
           >
             发送
@@ -40,19 +41,32 @@ export default {
     slug: {
       type: String,
       default: null
+    },
+    blogId: {
+      type: String,
+      default: ''
     }
   },
   methods: {
     async onSubmit() {
       this.isLoading = true
       try {
-        let postData = {}
-        console.log(this.commentText)
-        postData['content'] = this.commentText
-        postData['topic_id'] = this.slug
-        await pushComment(postData)
-        this.$emit('loadComments', this.slug)
+        console.log(this.blogId)
+        var params = {
+          "author": "zhuangweilong",
+          "blogId": this.blogId,
+          "content": this.commentText,
+          "id": 0,
+          "releaseTime": ""
+        }
         this.$message.success('留言成功')
+        // let postData = {}
+        // console.log(this.commentText)
+        // postData['content'] = this.commentText
+        // postData['topic_id'] = this.slug
+        // await pushComment(postData)
+        // this.$emit('loadComments', this.slug)
+        // this.$message.success('留言成功')
       } catch (e) {
         this.$buefy.toast.open({
           message: `Cannot comment this story. ${e}`,

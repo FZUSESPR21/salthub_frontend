@@ -47,7 +47,7 @@
       </div>
       <hr>
       <div>
-        <v-CreateComment></v-CreateComment>
+        <v-CreateComment :blogId="this.getRequest().key"></v-CreateComment>
       </div>
     </div>
   </div>
