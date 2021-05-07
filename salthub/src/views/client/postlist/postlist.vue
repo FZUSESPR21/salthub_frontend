@@ -85,7 +85,7 @@ export default {
     },
     searchByTag(tag) {
       console.log(tag);
-      this.$router.push({ path: '/Search?key=' + tag })
+      this.$router.push({ path: "/searchtag?key=" + tag });
     },
     //点击标题跳转详情
     detailById(id) {

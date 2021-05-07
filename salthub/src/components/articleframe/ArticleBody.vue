@@ -10,7 +10,7 @@
 <template>
   <article class="media">
     <div class="media-content">
-      <div class="post-main">
+      <div class="post-main" :key="componentKey">
         <p class="post-title">
           <el-link 
             :underline="false"
@@ -20,7 +20,7 @@
           {{ this.title }}
           </el-link >
         </p>
-        <p class="post-content" :key="componentKey">
+        <p class="post-content">
           <span class="is-size-6">{{ this.content }}</span>
         </p>
         <div class="act-buttons">
@@ -39,13 +39,30 @@
             size="small"
             @click="collection()"
           ></el-button>
+
           <el-button 
             type="info" 
             round 
             size="small"
-            @click="emitTag()"
-            :style="{ display: visible }"
+            @click="emitTag1()"
+            :style="{ display: visible1 }"
             >{{ tagname[0] }}</el-button>
+
+            <el-button 
+            type="info" 
+            round 
+            size="small"
+            @click="emitTag2()"
+            :style="{ display: visible2 }"
+            >{{ tagname[1] }}</el-button>
+
+            <el-button 
+            type="info" 
+            round 
+            size="small"
+            @click="emitTag3()"
+            :style="{ display: visible3 }"
+            >{{ tagname[2] }}</el-button>
         </div>
       </div>
     </div>
@@ -76,12 +93,20 @@ export default {
       canthumb:true,
       thumbname:"点赞",
       componentKey: 0,//用于刷新组件
-      visible:'none',
+      visible1:'none',
+      visible2:'none',
+      visible3:'none',
     }
   },
   methods:{
-    emitTag(){
-      //this.$emit('tag',value)
+    emitTag1(){
+      this.$emit('tag',this.tagid[0])
+    },
+    emitTag2(){
+      this.$emit('tag',this.tagid[1])
+    },
+    emitTag3(){
+      this.$emit('tag',this.tagid[2])
     },
     emitId(value){
       this.$emit('id',value)
@@ -93,9 +118,18 @@ export default {
           for (let i in data.data) {
             this.tagid[i] = data.data[i].id
             this.tagname[i] = data.data[i].name
-            if(this.tagid.length>0){
-              this.visible = ''
-            }
+          }
+          if(this.tagid.length===1){
+              this.visible1 = ''
+          }
+          else if(this.tagid.length===2){
+              this.visible1 = ''
+              this.visible2 = ''
+          }
+          else if(this.tagid.length===3){
+              this.visible1 = ''
+              this.visible2 = ''
+              this.visible3 = ''
           }
         }
         this.forceRerender()
