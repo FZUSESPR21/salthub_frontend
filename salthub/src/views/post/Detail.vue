@@ -43,8 +43,7 @@
         </el-container>
       </el-container>
       <div>
-        <v-Comments></v-Comments>
-        <!-- <v-Comments :blogId=""></v-Comments> -->
+        <v-Comments :blogId="this.getRequest().key"></v-Comments>
       </div>
       <hr>
       <div>

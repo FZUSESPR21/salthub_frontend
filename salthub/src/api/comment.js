@@ -2,19 +2,17 @@ import request from '@/utils/request'
 
 /**
  *@functionName: fetchCommentsByTopicId
- *@param: data 获取文章详情
- *@description:
+ *@param: topic_id 博客id
+ *@description: 获取一级评论
  *@author: 庄威龙
  *@date: 2021-05-4 11:08
  *@version: V1.0.0
 */
-export function fetchCommentsByTopicId(topic_Id) {
+export function getFirstComments(params) {
   return request({
-    url: '/comment/get_comments',
+    url: '/comment/2',
     method: 'get',
-    params: {
-      topicid: topic_Id
-    }
+    params
   })
 }
 
