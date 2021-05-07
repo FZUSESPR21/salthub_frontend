@@ -33,7 +33,11 @@
             <el-footer height="120px">
               <div style="float:right">
                 <el-button round style="background-color:#ff4949;color:white">点赞</el-button>
-                <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+                <el-button 
+                  type="warning" 
+                  icon="el-icon-star-off" 
+                  circle
+                  @click="collection()"></el-button>
                 <br>
                 <span style="font-size:15px">{{blog.releaseTime}}</span>
                 <el-button type="text" style="color:black">举报</el-button>
@@ -57,6 +61,7 @@
 import Header from '@/components/Layout/Header'
 import { mapGetters } from 'vuex'
 import { getBlogById } from '@/api/blog'
+import { collectBlog } from "@/api/blog";
 import CreateComment from '@/components/Comment/CreateComment'
 import Comments from '@/components/Comment/Comments'
 import Vditor from 'vditor'
@@ -97,6 +102,24 @@ import 'vditor/dist/index.css'
         Vditor.preview(document.getElementById('preview'), md, {
           hljs: { style: 'github' }
         })
+      },
+      /**
+       *@functionName:  collection
+       *@description: 收藏
+       *@author: xiaohan
+       *@date: 2021-05-07 21:29:41
+       *@version: V1.0.0
+      */
+      collection() {
+        collectBlog(this.getRequest().key).then((response) => {
+          const { data } = response;
+          if (data.code == "200") {
+            this.$message({
+              message: "收藏成功！",
+              type: "success",
+            });
+          }
+        });
       },
       /**
        *@functionName:  getBlogDetails
