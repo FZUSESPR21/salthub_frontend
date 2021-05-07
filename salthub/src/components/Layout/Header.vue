@@ -81,7 +81,7 @@
           </b-field>
         </b-navbar-item>
 
-        <b-navbar-item tag="div">
+        <b-navbar-item tag="div" @click="toInfo()">
             <el-button type="info" icon="el-icon-message" circle></el-button>
         </b-navbar-item>
 
@@ -107,7 +107,7 @@
           v-else
           class="nav-d"
         >
-          <b-navbar-item>
+          <b-navbar-item @click="toInfo()">
             个人中心
           </b-navbar-item>
           <hr class="dropdown-divider">
@@ -195,6 +195,16 @@ export default {
           }, 500)
         })
     },
+    /**
+     *@functionName: toInfo
+     *@description: 跳转个人中心
+     *@author: NoMornings
+     *@date: 2021-05-07 14:09:03
+     *@version: V1.0.0
+    */
+    toInfo() {
+      this.$router.push({ path: this.redirect || "/info" });
+    }
   },
 }
 </script>
