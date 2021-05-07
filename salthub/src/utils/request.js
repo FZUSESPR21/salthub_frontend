@@ -55,8 +55,8 @@ service.interceptors.response.use(
   // 接收到响应数据并成功后的一些共有的处理，关闭loading等
   response => {
     const res = response.data
-    // 如果自定义代码不是200，则将其判断为错误。
-    if (res.code !== 200) {
+    // 如果自定义代码不是200，则将其判断为错误。529为帖子未设置标签 不判定为error
+    if (res.code !== 200 && res.code !== 529) {
       // 401--Unauthorized  , 403--Forbidden 跳转至登录页面
       if (res.code === 401 || res.code === 403) {
         // 重新登录

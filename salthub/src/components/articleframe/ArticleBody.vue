@@ -20,7 +20,7 @@
           {{ this.title }}
           </el-link >
         </p>
-        <p class="post-content">
+        <p class="post-content" :key="componentKey">
           <span class="is-size-6">{{ this.content }}</span>
         </p>
         <div class="act-buttons">
@@ -43,7 +43,9 @@
             type="info" 
             round 
             size="small"
-            @click="emitTag(tag)">{{ this.tag }}</el-button>
+            @click="emitTag()"
+            :style="{ display: visible }"
+            >{{ tagname[0] }}</el-button>
         </div>
       </div>
     </div>
@@ -53,45 +55,51 @@
 
 <script>
 import 'buefy/dist/buefy.css'
-import { collectBlog } from "@/api/blog";
-import { thumbBlog } from "@/api/blog";
+import { thumbBlog , getTagById , collectBlog} from "@/api/blog";
 export default {
   name: "Article",
   props:["paper"],
   created(){
-    if(this.paper.moduleId===0){
-      this.tag = "福州大学"
-    }
-    else if(this.paper.moduleId===1){
-      this.tag = "外校"
-    }
-    else if(this.paper.moduleId===2){
-      this.tag = "杂谈"
-    }
-    else if(this.paper.moduleId===3){
-      this.tag = "拼课"
-    }
     this.title = this.paper.title
     this.content = this.Substr(this.paper.content,0,400)
     this.id = this.paper.id
+    this.getTag()
   },
   data(){
     return{
       item:this.paper,
-      tag:"",
+      tagid:[],
+      tagname:[],
       title:"",
       content:"",
       id:"",
       canthumb:true,
-      thumbname:"点赞"
+      thumbname:"点赞",
+      componentKey: 0,//用于刷新组件
+      visible:'none',
     }
   },
   methods:{
-    emitTag(value){
-      this.$emit('tag',value)
+    emitTag(){
+      //this.$emit('tag',value)
     },
     emitId(value){
       this.$emit('id',value)
+    },
+    getTag(){
+      getTagById(this.id).then((response) => {
+        const { data } = response;
+        if(data.code == "200"){
+          for (let i in data.data) {
+            this.tagid[i] = data.data[i].id
+            this.tagname[i] = data.data[i].name
+            if(this.tagid.length>0){
+              this.visible = ''
+            }
+          }
+        }
+        this.forceRerender()
+      });
     },
     collection(){
       collectBlog(this.item.id).then((response) => {
@@ -149,7 +157,17 @@ export default {
         }
       }
       return tmpStr+"...";
-    }
+    },
+    /**
+     *@functionName:  forceRerender 
+     *@description: 改变key值，重新渲染组件
+     *@author: xiaohan
+     *@date: 2021-05-05 13:31:54
+     *@version: V1.0.0
+    */
+    forceRerender() {
+      this.componentKey += 1;  
+    },
   }
 };
 </script>
