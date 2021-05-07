@@ -46,8 +46,12 @@
           :key="index"
         >
           <div :class="'type-btn'">
-            <el-tag :type="getType(item.type)">{{ getType(item.moduleId) }}</el-tag>
-            {{ Substr(item.title,0,50) }}
+            <el-tag :type="getType(item.type)">{{
+              getType(item.moduleId)
+            }}</el-tag>
+            <el-link :underline="false" class="is-size-6" @click="detailById(item.id)">
+              {{ Substr(item.title, 0, 50) }}
+            </el-link>
           </div>
           <el-divider></el-divider>
         </div>
@@ -151,16 +155,16 @@ export default {
       //记录页面信息
       page: {
         current: 1, //当前页面
-        totalpage:1,//总的页面数量
+        totalpage: 1, //总的页面数量
         total: 0, //后台总的文章数
       },
-      blogListTitle:[],
+      blogListTitle: [],
     };
   },
   created() {
-    this.init()
+    this.init();
   },
-    mounted() {
+  mounted() {
     window.addEventListener("scroll", this.load);
   },
   destroyed() {
@@ -168,22 +172,19 @@ export default {
   },
   methods: {
     getType(typeid) {
-      if(typeid === 0){
+      if (typeid === 0) {
         var type = "福州大学";
         return type;
-      }
-      else if(typeid === 1){
+      } else if (typeid === 1) {
         var type = "外校";
         return type;
-      }
-      else if(typeid === 2){
+      } else if (typeid === 2) {
         var type = "杂谈";
         return type;
-      }
-      else if(typeid === 3){
+      } else if (typeid === 3) {
         var type = "拼课";
         return type;
-      } 
+      }
     },
     /**
      *@functionName: toUpdate
@@ -196,13 +197,13 @@ export default {
       this.$router.push({ path: this.redirect || "/updateView" });
     },
     /**
-   *@functionName: init
-   *@description: 显示收藏
-   *@author: xiaohan
-   *@date: 2021-05-07 18:39:24
-   *@version: V1.0.0
-   */
-    init(){
+     *@functionName: init
+     *@description: 显示收藏
+     *@author: xiaohan
+     *@date: 2021-05-07 18:39:24
+     *@version: V1.0.0
+     */
+    init() {
       getCollectList(this.page.current).then((response) => {
         const { data } = response;
         this.page.current = data.data.current;
@@ -219,6 +220,13 @@ export default {
         }
       });
     },
+    /**
+     *@functionName: load
+     *@description: 无限下拉
+     *@author: xiaohan
+     *@date: 2021-05-07 19:20:24
+     *@version: V1.0.0
+     */
     load() {
       let vm = this;
       if (getScrollTop() + getWindowHeight() >= getScrollHeight()) {
@@ -232,7 +240,13 @@ export default {
         }
       }
     },
-    // 字符串截取 包含对中文处理,str需截取字符串,start开始截取位置,n截取长度
+    /**
+     *@functionName: substr
+     *@description: 字符串截取 包含对中文处理,str需截取字符串,start开始截取位置,n截取长度
+     *@author: xiaohan
+     *@date: 2021-05-07 19:21:24
+     *@version: V1.0.0
+     */
     Substr(str, start, n) {
       // eslint-disable-line
       if (str.replace(/[\u4e00-\u9fa5]/g, "**").length <= n) {
@@ -255,6 +269,22 @@ export default {
         }
       }
       return tmpStr + "...";
+    },
+    /**
+     *@functionName: detailById
+     *@description: 显示收藏详情
+     *@author: xiaohan
+     *@date: 2021-05-07 19:39:24
+     *@version: V1.0.0
+     */
+    //点击标题跳转详情
+    detailById(id) {
+      console.log(id);
+      let routeData = this.$router.resolve({
+        path: "/Detail",
+        query: { key: id },
+      });
+      window.open(routeData.href, "_blank");
     },
   },
 };
