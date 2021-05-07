@@ -105,3 +105,19 @@ export function thumbBlog(params) {
     params
   })
 }
+
+/*
+ *@functionName: getTagById
+ *@params1: id 文章tag
+ *@description:根据文章id获取tag属性
+ *@author: xiaohan
+ *@date: 2021-05-07 11:57:19
+ *@version: V1.0.0
+*/
+export function getTagById(id) {
+  return request(({
+    url: '/tag',
+    method: 'get',
+    params: {id: id }
+  }))
+}

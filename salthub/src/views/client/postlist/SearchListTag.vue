@@ -10,10 +10,6 @@
 <template>
   <div>
     <el-card shadow="never">
-      <div slot="header" class="clearfix">
-        检索到 <code>{{ articleList.length }}</code> 条关于
-        <code class="has-text-info">{{ page.tagname }}</code> 的记录
-      </div>
       <div>
         <article-list
           v-for="(item, index) in articleList"
@@ -34,11 +30,12 @@
 <script>
 //检测屏幕滑动高度的 用于无限下拉
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
+import { getListByTag } from "@/api/postlist";
 import articleList from "@/components/articleframe/ArticleBody";
 export default {
   inject: ["reload"],
   name: "SearchlistTag",
-  components: { articleList },
+  components: { articleList},
   data() {
     return {
       articleList: [],
@@ -61,16 +58,15 @@ export default {
   },
   created() {
     this.fetchList();
-    this.settagname( this.$route.query.key)
   },
   methods: {
     fetchList() {
-      this.searchByTag(this.page.tag);
+      this.searchByTag(this.$route.query.key);
     },
     //根据标签检索
     searchByTag(tag) {
       console.log(tag);
-      searchBytag(this.page.current,this.page.tag,).then((response) =>  {
+      getListByTag(this.page.current,this.page.tag,).then((response) =>  {
         const { data } = response;
         console.log(data);
         this.page.current = data.data.current;
@@ -111,17 +107,6 @@ export default {
         }
       }
     },
-    settagname(tag){
-      if(tag===0){
-        this.page.tagname = "福州大学"
-      }
-      else if(tag===1){
-        this.page.tagname = "经验"
-      }
-      else if(tag===2){
-        this.page.tagname = "资讯"
-      }
-    }
   },
   mounted() {
     window.addEventListener("scroll", this.load);

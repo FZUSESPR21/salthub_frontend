@@ -128,7 +128,7 @@ export default new Router({
       path: "/",
       component: App,
       // redirect:'/client',
-      redirect: '/admin',
+      redirect: '/home',
       meta: { title: "SaltHub" },
       children: [
         // {
