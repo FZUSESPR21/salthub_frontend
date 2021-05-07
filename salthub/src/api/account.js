@@ -31,3 +31,35 @@ export function putInfo(data) {
     data
   })
 }
+
+/**
+ *@functionName: banAccount
+ *@param: data 用户名
+ *@description:
+ *@author: NoMornings
+ *@date: 2021-05-08 01:01:21
+ *@version: V1.0.0
+*/
+export function banAccount(params) {
+  return request({
+    url: '/ban/account',
+    method: 'put',
+    params
+  })
+}
+
+/**
+ *@functionName: unbanAccount
+ *@param: data 用户名
+ *@description:
+ *@author: NoMornings
+ *@date: 2021-05-08 01:30:08
+ *@version: V1.0.0
+*/
+export function unbanAccount(params) {
+  return request({
+    url: '/ban/account',
+    method: 'delete',
+    params
+  })
+}

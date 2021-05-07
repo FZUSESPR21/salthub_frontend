@@ -78,7 +78,7 @@
               size="mini"
               type="danger"
               @click="handleDisabled(scope.$index, scope.row)"
-              >封禁</el-button
+              >{{ isDisabled(scope.row) }}</el-button
             >
           </template>
         </el-table-column>
@@ -139,7 +139,7 @@
 </style>
 
 <script>
-import { getAccount } from "@/api/account";
+import { getAccount, banAccount, unbanAccount } from "@/api/account";
 import store from "@/store";
 
 export default {
@@ -197,7 +197,7 @@ export default {
       }
       this.tableData.pop();
     });
-    console.log("token=>", store.getters.token);
+    // console.log("token=>", store.getters.token);
   },
   methods: {
     handleDetail(index, row) {
@@ -205,6 +205,47 @@ export default {
     },
     handleDisabled(index, row) {
       console.log(index, row);
+      // 封禁用户
+      if (row.status != "封禁")
+        banAccount({ name: row.id }).then((response) => {
+          if (response.data.code == 200) {
+            this.$message({
+              message: "封禁成功",
+              type: "success",
+              duration: 2000,
+            });
+            // 刷新结果
+            location.reload();
+          } else if (response.data.code == 563) {
+            this.$message({
+              message: "该账号已是封禁状态",
+              type: "error",
+              duration: 2000,
+            });
+          }
+        });
+      // 解封用户
+      else
+        unbanAccount({ name: row.id }).then((response) => {
+          if (response.data.code == 200) {
+            this.$message({
+              message: "解封成功",
+              type: "success",
+              duration: 2000,
+            });
+            // 刷新结果
+            location.reload();
+          } else if (response.data.code == 563) {
+            this.$message({
+              message: "该账号未处于封禁状态",
+              type: "error",
+              duration: 2000,
+            });
+          }
+        });
+    },
+    isDisabled(row) {
+      return row.status == "封禁" ? "解封" : "封禁";
     },
     convert() {},
     handleCurrentChange: function (currentPage) {
@@ -230,7 +271,7 @@ export default {
         this.tableData = [];
       }
     },
-    judgeAuth(roleId){
+    judgeAuth(roleId) {
       if (roleId == 0) return "注销用户";
       else if (roleId == 1) return "封禁用户";
       else if (roleId == 2) return "游客用户";
