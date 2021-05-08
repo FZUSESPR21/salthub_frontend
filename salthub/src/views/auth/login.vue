@@ -27,13 +27,14 @@
             ></el-input>
           </el-form-item>
 
-          <el-form-item label="记住" prop="status">
+          <el-form-item style="width: 80%" label="记住" prop="status">
             <el-switch
               v-model="ruleForm.status"
               :active-value="1"
               :inactive-value="0"
             >
             </el-switch>
+            <a style="float: right" @click="toForgetPwd()">忘记密码？</a>
           </el-form-item>
 
           <transition name="fade">
@@ -142,6 +143,10 @@ export default {
      */
     toRegister() {
       this.$router.push({ path: this.redirect || "/register" });
+    },
+    toForgetPwd() {
+      console.log("forget")
+      this.$router.push({ path: this.redirect || "/forgetpwd" });
     },
     /**
      *@functionName:    显示slider
