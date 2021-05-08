@@ -52,8 +52,9 @@ export default {
       this.isLoading = true
       try {
         console.log(this.blogId)
+        console.log(store.getters.user.name)
         var data = {
-          "author": store.getters.user,
+          "author": store.getters.user.name,
           "blogId": this.blogId,
           "content": this.textarea,
           "id": 0,

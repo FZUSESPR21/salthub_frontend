@@ -67,13 +67,12 @@ export default {
         // }
         var data = {
           "accountName": this.firstCommentAuthor,
-          "author": "zhuangweilong",
+          "author": store.getters.user.name,
           "commentId": this.firstCommentId,
           "content": this.textarea,
           "id": 1,
           "releaseTime": ""
         }
-        console.log(store.getters.user+"######")
         pushSecondComment(data)
         this.$message.success('留言成功')
         this.textarea = ''
