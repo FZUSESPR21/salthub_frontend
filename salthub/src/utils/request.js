@@ -74,7 +74,7 @@ service.interceptors.response.use(
         //修改密码 旧密码错误
         Message({
           showClose: true,
-          message: '旧密码错误，请重试',
+          message: '密码错误，请重试',
           type: 'error',
           duration: 2 * 1000
         })

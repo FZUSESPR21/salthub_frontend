@@ -49,6 +49,15 @@ export function putBlog(data) {
   })
 }
 
+export function updateTag(params, data) {
+  return request({
+    url: '/tag',
+    method: 'put',
+    params,
+    data
+  })
+}
+
 
 /**
  *@functionName: jsfn
