@@ -118,8 +118,8 @@ export default {
             label: '杂谈',
             options: [
               {
-                value: '2',
-                label: '求助'
+                value: '1',
+                label: '经验'
               },
               {
                 value: '21',
@@ -131,19 +131,19 @@ export default {
             label: '拼课',
             options: [
               {
-                value: '3',
+                value: '4',
                 label: '数学'
               },
               {
-                value: '31',
+                value: '41',
                 label: '英语'
               },
               {
-                value: '32',
+                value: '42',
                 label: '政治'
               },
               {
-                value: '33',
+                value: '43',
                 label: '专业课'
               }
             ]
@@ -152,11 +152,17 @@ export default {
             label: '院校',
             options: [{
               value: '0',
-              label: '福大'
-            }, {
-              value: '1',
+              label: '福州大学'
+            }, 
+            {
+              value: '3',
               label: '外校'
-            }]
+            },
+            {
+              value: '2',
+              label: '资讯'
+            },
+            ]
           },
         ],options2: [
           {

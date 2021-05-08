@@ -296,6 +296,12 @@ export default new Router({
       meta: { title: "注册" },
     },
     {
+      path: '/forgetpwd',
+      name: 'forgetpwd',
+      component: () => import('@/views/auth/ForgetPwd'),
+      meta: { title: "忘记密码" },
+    },
+    {
       path: '/backlogin',
       name: 'backlogin',
       component: () => import('@/views/auth/backlogin'),

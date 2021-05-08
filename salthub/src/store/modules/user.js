@@ -1,9 +1,9 @@
 import { login, logout } from "@/api/auth";
-import { getToken, setToken, removeToken } from "@/utils/auth";
+import { getToken, setToken, removeToken, getUser, setUser } from "@/utils/auth";
 
 const state = {
   token: getToken(), // token
-  user: "", // 用户对象
+  user: getUser(), // 用户对象
 };
 
 const mutations = {
@@ -39,6 +39,7 @@ const actions = {
         //   console.log(token)
           setToken(token);
           commit("SET_TOKEN_STATE", token);
+          setUser(user);
           commit("SET_USER_STATE", user);
           resolve();
         })

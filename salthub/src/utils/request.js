@@ -68,7 +68,18 @@ service.interceptors.response.use(
         }).then(() => {
           window.location.href = '#/login'
         })
-      } else { // 其他异常直接提示
+      }
+      // 514--密码错误
+      else if (res.code === 514) {
+        //修改密码 旧密码错误
+        Message({
+          showClose: true,
+          message: '旧密码错误，请重试',
+          type: 'error',
+          duration: 2 * 1000
+        })
+      } 
+      else { // 其他异常直接提示
         Message({
           showClose: true,
           message: '⚠' + res.message || 'Error',

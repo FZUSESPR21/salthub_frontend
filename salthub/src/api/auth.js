@@ -34,6 +34,22 @@ export function register(code, data) {
 }
 
 /**
+ *@functionName: resetPwd
+ *@params: 新密码 旧密码
+ *@description: 修改密码
+ *@author: lw
+ *@date: 2021-05-08 19:21:58
+ *@version: V1.0.0
+*/
+export function resetPwd(params) {
+    return request({
+        url: '/account/password',
+        method: 'put',
+        params
+    })
+}
+
+/**
  *@functionName: logout 
  * @param data 账号
  *@description:

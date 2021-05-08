@@ -95,10 +95,10 @@
           @click="toInfo()" 
           class="mr-5" 
           v-else>
-          <el-image
+          <img
             :src="Url"
-            style="width: 25px; height: 25px border-radius:30px"
-          ></el-image>
+            class="avatar"
+          />
         </b-navbar-item>
 
 
@@ -157,7 +157,8 @@ export default {
     ...mapGetters(['token', 'user'])
   },
   created() {
-    console.log(store.getters.user)
+    // console.log(store.getters.user)
+    // console.log(JSON.parse(sessionStorage.getItem('user')))
   },
   methods: {
     /**
@@ -236,5 +237,9 @@ input {
 .nav-d {
   margin-right: 15%;
 }
-
+.avatar {
+  width: 25px;
+  height: 25px;
+  border-radius:15px;
+}
 </style>
