@@ -81,9 +81,26 @@
           </b-field>
         </b-navbar-item>
 
-        <b-navbar-item tag="div" @click="toInfo()">
+        <b-navbar-item tag="div" 
+          @click="toInfo()" 
+          class="mx-5">
             <el-button type="info" icon="el-icon-message" circle></el-button>
         </b-navbar-item>
+
+        <b-navbar-item 
+          v-if="token == null || token === ''">
+        </b-navbar-item>
+
+        <b-navbar-item 
+          @click="toInfo()" 
+          class="mr-5" 
+          v-else>
+          <el-image
+            :src="Url"
+            style="width: 25px; height: 25px border-radius:30px"
+          ></el-image>
+        </b-navbar-item>
+
 
         <b-navbar-item
           v-if="token == null || token === ''"
@@ -125,6 +142,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import 'buefy/dist/buefy.css'
+import store from '@/store'
 export default {
   name: 'Header',
   data() {
@@ -132,13 +150,14 @@ export default {
       logoImg: require('@/assets/ForumLogo.png'),
       fits: ['cover'],
       searchKey: '',
+      Url: 'https://47.100.89.20'+store.getters.user.avatar,
     }
   },
   computed: {
     ...mapGetters(['token', 'user'])
   },
   created() {
-
+    console.log(store.getters.user)
   },
   methods: {
     /**
