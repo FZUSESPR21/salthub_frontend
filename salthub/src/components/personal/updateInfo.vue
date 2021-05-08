@@ -122,6 +122,10 @@ export default {
       },
     };
   },
+  mounted(){
+    this.account=store.getters.user;
+  }
+  ,
   methods: {
     updateInfo(account) {
       putInfo(account).then((response) => {
