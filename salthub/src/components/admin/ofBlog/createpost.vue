@@ -53,6 +53,19 @@
                 </el-option>
               </el-option-group>
             </el-select>
+            <el-select v-model="ruleForm.tagId" placeholder="请选择">
+              <el-option-group
+                v-for="group in options2"
+                :key="group.label"
+                :label="group.label">
+                <el-option
+                  v-for="item in group.options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-option-group>
+            </el-select>
 
             <div style="padding-top:20px">
               <el-form-item>
@@ -140,6 +153,29 @@ export default {
               value: 'Shenzhen',
               label: '外校'
             }]
+          },
+        ],
+        options2: [
+          {
+            label: 'tagId',
+            options: [
+              {
+                value: 'fuda',
+                label: '福大'
+              },
+              {
+                value: 'waixiao',
+                label: '外校'
+              },
+              {
+                value: 'zatan',
+                label: '杂谈'
+              },
+              {
+                value: 'pingke',
+                label: '拼课'
+              },
+            ]
           },
         ],
     }
