@@ -17,7 +17,7 @@ export function getFirstComments(params) {
 }
 
 /**
- *@functionName: fetchCommentsByBlogId
+ *@functionName: pushComment
  *@param:
  *@description: 发布一级评论
  *@author: 庄威龙
@@ -31,4 +31,21 @@ export function pushComment(data) {
     data
   })
 }
+
+/**
+ *@functionName: pushSecondComment
+ *@param:
+ *@description: 发布二级评论
+ *@author: 庄威龙
+ *@date: 2021-05-8 21:05
+ *@version: V1.0.0
+*/
+export function pushSecondComment(data) {
+  return request({
+    url: '/comment/1',
+    method: 'post',
+    data
+  })
+}
+
 
