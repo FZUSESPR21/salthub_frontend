@@ -37,7 +37,7 @@
 
     <!-- 个人收藏 -->
     <div :class="['wrap', 'columns']">
-      <div :class="['blog', 'column is-three-quarters']">
+      <div :class="['blog', 'column is-three-quarters']" >
         <span :class="'collection'">我的收藏</span>
         <span :class="'my-blog'">我的帖子</span>
         <div
@@ -50,8 +50,14 @@
               getType(item.moduleId)
             }}</el-tag>
             <el-link :underline="false" class="is-size-6" @click="detailById(item.id)">
-              {{ Substr(item.title, 0, 50) }}
+              {{ Substr(item.title, 0, 45) }}
             </el-link>
+            <el-button 
+              type="danger" 
+              icon="el-icon-delete" 
+              circle 
+              class="del"
+              @click="delCollection(item.id)"></el-button>
           </div>
           <el-divider></el-divider>
         </div>
@@ -72,6 +78,10 @@ $title-color: #03298b;
 $grey: #9b9b9b;
 $opacity: 0.8;
 $size: 50px;
+
+.del{
+  float: right;
+}
 
 .v-box-card {
   height: auto;
@@ -142,6 +152,7 @@ import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
 import { getCollectList } from "@/api/postlist";
+import { delCollect } from "@/api/blog";
 import store from "@/store";
 export default {
   components: {
@@ -223,6 +234,26 @@ export default {
           for (let i in data.data.records) {
             this.blogList.push(data.data.records[i]);
           }
+        }
+      });
+    },
+    /**
+     *@functionName: delCollection
+     *@description: 删除收藏
+     *@author: xiaohan
+     *@date: 2021-05-08 10:32:24
+     *@version: V1.0.0
+     */
+    delCollection(id) {
+      delCollect(id).then((response) => {
+        const { data } = response;
+        if (data.code == "200") {
+          this.$message({
+            message: "取消收藏成功！",
+            type: "success",
+          });
+          this.page.current=1
+          this.init()
         }
       });
     },

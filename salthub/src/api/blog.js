@@ -121,3 +121,19 @@ export function getTagById(id) {
     params: {id: id }
   }))
 }
+
+/*
+ *@functionName: delCollect
+ *@params1: id 文章tag
+ *@description:删除收藏文章
+ *@author: xiaohan
+ *@date: 2021-05-08 10:57:19
+ *@version: V1.0.0
+*/
+export function delCollect(id) {
+  return request(({
+    url: '/collection',
+    method: 'delete',
+    params: {id:id}
+  }))
+}
