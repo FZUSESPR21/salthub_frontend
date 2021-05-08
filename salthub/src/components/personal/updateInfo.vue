@@ -135,6 +135,7 @@ export default {
             type: "success",
             duration: 2000,
           });
+          this.$router.push({ path: this.redirect || "/info" });
         }
         else{
           this.$message({

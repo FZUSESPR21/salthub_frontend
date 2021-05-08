@@ -50,7 +50,7 @@
               getType(item.moduleId)
             }}</el-tag>
             <el-link :underline="false" class="is-size-6" @click="detailById(item.id)">
-              {{ Substr(item.title, 0, 45) }}
+              {{ Substr(item.title, 0, 35) }}
             </el-link>
             <el-button 
               type="danger" 

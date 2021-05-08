@@ -29,11 +29,11 @@
       <transition name="slide-fade">
         <div v-if="comment.SecondComment">
           <div style="width:79%;margin-left:20%">
-            <CreateSecondComment :firstCommentId="comment.commentId"></CreateSecondComment>
+            <CreateSecondComment :firstCommentId="comment.id" :firstCommentAuthor="comment.author"></CreateSecondComment>
           </div>
         </div>
       </transition>
-      <SecondComment :firstCommentId="comment.commentId"></SecondComment>
+      <SecondComment :firstCommentId="comment.id"></SecondComment>
       <br>
     </div>
   </div>

@@ -4,7 +4,7 @@
     <h3 class="title is-5">评论</h3>
 
     <!-- <lv-comments-form :slug="slug" @loadComments="fetchComments"/> -->
-    <lv-comments-form :slug="slug"/>
+    <lv-comments-form :slug="slug" :firstCommentId="firstCommentId" :firstCommentAuthor="firstCommentAuthor"/>
 
   </div>
 </template>
@@ -32,6 +32,10 @@ export default {
     firstCommentId: {
       type: Number,
       default: 1
+    },
+    firstCommentAuthor: {
+      type: String,
+      default: null
     }
   },
   computed: {
