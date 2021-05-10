@@ -146,7 +146,7 @@ export default {
     },
     toForgetPwd() {
       console.log("forget")
-      this.$router.push({ path: this.redirect || "/forgetpwd" });
+      // this.$router.push({ path: this.redirect || "/forgetpwd" });
     },
     /**
      *@functionName:    显示slider
