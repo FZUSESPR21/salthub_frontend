@@ -145,7 +145,7 @@ export default {
       pageSize: 10,
     };
   },
-   mounted() {
+  mounted() {
     //获取所有公告
     getAllNotice({
       //当前页码

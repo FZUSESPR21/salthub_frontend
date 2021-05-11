@@ -140,7 +140,12 @@
 </style>
 
 <script>
-import { getAccount, banAccount, unbanAccount } from "@/api/account";
+import {
+  getAccount,
+  banAccount,
+  unbanAccount,
+  countAccount,
+} from "@/api/account";
 import store from "@/store";
 
 export default {
@@ -200,6 +205,11 @@ export default {
       }
       this.tableData.pop();
     });
+
+    // 获取用户个数
+    // countAccount().then((response) => {
+    //   console.log("countAccount()=>", response.data.data);
+    // });
     // console.log("token=>", store.getters.token);
   },
   methods: {
