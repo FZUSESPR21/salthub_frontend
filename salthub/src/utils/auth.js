@@ -12,7 +12,7 @@ export function setToken(token) {
     // return Cookies.set(uToken, token, {expires: 1})
     // localStorage.setItem('jwt', token)
     var date = new Date().getTime()
-    myLocalStorage.set('jwt', token, date+24*3600*1000) //设置1天的过期时间 单位ms
+    myLocalStorage.set('jwt', token, date + 24 * 3600 * 1000) //设置1天的过期时间 单位ms
 }
 
 // 删除Token
@@ -22,15 +22,15 @@ export function removeToken() {
 }
 
 //设置user进sessionStorage
-export function setUser (user) {
+export function setUser(user) {
     console.log(user)
     sessionStorage.setItem('user', JSON.stringify(user))
 }
 
 //从sessionStorage获取user
-export function getUser () {
+export function getUser() {
     // console.log(JSON.stringify(sessionStorage.getItem('user')))
-    return sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')): null
+    return sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null
 }
 
 const myLocalStorage = {
@@ -39,7 +39,18 @@ const myLocalStorage = {
         localStorage.setItem(key, JSON.stringify(data));
     },
     get: function (key) {
-        var data = JSON.parse(localStorage.getItem(key));
+
+        var data = "";
+        if (typeof localStorage.getItem(key) == 'string') {
+            try {
+                data = JSON.parse(localStorage.getItem(key));
+                // console.log('转换成功：' + data);
+            } catch (e) {
+                // console.log('error：' + localStorage.getItem(key) + '!!!' + e);
+                data = localStorage.getItem(key);
+            }
+        }
+        // var data = JSON.parse(localStorage.getItem(key));
         if (data !== null) {
             if (data.expirse != null && data.expirse < new Date().getTime()) {
                 localStorage.removeItem(key);
