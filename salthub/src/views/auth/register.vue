@@ -122,8 +122,8 @@ export default {
         name: [
           { required: true, message: "请输入账号", trigger: "blur" },
           {
-            min: 2,
-            max: 10,
+            min: 6,
+            max: 15,
             message: "长度在 6 到 15 个字符",
             trigger: "blur",
           },
