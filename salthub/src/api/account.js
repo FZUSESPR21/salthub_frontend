@@ -78,3 +78,19 @@ export function countAccount() {
     method: 'get',
   })
 }
+
+/**
+ *@functionName: searchAccountByName
+ *@param: 
+ *@description: 查询单个用户信息
+ *@author: NoMornings
+ *@date: 2021-05-11 23:34:25
+ *@version: V1.0.0
+*/
+export function searchAccountByName(params) {
+  return request({
+    url: '/admin',
+    method: 'get',
+    params
+  })
+}

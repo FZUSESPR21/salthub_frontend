@@ -145,6 +145,7 @@ import {
   banAccount,
   unbanAccount,
   countAccount,
+  searchAccountByName,
 } from "@/api/account";
 import store from "@/store";
 
@@ -169,48 +170,7 @@ export default {
     };
   },
   mounted() {
-    //获取用户列表
-    getAccount({
-      //当前页码
-      current: 1,
-    }).then((response) => {
-      // console.log("account=>", response.data.data.records);
-      var len = response.data.data.records.length;
-      var info = response.data.data.records;
-      for (var i = 0; i < len; i++) {
-        this.tableData.push({
-          nickname: "",
-          id: "",
-          blog: "",
-          status: "",
-          email: "",
-          auth: 4,
-        });
-        // 用户昵称
-        this.tableData[i].nickname = info[i].nickname;
-        // 用户ID
-        this.tableData[i].id = info[i].name;
-        // 最新发帖
-        this.tableData[i].blog = info[i].slogan;
-        // 状态（ 正常 | 封禁 | 注销 ）
-        this.tableData[i].status = this.judgeStatus(info[i].roleId);
-        // 邮箱
-        this.tableData[i].email = info[i].email;
-        // 权限
-        this.tableData[i].auth = this.judgeAuth(info[i].roleId);
-        // console.log(this.tableData[i].nickname);
-        // console.log(this.tableData[i].id);
-        // console.log(this.tableData[i].blog);
-        // console.log(this.tableData[i].status);
-      }
-      this.tableData.pop();
-    });
-
-    // 获取用户个数
-    // countAccount().then((response) => {
-    //   console.log("countAccount()=>", response.data.data);
-    // });
-    // console.log("token=>", store.getters.token);
+    this.init();
   },
   methods: {
     handleDetail(index, row) {
@@ -261,7 +221,37 @@ export default {
     isDisabled(row) {
       return row.status == "封禁" ? "解封" : "封禁";
     },
-    convert() {},
+    // 搜索用户
+    convert() {
+      if (this.input != "") {
+        // 查询单个用户信息
+        searchAccountByName({ name: this.input }).then((response) => {
+          // console.log("searchAccountByName()=>", response.data.data);
+          var info = response.data.data;
+          this.tableData = [];
+          this.tableData.push({
+            nickname: "",
+            id: "",
+            blog: "",
+            status: "",
+            email: "",
+            auth: 4,
+          });
+          // 用户昵称
+          this.tableData[0].nickname = info.nickname;
+          // 用户ID
+          this.tableData[0].id = info.name;
+          // 最新发帖
+          this.tableData[0].blog = info.slogan;
+          // 状态（ 正常 | 封禁 | 注销 ）
+          this.tableData[0].status = this.judgeStatus(info.roleId);
+          // 邮箱
+          this.tableData[0].email = info.email;
+          // 权限
+          this.tableData[0].auth = this.judgeAuth(info.roleId);
+        });
+      } else this.init();
+    },
     handleCurrentChange: function (currentPage) {
       console.log("handleCurrentChange()\n");
       this.tableData = [];
@@ -311,6 +301,46 @@ export default {
       if (status == "注销") return "info";
       else if (status == "封禁") return "danger";
       else return "success";
+    },
+    init() {
+      //获取用户列表
+      getAccount({
+        //当前页码
+        current: 1,
+      }).then((response) => {
+        // console.log("account=>", response.data.data.records);
+        var len = response.data.data.records.length;
+        var info = response.data.data.records;
+        for (var i = 0; i < len; i++) {
+          this.tableData.push({
+            nickname: "",
+            id: "",
+            blog: "",
+            status: "",
+            email: "",
+            auth: 4,
+          });
+          // 用户昵称
+          this.tableData[i].nickname = info[i].nickname;
+          // 用户ID
+          this.tableData[i].id = info[i].name;
+          // 最新发帖
+          this.tableData[i].blog = info[i].slogan;
+          // 状态（ 正常 | 封禁 | 注销 ）
+          this.tableData[i].status = this.judgeStatus(info[i].roleId);
+          // 邮箱
+          this.tableData[i].email = info[i].email;
+          // 权限
+          this.tableData[i].auth = this.judgeAuth(info[i].roleId);
+        }
+        this.tableData.pop();
+      });
+
+      // 获取用户个数
+      // countAccount().then((response) => {
+      //   console.log("countAccount()=>", response.data.data);
+      // });
+      // console.log("token=>", store.getters.token);
     },
   },
 };
