@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 import { Message, MessageBox } from 'element-ui'
+const https = require('https');
 import { getToken } from '@/utils/auth'
 
 // 1.创建axios实例
@@ -14,7 +15,10 @@ const service = axios.create({
   // baseURL: 'https://'
 
   // 超时时间 单位是ms，这里设置了5s的超时时间
-  timeout: 5 * 1000
+  timeout: 5 * 1000,
+  httpsAgent: new https.Agent({  
+    rejectUnauthorized: false
+  })
 })
 
 // 2.请求拦截器request interceptor
