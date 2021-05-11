@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-后台首页-数据统计、公告栏、数据可视化子组件
+ * @fileName: indexCard.vue 
+ * @author: NoMornings 
+ * @date: 2021-04-28 12:13:12 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.1 
+!-->
 <template>
   <div :class="'wrap'">
     <div :class="'row'">

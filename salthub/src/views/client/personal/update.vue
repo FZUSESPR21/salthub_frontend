@@ -16,6 +16,7 @@
       <div class="container context">
         <div class="columns">
           <div class="column is-9 is-offset-1">
+            <!-- 个人信息修改卡片 -->
             <v-update></v-update>
           </div>
         </div>
@@ -31,7 +32,7 @@
 .front-head {
   margin-bottom: 20px;
 }
-.front-main{
+.front-main {
   min-height: 500px;
 }
 

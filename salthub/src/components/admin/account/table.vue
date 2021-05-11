@@ -22,7 +22,7 @@
           >
           </el-input>
         </div>
-
+        <!-- 搜索按钮 -->
         <el-button
           type="primary"
           icon="el-icon-search"
@@ -33,6 +33,7 @@
       </div>
     </div>
 
+    <!-- 用户列表 -->
     <el-col :span="21">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
@@ -84,7 +85,7 @@
         </el-table-column>
       </el-table>
     </el-col>
-
+    <!-- 分页 -->
     <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
@@ -163,7 +164,9 @@ export default {
     };
   },
   mounted() {
+    //获取用户列表
     getAccount({
+      //当前页码
       current: 1,
     }).then((response) => {
       // console.log("account=>", response.data.data.records);
@@ -244,6 +247,7 @@ export default {
           }
         });
     },
+    // 按钮显示封禁或解封状态
     isDisabled(row) {
       return row.status == "封禁" ? "解封" : "封禁";
     },
@@ -271,6 +275,7 @@ export default {
         this.tableData = [];
       }
     },
+    // 判断用户权限
     judgeAuth(roleId) {
       if (roleId == 0) return "注销用户";
       else if (roleId == 1) return "封禁用户";
@@ -278,17 +283,20 @@ export default {
       else if (roleId == 3) return "普通用户";
       else if (roleId == 4) return "管理员用户";
     },
+    // 根据用户权限渲染标签颜色
     authTag(auth) {
       if (auth == "注销用户") return "info";
       else if (auth == "封禁用户") return "danger";
       else if (auth == "管理员用户") return "success";
       else return "";
     },
+    // 判断用户状态
     judgeStatus(roleId) {
       if (roleId == 0) return "注销";
       else if (roleId == 1) return "封禁";
       else return "正常";
     },
+    // 根据用户状态渲染标签颜色
     statusTag(status) {
       if (status == "注销") return "info";
       else if (status == "封禁") return "danger";
