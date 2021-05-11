@@ -64,3 +64,19 @@ export function deleteNotice(params) {
         params
     })
 }
+
+/**
+ *@functionName: getAllNotice
+ *@params1: params
+ *@description: 获取所有公告
+ *@author: NoMornings
+ *@date: 2021-05-011 23:10:05
+ *@version: V1.0.0
+*/
+export function getAllNotice(params) {
+    return request({
+        url: '/admin/notice/all',
+        method: 'get',
+        params
+    })
+}

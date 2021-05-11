@@ -126,6 +126,8 @@
 </style>
 
 <script>
+import { getAllNotice } from "@/api/notice";
+import store from "@/store";
 export default {
   data() {
     return {
@@ -136,32 +138,41 @@ export default {
           id: "王小虎",
           blog: "福大计算机考研复试之人工智能分析篇",
         },
-        {
-          releaseTime: "2021-4-28",
-          id: "王小虎",
-          blog: "2022福州大学考研指导来了，必看！！...",
-        },
-        {
-          releaseTime: "2021-4-28",
-          id: "王小虎",
-          blog: "考研改怎么准备呢",
-        },
-        {
-          releaseTime: "2021-4-28",
-          id: "王小虎",
-          blog: "考研每天应该学多久才能不成为炮灰？",
-        },
-        {
-          releaseTime: "2021-4-28",
-          id: "王小虎",
-          blog: "考研每天应该学多久才能不成为炮灰？",
-        },
       ],
       tableDataAll: [],
       total: 0,
       currentPage: 1,
       pageSize: 10,
     };
+  },
+   mounted() {
+    //获取所有公告
+    getAllNotice({
+      //当前页码
+      current: 1,
+    }).then((response) => {
+      // console.log("notice=>", response.data.data.records);
+      var len = response.data.data.records.length;
+      var info = response.data.data.records;
+      for (var i = 0; i < len; i++) {
+        this.tableData.push({
+          releaseTime: "",
+          id: "",
+          blog: "",
+        });
+        // 发布时间
+        this.tableData[i].releaseTime = info[i].releaseTime;
+        // 管理员ID
+        this.tableData[i].id = info[i].author;
+        // 通知标题
+        this.tableData[i].blog = info[i].title;
+        // console.log(this.tableData[i].releaseTime);
+        // console.log(this.tableData[i].id);
+        // console.log(this.tableData[i].blog);
+      }
+      this.tableData.pop();
+    });
+    // console.log("token=>", store.getters.token);
   },
   methods: {
     handleDetail(index, row) {
