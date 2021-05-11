@@ -5,7 +5,7 @@
         <span>晒研论坛--fzu</span>
 
         <span style="float: right">
-          <router-link :to="{path:'/admin'}">
+          <router-link :to="{path:'/backlogin'}">
             管理员登录
           </router-link>
         </span>
