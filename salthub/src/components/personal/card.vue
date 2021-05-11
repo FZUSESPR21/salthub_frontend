@@ -14,7 +14,7 @@
       <div :class="'p-info'">
         <!-- 头像 -->
         <el-avatar
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          :src="url"
           :size="70"
         ></el-avatar>
         <!-- 文字信息 -->
@@ -182,6 +182,8 @@ export default {
         total: 0, //后台总的文章数
       },
       blogListTitle: [],
+      // avatar
+      url: 'https://47.100.89.20'+store.getters.user.avatar
     };
   },
   created() {
