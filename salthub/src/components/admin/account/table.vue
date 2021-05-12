@@ -60,7 +60,7 @@
         </el-table-column>
         <el-table-column label="用户昵称" prop="nickname"> </el-table-column>
         <el-table-column label="用户 ID" prop="id"> </el-table-column>
-        <el-table-column label="最新发帖" prop="blog"> </el-table-column>
+        <el-table-column label="最新发帖" prop="blog" show-overflow-tooltip> </el-table-column>
         <el-table-column label="状态" prop="status">
           <template slot-scope="scope">
             <el-tag :type="statusTag(scope.row.status)">{{
