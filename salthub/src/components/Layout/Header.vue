@@ -89,6 +89,7 @@
 
         <b-navbar-item 
           v-if="token == null || token === ''">
+
         </b-navbar-item>
 
         <b-navbar-item 
@@ -150,13 +151,17 @@ export default {
       logoImg: require('@/assets/ForumLogo.png'),
       fits: ['cover'],
       searchKey: '',
-      Url: 'https://47.100.89.20'+store.getters.user.avatar,
+      Url: 'https://47.100.89.20',
     }
   },
   computed: {
     ...mapGetters(['token', 'user'])
   },
   created() {
+    //有token时候加上头像地址
+    if(this.token !== null || this.token != ''){
+      this.Url = this.Url + store.getters.user.avatar
+    }
     // console.log(store.getters.user)
     // console.log(JSON.parse(sessionStorage.getItem('user')))
   },
