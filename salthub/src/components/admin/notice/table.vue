@@ -54,7 +54,8 @@
         </el-table-column>
         <el-table-column label="发表时间" prop="releaseTime"> </el-table-column>
         <el-table-column label="管理员 ID" prop="id"> </el-table-column>
-        <el-table-column label="通知标题" prop="blog" show-overflow-tooltip> </el-table-column>
+        <el-table-column label="通知标题" prop="blog" show-overflow-tooltip>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -124,7 +125,7 @@
   display: flex;
   justify-content: center;
 }
-#text{
+#text {
   color: red;
 }
 </style>
@@ -143,7 +144,7 @@ export default {
           blog: "福大计算机考研复试之人工智能分析篇",
           noticeId: "1",
           content: "最后一次！！！",
-          accountName: "KaoYanRen"
+          accountName: "KaoYanRen",
         },
       ],
       tableDataAll: [],
@@ -167,20 +168,20 @@ export default {
         id: row.noticeId,
       }).then((response) => {
         if (response.data.code == 200) {
-            this.$message({
-              message: "删除成功",
-              type: "success",
-              duration: 2000,
-            });
-            // 刷新结果
-            location.reload();
-          } else if (response.data.code == 558) {
-            this.$message({
-              message: "该通知id不存在",
-              type: "error",
-              duration: 2000,
-            });
-          }
+          this.$message({
+            message: "删除成功",
+            type: "success",
+            duration: 2000,
+          });
+          // 刷新结果
+          location.reload();
+        } else if (response.data.code == 558) {
+          this.$message({
+            message: "该通知id不存在",
+            type: "error",
+            duration: 2000,
+          });
+        }
       });
     },
     convert() {},

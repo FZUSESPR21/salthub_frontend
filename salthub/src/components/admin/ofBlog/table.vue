@@ -52,7 +52,8 @@
         </el-table-column>
         <el-table-column label="发表时间" prop="releaseTime"> </el-table-column>
         <el-table-column label="管理员 ID" prop="id"> </el-table-column>
-        <el-table-column label="官方文章标题" prop="blog" show-overflow-tooltip> </el-table-column>
+        <el-table-column label="官方文章标题" prop="blog" show-overflow-tooltip>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button

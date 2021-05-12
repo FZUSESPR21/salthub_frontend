@@ -60,8 +60,19 @@
         </el-table-column>
         <el-table-column label="用户昵称" prop="nickname"> </el-table-column>
         <el-table-column label="用户 ID" prop="id"> </el-table-column>
-        <el-table-column label="最新发帖" prop="blog" show-overflow-tooltip> </el-table-column>
-        <el-table-column label="状态" prop="status">
+        <el-table-column label="最新发帖" prop="blog" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          prop="status"
+          :filters="[
+            { text: '正常', value: '正常' },
+            { text: '封禁', value: '封禁' },
+            { text: '注销', value: '注销' },
+          ]"
+          :filter-method="filterTag"
+          filter-placement="bottom-end"
+        >
           <template slot-scope="scope">
             <el-tag :type="statusTag(scope.row.status)">{{
               scope.row.status
@@ -290,7 +301,7 @@ export default {
       else if (auth == "管理员用户") return "success";
       else return "";
     },
-    // 判断用户状态
+    // 判断用户状态status
     judgeStatus(roleId) {
       if (roleId == 0) return "注销";
       else if (roleId == 1) return "封禁";
@@ -341,6 +352,9 @@ export default {
       //   console.log("countAccount()=>", response.data.data);
       // });
       // console.log("token=>", store.getters.token);
+    },
+    filterTag(value, row) {
+      return row.status === value;
     },
   },
 };

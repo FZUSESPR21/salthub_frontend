@@ -61,7 +61,8 @@
         </el-table-column>
         <el-table-column label="发表时间" prop="releaseTime"> </el-table-column>
         <el-table-column label="用户 ID" prop="id"> </el-table-column>
-        <el-table-column label="文章标题" prop="blog" show-overflow-tooltip> </el-table-column>
+        <el-table-column label="文章标题" prop="blog" show-overflow-tooltip>
+        </el-table-column>
         <el-table-column label="状态" prop="status"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
