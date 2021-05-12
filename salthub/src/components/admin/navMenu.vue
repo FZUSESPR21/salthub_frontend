@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-后台-通用组件-侧边栏
+ * @fileName: navMenu.vue 
+ * @author: NoMornings 
+ * @date: 2021-04-28 12:13:12 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.1 
+!-->
 <template style="height:100%">
   <el-col :span="3" :class="'nav'">
     <el-menu
@@ -10,18 +19,22 @@
       text-color="#fff"
       active-text-color="#ffd04b"
     >
+      <!-- 后台首页 -->
       <el-menu-item index="1" @click="jumpIndex()">
         <i class="el-icon-s-home"></i>
         <span>后台首页</span>
       </el-menu-item>
+      <!-- 文章管理 -->
       <el-menu-item index="2" @click="jumpBlog()">
         <i class="el-icon-menu"></i>
         <span slot="title">文章管理</span>
       </el-menu-item>
+      <!-- 用户管理 -->
       <el-menu-item index="3" @click="jumpAccount()">
         <i class="el-icon-menu"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
+      <!-- 通知管理 -->
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-message-solid"></i>
@@ -37,6 +50,7 @@
           >发布通知</el-menu-item
         >
       </el-submenu>
+      <!-- 官方文章 -->
       <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -52,10 +66,6 @@
           >发布官方文章</el-menu-item
         >
       </el-submenu>
-      <!-- <el-menu-item index="5" @click="jumpOfBlog()">
-        <i class="el-icon-document"></i>
-        <span slot="title">官方文章</span>
-      </el-menu-item> -->
     </el-menu>
   </el-col>
 </template>

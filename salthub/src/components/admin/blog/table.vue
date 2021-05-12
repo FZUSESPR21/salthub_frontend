@@ -22,7 +22,7 @@
           >
           </el-input>
         </div>
-
+        <!-- 搜索按钮 -->
         <el-button
           type="primary"
           icon="el-icon-search"
@@ -38,6 +38,7 @@
       </el-badge>
     </div>
 
+    <!-- 文章列表 -->
     <el-col :span="21">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
@@ -60,7 +61,8 @@
         </el-table-column>
         <el-table-column label="发表时间" prop="releaseTime"> </el-table-column>
         <el-table-column label="用户 ID" prop="id"> </el-table-column>
-        <el-table-column label="文章标题" prop="blog"> </el-table-column>
+        <el-table-column label="文章标题" prop="blog" show-overflow-tooltip>
+        </el-table-column>
         <el-table-column label="状态" prop="status"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -84,7 +86,7 @@
         </el-table-column>
       </el-table>
     </el-col>
-
+    <!-- 分页 -->
     <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
@@ -137,7 +139,7 @@
   justify-content: center;
 }
 
-.notice{
+.notice {
   float: right;
   display: block;
   margin-right: 140px;

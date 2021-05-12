@@ -22,7 +22,7 @@
           >
           </el-input>
         </div>
-
+        <!-- 搜索按钮 -->
         <el-button
           type="primary"
           icon="el-icon-search"
@@ -33,6 +33,7 @@
       </div>
     </div>
 
+    <!-- 用户列表 -->
     <el-col :span="21">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="expand">
@@ -59,8 +60,19 @@
         </el-table-column>
         <el-table-column label="用户昵称" prop="nickname"> </el-table-column>
         <el-table-column label="用户 ID" prop="id"> </el-table-column>
-        <el-table-column label="最新发帖" prop="blog"> </el-table-column>
-        <el-table-column label="状态" prop="status">
+        <el-table-column label="最新发帖" prop="blog" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          prop="status"
+          :filters="[
+            { text: '正常', value: '正常' },
+            { text: '封禁', value: '封禁' },
+            { text: '注销', value: '注销' },
+          ]"
+          :filter-method="filterTag"
+          filter-placement="bottom-end"
+        >
           <template slot-scope="scope">
             <el-tag :type="statusTag(scope.row.status)">{{
               scope.row.status
@@ -84,7 +96,7 @@
         </el-table-column>
       </el-table>
     </el-col>
-
+    <!-- 分页 -->
     <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
@@ -139,7 +151,13 @@
 </style>
 
 <script>
-import { getAccount, banAccount, unbanAccount } from "@/api/account";
+import {
+  getAccount,
+  banAccount,
+  unbanAccount,
+  countAccount,
+  searchAccountByName,
+} from "@/api/account";
 import store from "@/store";
 
 export default {
@@ -163,41 +181,7 @@ export default {
     };
   },
   mounted() {
-    getAccount({
-      current: 1,
-    }).then((response) => {
-      // console.log("account=>", response.data.data.records);
-      var len = response.data.data.records.length;
-      var info = response.data.data.records;
-      for (var i = 0; i < len; i++) {
-        this.tableData.push({
-          nickname: "",
-          id: "",
-          blog: "",
-          status: "",
-          email: "",
-          auth: 4,
-        });
-        // 用户昵称
-        this.tableData[i].nickname = info[i].nickname;
-        // 用户ID
-        this.tableData[i].id = info[i].name;
-        // 最新发帖
-        this.tableData[i].blog = info[i].slogan;
-        // 状态（ 正常 | 封禁 | 注销 ）
-        this.tableData[i].status = this.judgeStatus(info[i].roleId);
-        // 邮箱
-        this.tableData[i].email = info[i].email;
-        // 权限
-        this.tableData[i].auth = this.judgeAuth(info[i].roleId);
-        // console.log(this.tableData[i].nickname);
-        // console.log(this.tableData[i].id);
-        // console.log(this.tableData[i].blog);
-        // console.log(this.tableData[i].status);
-      }
-      this.tableData.pop();
-    });
-    // console.log("token=>", store.getters.token);
+    this.init();
   },
   methods: {
     handleDetail(index, row) {
@@ -244,10 +228,41 @@ export default {
           }
         });
     },
+    // 按钮显示封禁或解封状态
     isDisabled(row) {
       return row.status == "封禁" ? "解封" : "封禁";
     },
-    convert() {},
+    // 搜索用户
+    convert() {
+      if (this.input != "") {
+        // 查询单个用户信息
+        searchAccountByName({ name: this.input }).then((response) => {
+          // console.log("searchAccountByName()=>", response.data.data);
+          var info = response.data.data;
+          this.tableData = [];
+          this.tableData.push({
+            nickname: "",
+            id: "",
+            blog: "",
+            status: "",
+            email: "",
+            auth: 4,
+          });
+          // 用户昵称
+          this.tableData[0].nickname = info.nickname;
+          // 用户ID
+          this.tableData[0].id = info.name;
+          // 最新发帖
+          this.tableData[0].blog = info.slogan;
+          // 状态（ 正常 | 封禁 | 注销 ）
+          this.tableData[0].status = this.judgeStatus(info.roleId);
+          // 邮箱
+          this.tableData[0].email = info.email;
+          // 权限
+          this.tableData[0].auth = this.judgeAuth(info.roleId);
+        });
+      } else this.init();
+    },
     handleCurrentChange: function (currentPage) {
       console.log("handleCurrentChange()\n");
       this.tableData = [];
@@ -271,6 +286,7 @@ export default {
         this.tableData = [];
       }
     },
+    // 判断用户权限
     judgeAuth(roleId) {
       if (roleId == 0) return "注销用户";
       else if (roleId == 1) return "封禁用户";
@@ -278,21 +294,67 @@ export default {
       else if (roleId == 3) return "普通用户";
       else if (roleId == 4) return "管理员用户";
     },
+    // 根据用户权限渲染标签颜色
     authTag(auth) {
       if (auth == "注销用户") return "info";
       else if (auth == "封禁用户") return "danger";
       else if (auth == "管理员用户") return "success";
       else return "";
     },
+    // 判断用户状态status
     judgeStatus(roleId) {
       if (roleId == 0) return "注销";
       else if (roleId == 1) return "封禁";
       else return "正常";
     },
+    // 根据用户状态渲染标签颜色
     statusTag(status) {
       if (status == "注销") return "info";
       else if (status == "封禁") return "danger";
       else return "success";
+    },
+    init() {
+      //获取用户列表
+      getAccount({
+        //当前页码
+        current: 1,
+      }).then((response) => {
+        // console.log("account=>", response.data.data.records);
+        var len = response.data.data.records.length;
+        var info = response.data.data.records;
+        for (var i = 0; i < len; i++) {
+          this.tableData.push({
+            nickname: "",
+            id: "",
+            blog: "",
+            status: "",
+            email: "",
+            auth: 4,
+          });
+          // 用户昵称
+          this.tableData[i].nickname = info[i].nickname;
+          // 用户ID
+          this.tableData[i].id = info[i].name;
+          // 最新发帖
+          this.tableData[i].blog = info[i].slogan;
+          // 状态（ 正常 | 封禁 | 注销 ）
+          this.tableData[i].status = this.judgeStatus(info[i].roleId);
+          // 邮箱
+          this.tableData[i].email = info[i].email;
+          // 权限
+          this.tableData[i].auth = this.judgeAuth(info[i].roleId);
+        }
+        this.tableData.pop();
+      });
+
+      // 获取用户个数
+      // countAccount().then((response) => {
+      //   console.log("countAccount()=>", response.data.data);
+      // });
+      // console.log("token=>", store.getters.token);
+    },
+    filterTag(value, row) {
+      return row.status === value;
     },
   },
 };

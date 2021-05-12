@@ -1,3 +1,12 @@
+<!-- 
+ * @description: 晒研论坛-后台首页-公告栏卡片
+ * @fileName: noticeCard.vue 
+ * @author: NoMornings 
+ * @date: 2021-04-28 12:13:12 
+ * @后台人员:  
+ * @path:  
+ * @version: V1.0.1 
+!-->
 <template>
   <el-card class="box-card">
     <div :class="'title'">

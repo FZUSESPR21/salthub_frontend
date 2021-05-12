@@ -16,6 +16,7 @@
       <div class="container context">
         <div class="columns">
           <div class="column is-9 is-offset-1">
+            <!-- 个人信息卡片 -->
             <v-personal></v-personal>
           </div>
         </div>
@@ -42,7 +43,6 @@ html {
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import card from "@/components/personal/card";
-// import "@/assets/app.css";
 import "buefy/dist/buefy.css";
 
 export default {

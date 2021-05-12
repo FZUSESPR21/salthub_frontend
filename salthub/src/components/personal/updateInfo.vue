@@ -1,5 +1,5 @@
 <!-- 
- * @description: 晒研论坛-修改个人信息
+ * @description: 晒研论坛-修改个人信息卡片
  * @fileName: updateInfo.vue 
  * @author: NoMornings 
  * @date: 2021-05-07 15:06:10 
@@ -13,10 +13,12 @@
     <!-- 个人信息 -->
     <div :class="'wrap'">
       <div :class="'p-info'">
+        <!-- 头像 -->
         <el-avatar
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          :src="url"
           :size="70"
         ></el-avatar>
+        <!-- 文字信息 -->
         <div :class="['column', 'info-text']">
           <div :class="'nickname'">
             <p>昵称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -36,6 +38,7 @@
           </div>
         </div>
       </div>
+      <!-- 确认修改按钮 -->
       <div :class="'v-submit'">
         <el-button
           type="primary"
@@ -120,13 +123,15 @@ export default {
         roleId: 4,
         slogan: "努力！奋斗！",
       },
+      // avatar
+      url: 'https://47.100.89.20'+store.getters.user.avatar
     };
   },
-  mounted(){
-    this.account=store.getters.user;
-  }
-  ,
+  mounted() {
+    this.account = store.getters.user;
+  },
   methods: {
+    // 修改个人信息（目前仅限昵称和个性签名）
     updateInfo(account) {
       putInfo(account).then((response) => {
         if (response.data.code == 200) {
@@ -136,8 +141,7 @@ export default {
             duration: 2000,
           });
           this.$router.push({ path: this.redirect || "/info" });
-        }
-        else{
+        } else {
           this.$message({
             message: "保存失败，请重试",
             type: "error",

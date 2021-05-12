@@ -1,5 +1,5 @@
 <!-- 
- * @description: 晒研论坛-个人信息
+ * @description: 晒研论坛-个人信息卡片
  * @fileName: card.vue 
  * @author: NoMornings 
  * @date: 2021-05-06 21:42:17 
@@ -12,16 +12,19 @@
     <!-- 个人信息 -->
     <div :class="'title'">
       <div :class="'p-info'">
+        <!-- 头像 -->
         <el-avatar
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          :src="url"
           :size="70"
         ></el-avatar>
+        <!-- 文字信息 -->
         <div :class="['column', 'info-text']">
           <p :class="'nickname'" v-cloak>昵称：{{ nickname }}</p>
           <p :class="'user-id'" v-cloak>ID：{{ userId }}</p>
           <p :class="'slogan'" v-cloak>个性签名：{{ slogan }}</p>
         </div>
       </div>
+      <!-- 编辑按钮 -->
       <div :class="'v-edit'">
         <el-button
           type="info"
@@ -37,7 +40,7 @@
 
     <!-- 个人收藏 -->
     <div :class="['wrap', 'columns']">
-      <div :class="['blog', 'column is-three-quarters']" >
+      <div :class="['blog', 'column is-three-quarters']">
         <span :class="'collection'">我的收藏</span>
         <span :class="'my-blog'">我的帖子</span>
         <div
@@ -49,20 +52,27 @@
             <el-tag :type="getType(item.type)">{{
               getType(item.moduleId)
             }}</el-tag>
-            <el-link :underline="false" class="is-size-6" @click="detailById(item.id)">
+            <el-link
+              :underline="false"
+              class="is-size-6"
+              @click="detailById(item.id)"
+            >
               {{ Substr(item.title, 0, 35) }}
             </el-link>
-            <el-button 
-              type="danger" 
-              icon="el-icon-delete" 
-              circle 
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
               class="del"
-              @click="delCollection(item.id)"></el-button>
+              @click="delCollection(item.id)"
+            ></el-button>
           </div>
           <el-divider></el-divider>
         </div>
         <!-- 收藏到底提示 -->
-        <div :class="'v-end'">{{blogList.length==0?"你还没有收藏哦":"收藏已经到底啦"}}</div>
+        <div :class="'v-end'">
+          {{ blogList.length == 0 ? "你还没有收藏哦" : "收藏已经到底啦" }}
+        </div>
       </div>
 
       <!-- 考研倒计时 -->
@@ -79,7 +89,7 @@ $grey: #9b9b9b;
 $opacity: 0.8;
 $size: 50px;
 
-.del{
+.del {
   float: right;
 }
 
@@ -160,7 +170,7 @@ export default {
   },
   data() {
     return {
-      userInfo:{},
+      userInfo: {},
       nickname: "烤盐人",
       userId: "123456",
       slogan: "努力！奋斗！",
@@ -172,6 +182,8 @@ export default {
         total: 0, //后台总的文章数
       },
       blogListTitle: [],
+      // avatar
+      url: 'https://47.100.89.20'+store.getters.user.avatar
     };
   },
   created() {
@@ -179,10 +191,10 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.load);
-    this.userInfo=store.getters.user;
-    this.nickname=this.userInfo.nickname;
-    this.userId=this.userInfo.name;
-    this.slogan=this.userInfo.slogan;
+    this.userInfo = store.getters.user;
+    this.nickname = this.userInfo.nickname;
+    this.userId = this.userInfo.name;
+    this.slogan = this.userInfo.slogan;
   },
   destroyed() {
     window.removeEventListener("scroll", this.load, false);
@@ -252,8 +264,8 @@ export default {
             message: "取消收藏成功！",
             type: "success",
           });
-          this.page.current=1
-          this.init()
+          this.page.current = 1;
+          this.init();
         }
       });
     },

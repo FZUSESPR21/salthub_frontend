@@ -8,7 +8,7 @@
 </template>
 
 <style scoped>
-p{
+p {
   font-size: 24px;
   margin: 10px 20px;
   display: inline-block;
