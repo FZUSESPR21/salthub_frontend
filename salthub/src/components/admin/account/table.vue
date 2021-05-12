@@ -14,7 +14,7 @@
       <div class="v-search">
         <div>
           <el-input
-            placeholder="搜索用户"
+            placeholder="请输入用户ID"
             v-model="input"
             clearable
             @keyup.enter.native="convert()"
@@ -42,8 +42,8 @@
               <el-form-item label="用户昵称">
                 <span>{{ props.row.nickname }}</span>
               </el-form-item>
-              <el-form-item label="用户 ID">
-                <span>{{ props.row.id }}</span>
+              <el-form-item label="个性签名">
+                <span>{{ props.row.slogan }}</span>
               </el-form-item>
               <el-form-item label="email">
                 <span>{{ props.row.email }}</span>
@@ -244,6 +244,7 @@ export default {
             nickname: "",
             id: "",
             blog: "",
+            slogan: "",
             status: "",
             email: "",
             auth: 4,
@@ -252,8 +253,10 @@ export default {
           this.tableData[0].nickname = info.nickname;
           // 用户ID
           this.tableData[0].id = info.name;
-          // 最新发帖
+          // 最新发帖（待完善）
           this.tableData[0].blog = info.slogan;
+          // 个性签名
+          this.tableData[0].slogan = info.slogan;
           // 状态（ 正常 | 封禁 | 注销 ）
           this.tableData[0].status = this.judgeStatus(info.roleId);
           // 邮箱
@@ -327,6 +330,7 @@ export default {
             nickname: "",
             id: "",
             blog: "",
+            slogan: "",
             status: "",
             email: "",
             auth: 4,
@@ -337,6 +341,8 @@ export default {
           this.tableData[i].id = info[i].name;
           // 最新发帖
           this.tableData[i].blog = info[i].slogan;
+          // 个性签名
+          this.tableData[i].slogan = info[i].slogan;
           // 状态（ 正常 | 封禁 | 注销 ）
           this.tableData[i].status = this.judgeStatus(info[i].roleId);
           // 邮箱
