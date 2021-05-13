@@ -9,26 +9,20 @@
 !-->
 <template>
   <header class="header has-background-white has-text-black">
-    <b-navbar
-      class="is-white"
-      :fixed-top="true"
-    >
+    <b-navbar class="is-white" :fixed-top="true">
       <template slot="brand">
         <div class="imglogo" v-for="fit in fits" :key="fit">
           <el-image
             style="width: 150px; height: 40px"
             class="mt-2"
             :src="logoImg"
-            :fit="fit"></el-image>
+            :fit="fit"
+          ></el-image>
         </div>
       </template>
       <template slot="start">
-        <b-navbar-item
-          tag="router-link"
-          :to="{ path: '/home' }"
-          class="px-5"
-        >
-           首页
+        <b-navbar-item tag="router-link" :to="{ path: '/home' }" class="px-5">
+          首页
         </b-navbar-item>
 
         <b-navbar-item
@@ -36,23 +30,15 @@
           :to="{ path: '/community' }"
           class="px-5"
         >
-           社区
+          社区
         </b-navbar-item>
 
-        <b-navbar-item
-          tag="router-link"
-          :to="{ path: '/home' }"
-          class="px-5"
-        >
-           资讯
+        <b-navbar-item tag="router-link" :to="{ path: '/home' }" class="px-5">
+          资讯
         </b-navbar-item>
 
-        <b-navbar-item
-          tag="router-link"
-          :to="{ path: '/home' }"
-          class="px-5"
-        >
-           树洞
+        <b-navbar-item tag="router-link" :to="{ path: '/home' }" class="px-5">
+          树洞
         </b-navbar-item>
       </template>
 
@@ -70,70 +56,38 @@
 
             <p class="control">
               <el-button
-                type="primary" 
+                type="primary"
                 size="medium"
                 round
                 icon="el-icon-search"
                 @click="search()"
-              >搜索
+                >搜索
               </el-button>
             </p>
           </b-field>
         </b-navbar-item>
 
-        <b-navbar-item tag="div" 
-          @click="toInfo()" 
-          class="mx-5">
-            <el-button type="info" icon="el-icon-message" circle></el-button>
+        <b-navbar-item tag="div" @click="toInfo()" class="mx-5">
+          <el-button type="info" icon="el-icon-message" circle></el-button>
         </b-navbar-item>
 
-        <b-navbar-item 
-          v-if="token == null || token === ''">
+        <b-navbar-item v-if="token == null || token === ''"> </b-navbar-item>
 
+        <b-navbar-item @click="toInfo()" class="mr-5" v-else>
+          <img :src="Url" class="avatar" />
         </b-navbar-item>
 
-        <b-navbar-item 
-          @click="toInfo()" 
-          class="mr-5" 
-          v-else>
-          <img
-            :src="Url"
-            class="avatar"
-          />
-        </b-navbar-item>
-
-
-        <b-navbar-item
-          v-if="token == null || token === ''"
-          tag="div"
-        >
+        <b-navbar-item v-if="token == null || token === ''" tag="div">
           <div class="buttons">
-            <b-button
-              class="is-light"
-              @click="toRegister()">
-              注册
-            </b-button>
-            <b-button
-              class="is-light"
-              @click="toLogin()">
-              登录
-            </b-button>
+            <b-button class="is-light" @click="toRegister()"> 注册 </b-button>
+            <b-button class="is-light" @click="toLogin()"> 登录 </b-button>
           </div>
         </b-navbar-item>
 
-        <b-navbar-dropdown
-          v-else
-          class="nav-d"
-        >
-          <b-navbar-item @click="toInfo()">
-            个人中心
-          </b-navbar-item>
-          <hr class="dropdown-divider">
-          <b-navbar-item
-            tag="a"
-            @click="logout">
-            退出登录
-          </b-navbar-item>
+        <b-navbar-dropdown v-else class="nav-d">
+          <b-navbar-item @click="toInfo()"> 个人中心 </b-navbar-item>
+          <hr class="dropdown-divider" />
+          <b-navbar-item tag="a" @click="logout"> 退出登录 </b-navbar-item>
         </b-navbar-dropdown>
       </template>
     </b-navbar>
@@ -141,48 +95,51 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import 'buefy/dist/buefy.css'
-import store from '@/store'
+import { mapGetters } from "vuex";
+import "buefy/dist/buefy.css";
+import store from "@/store";
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
-      logoImg: require('@/assets/ForumLogo.png'),
-      fits: ['cover'],
-      searchKey: '',
-      Url: 'https://47.100.89.20',
-    }
+      logoImg: require("@/assets/ForumLogo.png"),
+      fits: ["cover"],
+      searchKey: "",
+      Url:
+        store.getters.user == null
+          ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          : "https://47.100.89.20" + store.getters.user.avatar,
+    };
   },
   computed: {
-    ...mapGetters(['token', 'user'])
+    ...mapGetters(["token", "user"]),
   },
-  created() {
-    //有token时候加上头像地址
-    if(this.token !== null || this.token != ''){
-      this.Url = this.Url + store.getters.user.avatar
-    }
-    // console.log(store.getters.user)
-    // console.log(JSON.parse(sessionStorage.getItem('user')))
-  },
+  // created() {
+  //   //有token时候加上头像地址
+  //   if (this.token !== null || this.token != "") {
+  //     this.Url = "https://47.100.89.20" + store.getters.user.avatar;
+  //   }
+  //   // console.log(store.getters.user)
+  //   // console.log(JSON.parse(sessionStorage.getItem('user')))
+  // },
   methods: {
     /**
-     *@functionName:    toRegister 
+     *@functionName:    toRegister
      *@description: 跳转注册页面
      *@author: lw
      *@date: 2021-05-01 14:59:52
      *@version: V1.0.0
-    */
+     */
     toRegister() {
       this.$router.push({ path: this.redirect || "/register" });
     },
     /**
-     *@functionName:    toLogin 
+     *@functionName:    toLogin
      *@description: 跳转登录页面
      *@author: xiaohan
      *@date: 2021-05-01 17:00:03
      *@version: V1.0.0
-    */
+     */
     toLogin() {
       this.$router.push({ path: this.redirect || "/login" });
     },
@@ -192,16 +149,16 @@ export default {
      *@author: xiaohan
      *@date: 2021-05-03 00:25:49
      *@version: V1.0.0
-    */
-    search(){
-      if (this.searchKey.trim() === null || this.searchKey.trim() === '') {
+     */
+    search() {
+      if (this.searchKey.trim() === null || this.searchKey.trim() === "") {
         this.$message({
-          message: '请输入关键字搜索',
-          type: 'error'
+          message: "请输入关键字搜索",
+          type: "error",
         });
-        return false
+        return false;
       }
-      this.$router.push({ path: '/Search?key=' + this.searchKey })
+      this.$router.push({ path: "/Search?key=" + this.searchKey });
     },
     /**
      *@functionName: logout
@@ -209,16 +166,14 @@ export default {
      *@author: xiaohan
      *@date: 2021-05-03 00:28:03
      *@version: V1.0.0
-    */
+     */
     logout() {
-      this.$store
-        .dispatch("user/logout")
-        .then(() => {
-          this.$message.info('退出登录成功')
-          setTimeout(() => {
-            this.$router.push({ path: this.redirect || '/home' })
-          }, 500)
-        })
+      this.$store.dispatch("user/logout").then(() => {
+        this.$message.info("退出登录成功");
+        setTimeout(() => {
+          this.$router.push({ path: this.redirect || "/home" });
+        }, 500);
+      });
     },
     /**
      *@functionName: toInfo
@@ -226,12 +181,12 @@ export default {
      *@author: NoMornings
      *@date: 2021-05-07 14:09:03
      *@version: V1.0.0
-    */
+     */
     toInfo() {
       this.$router.push({ path: this.redirect || "/info" });
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -245,6 +200,6 @@ input {
 .avatar {
   width: 25px;
   height: 25px;
-  border-radius:15px;
+  border-radius: 15px;
 }
 </style>
