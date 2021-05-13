@@ -105,7 +105,10 @@ export default {
       comments: [],
       buttonState: "评论",
       // avatar
-      url: "https://47.100.89.20" + store.getters.user.avatar,
+      url:
+        store.getters.user == null
+          ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          : "https://47.100.89.20" + store.getters.user.avatar,
     };
   },
   created() {
