@@ -77,6 +77,8 @@ export default {
     this.title = this.paper.title;
     this.content = this.Substr(this.paper.content, 0, 400);
     this.id = this.paper.id;
+  },
+  mounted(){
     this.getTag();
   },
   data() {
@@ -108,7 +110,7 @@ export default {
     emitId(value) {
       this.$emit("id", value);
     },
-    getTag() {
+    async getTag() {
       getTagById(this.id).then((response) => {
         const { data } = response;
         if (data.code == "200") {

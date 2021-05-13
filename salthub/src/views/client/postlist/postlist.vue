@@ -13,34 +13,40 @@
       <div slot="header">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="推荐" name="commendest">
-            <article-list
-              v-for="(item, index) in articleList"
-              :key="index"
-              v-bind:paper="item"
-              @tag='searchByTag'
-              @id="detailById"
-            >
-            </article-list>
+            <div v-if="activeName === 'commendest'">
+              <article-list
+                v-for="(item, index) in articleList"
+                :key="index"
+                v-bind:paper="item"
+                @tag='searchByTag'
+                @id="detailById"
+              >
+              </article-list>
+            </div>
           </el-tab-pane>
           <el-tab-pane label="热榜" name="hotest">
-            <article-list
-              v-for="(item, index) in articleList"
-              :key="index"
-              v-bind:paper="item"
-              @tag='searchByTag'
-              @id="detailById"
-            >
-            </article-list>
+            <div v-if="activeName === 'hotest'">
+              <article-list
+                v-for="(item, index) in articleList"
+                :key="index"
+                v-bind:paper="item"
+                @tag='searchByTag'
+                @id="detailById"
+              >
+              </article-list>
+            </div>
           </el-tab-pane>
           <el-tab-pane label="精品" name="best">
-            <article-list
-              v-for="(item, index) in articleList"
-              :key="index"
-              v-bind:paper="item"
-              @tag='searchByTag'
-              @id="detailById"
-            >
-            </article-list>
+            <div v-if="activeName === 'best'">
+              <article-list
+                v-for="(item, index) in articleList"
+                :key="index"
+                v-bind:paper="item"
+                @tag='searchByTag'
+                @id="detailById"
+              >
+              </article-list>
+            </div>
           </el-tab-pane>
         </el-tabs>
       </div>

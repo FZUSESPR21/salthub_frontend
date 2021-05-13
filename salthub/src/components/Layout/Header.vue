@@ -201,7 +201,7 @@ export default {
         });
         return false
       }
-      this.$router.push({ path: '/Search?key=' + this.searchKey })
+      //this.$router.push({ path: '/Search?key=' + this.searchKey })
     },
     /**
      *@functionName: logout
