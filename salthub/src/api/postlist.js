@@ -65,3 +65,19 @@ export function getCollectList(pageNo) {
     params: { current: pageNo}
   }))
 }
+
+/*
+ *@functionName: getSearchList
+ *@params1: pageNo 当前页码 keyword:模糊查询关键字
+ *@description:获取收藏文章列表
+ *@author: xiaohan
+ *@date: 2021-05-13 23:50:19
+ *@version: V1.0.0
+*/
+export function getSearchList(pageNo,keyword) {
+  return request(({
+    url: '/blog/title',
+    method: 'get',
+    params: { current: pageNo, title:keyword}
+  }))
+}

@@ -48,7 +48,7 @@
             <el-input
               v-model="searchKey"
               class="s_input mx-5"
-              placeholder="搜索帖子、标签"
+              placeholder="搜索帖子"
               rounded
               clearable
               @keyup.enter.native="search()"
@@ -67,7 +67,7 @@
           </b-field>
         </b-navbar-item>
 
-        <b-navbar-item tag="div" @click="toInfo()" class="mx-5">
+        <b-navbar-item tag="div" class="mx-5">
           <el-button type="info" icon="el-icon-message" circle></el-button>
         </b-navbar-item>
 
@@ -158,7 +158,7 @@ export default {
         });
         return false;
       }
-      //this.$router.push({ path: '/Search?key=' + this.searchKey })
+      this.$router.push({ path: '/Search?key=' + this.searchKey })
     },
     /**
      *@functionName: logout

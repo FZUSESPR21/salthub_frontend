@@ -10,8 +10,14 @@
 <template>
   <div>
     <div slot="header" class="clearfix">
-      <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card" :key="componentKey">
+      <el-tabs
+        v-model="activeName"
+        @tab-click="handleClick"
+        type="border-card"
+        :key="componentKey"
+      >
         <el-tab-pane label="福大" name="fzu">
+          <div v-if="activeName === 'fzu'">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
@@ -20,8 +26,10 @@
               @id="detailById"
             >
             </article-list>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="外校" name="otherschool">
+          <div v-if="activeName === 'otherschool'">
             <article-list
               v-for="(item, index) in articleList"
               :key="index"
@@ -30,26 +38,31 @@
               @id="detailById"
             >
             </article-list>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="杂谈" name="nonsense">
-          <article-list
-            v-for="(item, index) in articleList"
-            :key="index"
-            v-bind:paper="item"
-            @tag="searchByTag"
-            @id="detailById"
-          >
-          </article-list>
+          <div v-if="activeName === 'nonsense'">
+            <article-list
+              v-for="(item, index) in articleList"
+              :key="index"
+              v-bind:paper="item"
+              @tag="searchByTag"
+              @id="detailById"
+            >
+            </article-list>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="拼课" name="freeclass">
-          <article-list
-            v-for="(item, index) in articleList"
-            :key="index"
-            v-bind:paper="item"
-            @tag="searchByTag"
-            @id="detailById"
-          >
-          </article-list>
+          <div v-if="activeName === 'freeclass'">
+            <article-list
+              v-for="(item, index) in articleList"
+              :key="index"
+              v-bind:paper="item"
+              @tag="searchByTag"
+              @id="detailById"
+            >
+            </article-list>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -86,7 +99,7 @@ export default {
         totalpage: 1, //总的页面数量
       },
       modules: 0, //默认的tab是福州大学
-      componentKey: 0,//用于刷新组件
+      componentKey: 0, //用于刷新组件
     };
   },
   created() {
@@ -116,9 +129,9 @@ export default {
       console.log(id);
       let routeData = this.$router.resolve({
         path: "/Detail",
-        query: {key: id}
+        query: { key: id },
       });
-      window.open(routeData.href, '_blank');
+      window.open(routeData.href, "_blank");
     },
     //加载帖子列表
     init(tab) {
@@ -145,7 +158,7 @@ export default {
           this.page.totalpage = data.data.pages;
           this.articleList = data.data.records;
           //异步加载完文章列表之后 重新渲染tab pane
-          this.forceRerender()
+          this.forceRerender();
         } else {
           //将后面页码的数据和之前的数据拼合
           for (let i in data.data.records) {
@@ -169,14 +182,14 @@ export default {
       }
     },
     /**
-     *@functionName:  forceRerender 
+     *@functionName:  forceRerender
      *@description: 改变key值，重新渲染组件
      *@author: xiaohan
      *@date: 2021-05-05 13:31:54
      *@version: V1.0.0
-    */
+     */
     forceRerender() {
-      this.componentKey += 1;  
+      this.componentKey += 1;
     },
   },
 };
