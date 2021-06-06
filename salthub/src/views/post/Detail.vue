@@ -68,9 +68,12 @@
             </el-main>
             <el-footer height="120px">
               <div style="float: right">
-                <el-button round style="background-color: #ff4949; color: white"
-                  >点赞</el-button
-                >
+                <el-button
+                  round
+                  style="background-color: #ff4949; color: white"
+                  @click="thumb()"
+                >{{thumbname}}
+                </el-button>
                 <el-button
                   type="warning"
                   icon="el-icon-star-off"
@@ -79,7 +82,11 @@
                 ></el-button>
                 <br />
                 <span style="font-size: 15px">{{ blog.releaseTime }}</span>
-                <el-button type="text" style="color: black">举报</el-button>
+                <el-button
+                  type="text"
+                  style="color: black"
+                  @click="tipOff()"
+                >举报</el-button>
               </div>
             </el-footer>
           </el-container>
@@ -101,6 +108,8 @@ import Header from "@/components/Layout/Header";
 import { mapGetters } from "vuex";
 import { getBlogById } from "@/api/blog";
 import { collectBlog } from "@/api/blog";
+import { tipOffBlog } from '@/api/blog'
+import { thumbBlog } from '@/api/blog'
 import CreateComment from "@/components/Comment/CreateComment";
 import Comments from "@/components/Comment/Comments";
 import Vditor from "vditor";
@@ -130,6 +139,8 @@ export default {
       title: "",
       content: "",
       authorName: "",
+      canthumb: true,//是否可以点赞
+      thumbname: "点赞",
       // avatar
       url:
         store.getters.user == null
@@ -159,6 +170,55 @@ export default {
         if (data.code == "200") {
           this.$message({
             message: "收藏成功！",
+            type: "success",
+          });
+        }
+      });
+    },
+    /**
+     *@functionName:  thumb
+     *@description: 点赞
+     *@author: 原著作xiaohan、代码复用搬运庄威龙
+     *@date: 2021-06-06 11:40:08
+     *@version: V1.0.0
+     */
+    thumb() {
+      let params = {
+        blogId: this.getRequest().key,
+        flag: this.canthumb,
+      };
+      thumbBlog(params).then((response) => {
+        const { data } = response;
+        if (data.code == "200" && this.canthumb === true) {
+          this.$message({
+            message: "点赞成功！",
+            type: "success",
+          });
+          this.canthumb = false;
+          this.thumbname = "已点赞";
+        } else if (data.code == "200" && this.canthumb === false) {
+          this.$message({
+            message: "取消点赞成功！",
+            type: "success",
+          });
+          this.canthumb = true;
+          this.thumbname = "点赞";
+        }
+      });
+    },
+    /**
+     *@functionName:  tipOff
+     *@description: 举报
+     *@author: 庄威龙
+     *@date: 2021-6-6 15:15:41
+     *@version: V1.0.0
+     */
+    tipOff() {
+      tipOffBlog(this.getRequest().key).then((response) => {
+        const { data } = response;
+        if (data.code == "200") {
+          this.$message({
+            message: "举报成功！",
             type: "success",
           });
         }
