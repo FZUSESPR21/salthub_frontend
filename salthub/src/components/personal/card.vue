@@ -41,8 +41,8 @@
     <!-- 个人收藏 -->
     <div :class="['wrap', 'columns']">
       <div :class="['blog', 'column is-three-quarters']">
-        <span :class="'collection'">我的收藏</span>
-        <span :class="'my-blog'">我的帖子</span>
+        <span :class="'collection'" @click=" init() ">我的收藏</span>
+        <span :class="'my-blog'" @click=" mypost() ">我的帖子</span>
         <div
           :class="'blog-list'"
           v-for="(item, index) in blogList"
@@ -65,6 +65,15 @@
               circle
               class="del"
               @click="delCollection(item.id)"
+              v-if="flag === 1"
+            ></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              class="del"
+              @click="delBlog(item.id)"
+              v-if="flag === 0"
             ></el-button>
           </div>
           <el-divider></el-divider>
@@ -161,8 +170,8 @@ import CountDownCard from "@/views/client/card/CountDown";
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
-import { getCollectList } from "@/api/postlist";
-import { delCollect } from "@/api/blog";
+import { getCollectList,getMyList} from "@/api/postlist";
+import { delCollect , delBlog } from "@/api/blog";
 import store from "@/store";
 export default {
   components: {
@@ -183,7 +192,8 @@ export default {
       },
       blogListTitle: [],
       // avatar
-      url: 'https://47.100.89.20'+store.getters.user.avatar
+      url: 'https://47.100.89.20'+store.getters.user.avatar,
+      flag:1//记录是收藏还是用户发布的文章
     };
   },
   created() {
@@ -233,7 +243,36 @@ export default {
      *@version: V1.0.0
      */
     init() {
+      this.flag = 1
       getCollectList(this.page.current).then((response) => {
+        const { data } = response;
+        this.page.current = data.data.current;
+        if (this.page.current === 1) {
+          //请求第一页就直接赋值
+          this.page.total = data.data.total;
+          this.page.totalpage = data.data.pages;
+          this.blogList = data.data.records;
+        } else {
+          //将后面页码的数据和之前的数据拼合
+          for (let i in data.data.records) {
+            this.blogList.push(data.data.records[i]);
+          }
+        }
+      });
+    },
+    /**
+     *@functionName: mypost
+     *@description: 显示我的文章
+     *@author: xiaohan
+     *@date: 2021-05-019 13:50:24
+     *@version: V1.0.0
+     */
+    mypost() {
+      this.page.current = 1
+      this.page.totalpage = 1
+      this.page.total = 0
+      this.flag = 0
+      getMyList(this.userId,this.page.current).then((response) => {
         const { data } = response;
         this.page.current = data.data.current;
         if (this.page.current === 1) {
@@ -270,6 +309,26 @@ export default {
       });
     },
     /**
+     *@functionName: delBlog
+     *@description: 删除发布的帖子
+     *@author: xiaohan
+     *@date: 2021-05-019 14:07:24
+     *@version: V1.0.0
+     */
+    delBlog(id) {
+      delBlog(id).then((response) => {
+        const { data } = response;
+        if (data.code == "200") {
+          this.$message({
+            message: "删除帖子成功！",
+            type: "success",
+          });
+          this.page.current = 1;
+          this.mypost();
+        }
+      });
+    },
+    /**
      *@functionName: load
      *@description: 无限下拉
      *@author: xiaohan
@@ -285,7 +344,6 @@ export default {
           console.log(vm.page.current); //打印当前页码
           this.init(vm.activeName); //拉取数据
         } else {
-          this.$message("到底啦~看看前面的帖子吧");
         }
       }
     },

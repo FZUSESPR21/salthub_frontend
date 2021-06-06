@@ -81,3 +81,19 @@ export function getSearchList(pageNo,keyword) {
     params: { current: pageNo, title:keyword}
   }))
 }
+
+/*
+ *@functionName: getMyList
+ *@params1: pageNo 当前页码
+ *@description:获取我发布的文章列表
+ *@author: xiaohan
+ *@date: 2021-05-19 13:52:19
+ *@version: V1.0.0
+*/
+export function getMyList(name,pageNo) {
+  return request(({
+    url: '/blog/account',
+    method: 'post',
+    params: { account:name,current: pageNo}
+  }))
+}

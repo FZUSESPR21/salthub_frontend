@@ -20,15 +20,15 @@ export function postBlog(data) {
  *@functionName: delBlog
  *@param: data 删除文章信息
  *@description:
- *@author: lw
- *@date: 2021-04-30 08:45:28
+ *@author: xiaohan
+ *@date: 2021-05-19 14:05:28
  *@version: V1.0.0
 */
-export function delBlog(data) {
+export function delBlog(id) {
   return request({
     url: '/blog',
     method: 'delete',
-    data
+    params:{blogId:id}
   })
 }
 
