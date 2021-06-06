@@ -100,8 +100,9 @@
     <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
-          layout="prev, pager, next"
-          :total="this.tableDataAll.length"
+          layout="total, prev, pager, next"
+          :page-size="pageSize"
+          :total="total"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :current-size="pageSize"
@@ -177,7 +178,7 @@ export default {
       tableDataAll: [],
       total: 0,
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 20,
     };
   },
   mounted() {
@@ -267,27 +268,46 @@ export default {
       } else this.init();
     },
     handleCurrentChange: function (currentPage) {
-      console.log("handleCurrentChange()\n");
+      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      console.log("currentPage=" + currentPage + "\n");
-      var i;
-      for (
-        var i = (currentPage - 1) * 10, j = 0;
-        j < 10 &&
-        this.tableDataAll.length != 0 &&
-        i + j <= this.tableDataAll.length - 1;
-        j++, i++
-      ) {
-        console.log("i=" + i + "\n");
-        this.tableData.push(this.tableDataAll[i]);
-        console.log(
-          "this.tableDataAll[i]" + JSON.stringify(this.tableDataAll[i]) + "\n"
-        );
-      }
-      if (this.tableDataAll.length == 0) {
-        this.tableData = [];
-      }
+      // console.log("currentPage=" + currentPage + "\n");
+
+      //获取用户列表
+      getAccount({
+        //当前页码
+        current: this.currentPage,
+      }).then((response) => {
+        // console.log("account=>", response.data.data.records);
+        var len = response.data.data.records.length;
+        var info = response.data.data.records;
+        for (var i = 0; i < len; i++) {
+          this.tableData.push({
+            nickname: "",
+            id: "",
+            blog: "",
+            slogan: "",
+            status: "",
+            email: "",
+            auth: 4,
+          });
+          // 用户昵称
+          this.tableData[i].nickname = info[i].nickname;
+          // 用户ID
+          this.tableData[i].id = info[i].name;
+          // 最新发帖
+          this.tableData[i].blog = info[i].slogan;
+          // 个性签名
+          this.tableData[i].slogan = info[i].slogan;
+          // 状态（ 正常 | 封禁 | 注销 ）
+          this.tableData[i].status = this.judgeStatus(info[i].roleId);
+          // 邮箱
+          this.tableData[i].email = info[i].email;
+          // 权限
+          this.tableData[i].auth = this.judgeAuth(info[i].roleId);
+        }
+        this.tableData.pop();
+      });
     },
     // 判断用户权限
     judgeAuth(roleId) {
@@ -317,10 +337,16 @@ export default {
       else return "success";
     },
     init() {
+      // 获取用户个数
+      countAccount().then((response) => {
+        this.total = response.data.data;
+        // console.log("countAccount()=>", response.data.data);
+      });
+
       //获取用户列表
       getAccount({
         //当前页码
-        current: 1,
+        current: this.currentPage,
       }).then((response) => {
         // console.log("account=>", response.data.data.records);
         var len = response.data.data.records.length;
@@ -353,10 +379,6 @@ export default {
         this.tableData.pop();
       });
 
-      // 获取用户个数
-      // countAccount().then((response) => {
-      //   console.log("countAccount()=>", response.data.data);
-      // });
       // console.log("token=>", store.getters.token);
     },
     filterTag(value, row) {
