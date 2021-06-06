@@ -177,7 +177,6 @@ export default {
           console.log(vm.page.current); //打印当前页码
           this.init(vm.activeName); //拉取数据
         } else {
-          this.$message("到底啦~看看前面的帖子吧");
         }
       }
     },
