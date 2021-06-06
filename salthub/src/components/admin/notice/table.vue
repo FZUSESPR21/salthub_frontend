@@ -77,8 +77,9 @@
     <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
-          layout="prev, pager, next"
-          :total="this.tableDataAll.length"
+          layout="total, prev, pager, next"
+          :total="total"
+          :page-size="pageSize"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :current-size="pageSize"
@@ -150,7 +151,7 @@ export default {
       tableDataAll: [],
       total: 0,
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 20,
     };
   },
   mounted() {
@@ -186,27 +187,43 @@ export default {
     },
     convert() {},
     handleCurrentChange: function (currentPage) {
-      console.log("handleCurrentChange()\n");
+      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      console.log("currentPage=" + currentPage + "\n");
-      var i;
-      for (
-        var i = (currentPage - 1) * 10, j = 0;
-        j < 10 &&
-        this.tableDataAll.length != 0 &&
-        i + j <= this.tableDataAll.length - 1;
-        j++, i++
-      ) {
-        console.log("i=" + i + "\n");
-        this.tableData.push(this.tableDataAll[i]);
-        console.log(
-          "this.tableDataAll[i]" + JSON.stringify(this.tableDataAll[i]) + "\n"
-        );
-      }
-      if (this.tableDataAll.length == 0) {
-        this.tableData = [];
-      }
+      // console.log("currentPage=" + currentPage + "\n");
+
+      //获取所有公告
+      getAllNotice({
+        //当前页码
+        current: currentPage,
+      }).then((response) => {
+        // console.log("notice=>", response.data.data.records);
+        var len = response.data.data.records.length;
+        var info = response.data.data.records;
+        for (var i = 0; i < len; i++) {
+          this.tableData.push({
+            releaseTime: "",
+            id: "",
+            blog: "",
+            noticeId: "",
+            content: "",
+            accountName: "",
+          });
+          // 发布时间
+          this.tableData[i].releaseTime = info[i].releaseTime;
+          // 管理员ID
+          this.tableData[i].id = info[i].author;
+          // 通知标题
+          this.tableData[i].blog = info[i].title;
+          // 公告ID
+          this.tableData[i].noticeId = info[i].id;
+          // 内容
+          this.tableData[i].content = info[i].content;
+          // 用户名
+          this.tableData[i].accountName = info[i].accountName;
+        }
+        this.tableData.pop();
+      });
     },
     init() {
       //获取所有公告

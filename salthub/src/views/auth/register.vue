@@ -47,21 +47,13 @@
               v-if="!waitMailCode"
               class="code"
               type="primary"
-              @click="getCode()"
+              @click="checkEmail()"
               >获取验证码</el-button
             >
             <el-button v-if="waitMailCode" class="code" type="primary" disabled
               >{{ waitTime }} 秒后重新获取</el-button
             >
           </el-form-item>
-          <transition name="fade">
-            <SliderCheck
-              v-show="sliderShown"
-              class="formItem"
-              :successFun="successVerified"
-              :errorFun="errorVerified"
-            ></SliderCheck>
-          </transition>
 
           <el-form-item label="验证码">
             <el-input style="width: 55%" v-model="ruleForm.code" />
@@ -206,32 +198,61 @@ export default {
       this.$refs[formName].resetFields();
     },
     /**
-     *@functionName:  checkEmail 
+     *@functionName:  checkEmail
      *@description: 检查邮箱可用性
      *@author: lw
      *@date: 2021-05-04 14:48:47
      *@version: V1.0.0
-    */
+     */
     checkEmail() {
       var email = {
         email: this.ruleForm.mailbox,
       };
-      getEmailStatus(email)   //调用接口，传入参数
+      getEmailStatus(email) //调用接口，传入参数
         .then((response) => {
-          var res = response.data
+          var res = response.data;
           if (res.data === false) {
-            console.log("可使用该邮箱")
-            this.mailAvailable = true
-          }
-          else if (this.ruleForm.mailbox === "") {
+            console.log("可使用该邮箱");
+            this.mailAvailable = true;
+            this.getCode();
+          } else if (this.ruleForm.mailbox === "") {
             this.$message.error("邮箱不能为空");
-          }
-          else {
-            console.log("邮箱不可使用")
+          } else {
+            this.mailAvailable = false;
+            console.log(this.mailAvailable)
+            console.log("邮箱不可使用");
             this.$message.error("该邮箱不能注册");
-            this.mailAvailable = false
           }
-        })
+        });
+    },
+    /**
+     *@functionName: varify
+     *@description: 滑块验证
+     *@author: lw
+     *@date: 2021-06-06 19:25:26
+     *@version: V1.0.0
+     */
+    varify() {
+      let appid = "2065604160"; // 腾讯云控制台中对应这个项目的 appid
+      var _this = this;
+      //生成一个滑块验证码对象
+      let captcha = new TencentCaptcha(appid, function (res) {
+        // 用户滑动结束或者关闭弹窗，腾讯返回的内容
+        // console.log(res);
+        if (res.ret === 0) {
+          //成功，传递数据给后台进行验证
+          setTrue();
+        } else {
+          // 提示用户完成验证
+        }
+      });
+      function setTrue() {
+        _this.isVerified = true;
+        // console.log(_this == this)
+        // console.log(abc)
+      }
+      // 滑块显示
+      captcha.show();
     },
     /**
      *@functionName: getCode
@@ -243,27 +264,32 @@ export default {
     getCode() {
       var verify = /^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
       // console.log(this.waitMailCode);
-      this.checkEmail(this.ruleForm.mailbox)
-      this.sliderShown = true;
-      if (verify.test(this.ruleForm.mailbox) && this.isVerified && this.mailAvailable) {
-        //通过邮箱格式验证且通过人机验证
-        // console.log('验证成功')
-        (this.waitTime = 60), (this.waitMailCode = true);
-        var timer = setInterval(() => {
-          this.waitTime--;
-          if (this.waitTime <= 0) {
-            this.waitMailCode = false;
-            clearInterval(timer);
-          }
-        }, 1000);
-        var email = {
-          email: this.ruleForm.mailbox,
-        };
-        getMailCode(email)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch(() => {});
+      // this.checkEmail(this.ruleForm.mailbox);
+      // console.log(this.mailAvailable)
+      if (verify.test(this.ruleForm.mailbox)) {
+        //通过邮箱格式验证
+        if (this.isVerified) {
+          //通过人机验证
+          // console.log('验证成功')
+          (this.waitTime = 60), (this.waitMailCode = true);
+          var timer = setInterval(() => {
+            this.waitTime--;
+            if (this.waitTime <= 0) {
+              this.waitMailCode = false;
+              clearInterval(timer);
+            }
+          }, 1000);
+          var email = {
+            email: this.ruleForm.mailbox,
+          };
+          getMailCode(email)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch(() => {});
+        } else {
+          this.varify();
+        }
       } else {
         console.log(this.waitMailCode);
         console.log("验证失败");

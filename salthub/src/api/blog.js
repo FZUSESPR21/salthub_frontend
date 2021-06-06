@@ -34,7 +34,7 @@ export function delBlog(id) {
 
 
 /**
- *@functionName: putBlog 
+ *@functionName: putBlog
  *@param: data 修改文章信息
  *@description:
  *@author: lw
@@ -71,7 +71,7 @@ export function getBlogById(params) {
   return request({
     url: '/blog',
     method: 'get',
-    params 
+    params
   })
 }
 
@@ -85,7 +85,7 @@ export function getBlogByAccount(params) {
 
 /**
  *@functionName: collectBlog
- *@param: data 文章id 
+ *@param: data 文章id
  *@description:收藏文章
  *@author: xiaohan
  *@date: 2021-05-04 20:50:41
@@ -101,7 +101,7 @@ export function collectBlog(id) {
 
 /**
  *@functionName: thumbBlog
- *@param: data 文章id 
+ *@param: data 文章id
  *@description:点赞文章
  *@author: xaiohan
  *@date: 2021-05-06 21:53:41
@@ -145,4 +145,20 @@ export function delCollect(id) {
     method: 'delete',
     params: {id:id}
   }))
+}
+
+/**
+ *@functionName: tipOffBlog
+ *@param: data 文章id
+ *@description:举报文章
+ *@author: 庄威龙
+ *@date: 2021-6-6 9:58:41
+ *@version: V1.0.0
+*/
+export function tipOffBlog(id) {
+  return request({
+    url: '/tipOff',
+    method: 'post',
+    params:{id:id}
+  })
 }
