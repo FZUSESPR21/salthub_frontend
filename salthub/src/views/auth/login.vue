@@ -52,12 +52,10 @@
 
 <script>
 import SliderCheck from "@/components/auth/SliderCheck";
-import TxCheck from "@/components/auth/TxCheck";
 export default {
   name: "login",
   components: {
     SliderCheck,
-    TxCheck,
   },
   data() {
     return {
@@ -142,14 +140,13 @@ export default {
       this.$router.push({ path: this.redirect || "/forgetpwd" });
     },
     /**
-     *@functionName:    显示slider
-     *@description: 点击登录 显示slider进行人机验证
+     *@functionName: submit    
+     *@description: 点击登录 
      *@author: lw
      *@date: 2021-05-02 17:50:39
      *@version: V1.0.0
      */
     submit(form) {
-      this.sliderShown = true;
       console.log(this.isVerified);
       if (this.isVerified == true) {
         this.submitForm(form);
@@ -158,6 +155,13 @@ export default {
         this.varify()
       }
     },
+    /**
+     *@functionName: varify  
+     *@description: 滑块验证
+     *@author: lw
+     *@date: 2021-06-06 19:25:26
+     *@version: V1.0.0
+    */
     varify() {
       let appid = "2065604160"; // 腾讯云控制台中对应这个项目的 appid
       var _this = this;
