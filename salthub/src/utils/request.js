@@ -11,8 +11,8 @@ const service = axios.create({
 
   //demo接口url
   baseURL: 'https://47.100.89.20',
-  //新接口url
-  // baseURL: 'https://'
+  //build
+  // baseURL: 'https://localhost',
 
   // 超时时间 单位是ms，这里设置了5s的超时时间
   timeout: 5 * 1000,
@@ -63,8 +63,17 @@ service.interceptors.response.use(
     const res = response.data
     // 如果自定义代码不是200，则将其判断为错误。529为帖子未设置标签 不判定为error
     if (res.code !== 200 && res.code !== 5210) {
+      //Sql XSS攻击报错
+      if (res.code === 301) {
+        Message({
+          showClose: true,
+          message: '恶意攻击是不行的o～',
+          type: 'error',
+          duration: 2 * 1000
+        })
+      }
       // 401--Unauthorized  , 403--Forbidden 跳转至登录页面
-      if (res.code === 401 || res.code === 403) {
+      else if (res.code === 401 || res.code === 403) {
         // 重新登录
         MessageBox.confirm('会话失效，您可以留在当前页面，或重新登录', '权限不足', {
           confirmButtonText: '确定',

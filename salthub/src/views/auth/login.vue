@@ -37,14 +37,6 @@
             <a style="float: right" @click="toForgetPwd()">忘记密码？</a>
           </el-form-item>
 
-          <transition name="fade">
-            <SliderCheck
-              v-show="sliderShown"
-              class="formItem"
-              :successFun="successVerified"
-              :errorFun="errorVerified"
-            ></SliderCheck>
-          </transition>
           <el-form-item>
             <el-button class="submit" type="primary" @click="submit('ruleForm')"
               >登录</el-button
@@ -60,10 +52,12 @@
 
 <script>
 import SliderCheck from "@/components/auth/SliderCheck";
+import TxCheck from "@/components/auth/TxCheck";
 export default {
   name: "login",
   components: {
     SliderCheck,
+    TxCheck,
   },
   data() {
     return {
@@ -160,6 +154,31 @@ export default {
       if (this.isVerified == true) {
         this.submitForm(form);
       }
+      else {
+        this.varify()
+      }
+    },
+    varify() {
+      let appid = "2065604160"; // 腾讯云控制台中对应这个项目的 appid
+      var _this = this;
+      //生成一个滑块验证码对象
+      let captcha = new TencentCaptcha(appid, function (res) {
+        // 用户滑动结束或者关闭弹窗，腾讯返回的内容
+        // console.log(res);
+        if (res.ret === 0) {
+          //成功，传递数据给后台进行验证
+          setTrue()
+        } else {
+          // 提示用户完成验证
+        }
+      });
+      function setTrue() {
+        _this.isVerified = true;
+        // console.log(_this == this)
+        // console.log(abc)
+      }
+      // 滑块显示
+      captcha.show();
     },
     /**
      *@functionName:    successVerified
