@@ -79,7 +79,11 @@
                 ></el-button>
                 <br />
                 <span style="font-size: 15px">{{ blog.releaseTime }}</span>
-                <el-button type="text" style="color: black">举报</el-button>
+                <el-button
+                  type="text"
+                  style="color: black"
+                  @click="tipOff()"
+                >举报</el-button>
               </div>
             </el-footer>
           </el-container>
@@ -101,6 +105,7 @@ import Header from "@/components/Layout/Header";
 import { mapGetters } from "vuex";
 import { getBlogById } from "@/api/blog";
 import { collectBlog } from "@/api/blog";
+import { tipOffBlog } from '@/api/blog'
 import CreateComment from "@/components/Comment/CreateComment";
 import Comments from "@/components/Comment/Comments";
 import Vditor from "vditor";
@@ -159,6 +164,24 @@ export default {
         if (data.code == "200") {
           this.$message({
             message: "收藏成功！",
+            type: "success",
+          });
+        }
+      });
+    },
+    /**
+     *@functionName:  tipOff
+     *@description: 举报
+     *@author: 庄威龙
+     *@date: 2021-6-6 11:15:41
+     *@version: V1.0.0
+     */
+    tipOff() {
+      tipOffBlog(this.getRequest().key).then((response) => {
+        const { data } = response;
+        if (data.code == "200") {
+          this.$message({
+            message: "举报成功！",
             type: "success",
           });
         }
