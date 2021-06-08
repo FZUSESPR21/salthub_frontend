@@ -15,12 +15,12 @@
           class="demo-ruleForm"
         >
           <el-form-item label="账号" prop="name" class="btn-content">
-            <el-input style="width: 80%" v-model="ruleForm.name"></el-input>
+            <el-input style="width: 76%" v-model="ruleForm.name"></el-input>
           </el-form-item>
 
           <el-form-item label="密码" prop="password" class="btn-content">
             <el-input
-              style="width: 80%"
+              style="width: 76%"
               type="password"
               v-model="ruleForm.password"
               autocomplete="off"
@@ -37,7 +37,7 @@
           </el-form-item>
 
           <el-form-item class="btn-content">
-            <el-button style="width: 80% ;margin-left:5%" class="submit" type="primary" @click="submitForm('ruleForm')"
+            <el-button style="width: 76% ;margin-left:8%" class="submit" type="primary" @click="submitForm('ruleForm')"
               >登录</el-button
             >
           </el-form-item>
@@ -131,7 +131,7 @@ export default {
 
 .login-card {
   width: 35%;
-  height: 70%;
+  height: 65%;
   min-width: 440px;
   max-width: 510px;
   min-height: 440px;

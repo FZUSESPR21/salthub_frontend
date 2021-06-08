@@ -38,7 +38,7 @@
 
           <el-form-item label="邮箱" prop="mailbox">
             <el-input
-              style="width: 55%"
+              style="width: 50%"
               ref="mailboxAdd"
               v-model="ruleForm.mailbox"
               autocomplete="off"
@@ -47,6 +47,7 @@
               v-if="!waitMailCode"
               class="code"
               type="primary"
+              style="width: 35%"
               @click="checkEmail()"
               >获取验证码</el-button
             >
@@ -56,7 +57,7 @@
           </el-form-item>
 
           <el-form-item label="验证码">
-            <el-input style="width: 55%" v-model="ruleForm.code" />
+            <el-input style="width: 50%" v-model="ruleForm.code" />
           </el-form-item>
 
           <el-form-item class="btn-content">

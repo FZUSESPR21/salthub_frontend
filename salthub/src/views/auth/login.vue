@@ -15,12 +15,12 @@
           class="demo-ruleForm"
         >
           <el-form-item label="账号" prop="name" class="btn-content">
-            <el-input style="width: 85%" v-model="ruleForm.name"></el-input>
+            <el-input style="width: 75%" v-model="ruleForm.name"></el-input>
           </el-form-item>
 
           <el-form-item label="密码" prop="password" class="btn-content">
             <el-input
-              style="width: 85%"
+              style="width: 75%"
               type="password"
               v-model="ruleForm.password"
               autocomplete="off"
