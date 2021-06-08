@@ -117,7 +117,6 @@ export default {
             //将后面页码的数据和之前的数据拼合
             for (let i in data.data.records) {
               this.articleList.push(data.data.blogList[0]);
-              console.log("success");
             }
           }
       })

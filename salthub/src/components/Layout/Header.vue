@@ -67,7 +67,7 @@
           </b-field>
         </b-navbar-item>
 
-        <b-navbar-item tag="div" class="mx-5">
+        <b-navbar-item tag="div" class="mx-5" @click="toMessage()">
           <el-button type="info" icon="el-icon-message" circle></el-button>
         </b-navbar-item>
 
@@ -184,6 +184,16 @@ export default {
      */
     toInfo() {
       this.$router.push({ path: this.redirect || "/info" });
+    },
+    /**
+     *@functionName: toMessage
+     *@description: 跳转通知中心
+     *@author: hannah
+     *@date: 2021-06-07 14:43:03
+     *@version: V1.0.0
+     */
+    toMessage() {
+      this.$router.push({ path: this.redirect || "/message" });
     },
   },
 };
