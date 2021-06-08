@@ -59,15 +59,15 @@
             <el-input style="width: 55%" v-model="ruleForm.code" />
           </el-form-item>
 
-          <el-form-item>
+          <el-form-item class="btn-content">
             <el-button
               class="register-button"
               type="primary"
-              style="margin-left: 20px"
+              style="margin-left: 12%"
               @click="submitForm('ruleForm')"
               >注册</el-button
             >
-            <el-button style="margin-left: 100px" @click="resetForm('ruleForm')"
+            <el-button style="margin-left: 25%" @click="resetForm('ruleForm')"
               >重置</el-button
             >
           </el-form-item>
@@ -335,8 +335,8 @@ export default {
 }
 
 .register-card {
-  width: 530px;
-  height: 600px;
+  width: 35%;
+  height: 80%;
 }
 
 .formItem {
@@ -346,6 +346,10 @@ export default {
   width: 68%;
   margin-bottom: 20px;
   transition: 1s;
+}
+
+.btn-content >>> .el-form-item__content {
+  margin-left: 13% !important;
 }
 
 .fade-enter-active .fade-leave-active {

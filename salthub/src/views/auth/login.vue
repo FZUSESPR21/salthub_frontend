@@ -14,11 +14,11 @@
           label-width="100px"
           class="demo-ruleForm"
         >
-          <el-form-item label="账号" prop="name">
+          <el-form-item label="账号" prop="name" class="btn-content">
             <el-input style="width: 85%" v-model="ruleForm.name"></el-input>
           </el-form-item>
 
-          <el-form-item label="密码" prop="password">
+          <el-form-item label="密码" prop="password" class="btn-content">
             <el-input
               style="width: 85%"
               type="password"
@@ -27,7 +27,7 @@
             ></el-input>
           </el-form-item>
 
-          <el-form-item style="width: 80%" label="记住" prop="status">
+          <el-form-item style="width: 80%" label="记住" prop="status" class="btn-content">
             <el-switch
               v-model="ruleForm.status"
               :active-value="1"
@@ -37,7 +37,7 @@
             <a style="float: right" @click="toForgetPwd()">忘记密码？</a>
           </el-form-item>
 
-          <el-form-item>
+          <el-form-item class="btn-content">
             <el-button class="submit" type="primary" @click="submit('ruleForm')"
               >登录</el-button
             >
@@ -213,10 +213,10 @@ export default {
 
 <style scoped>
 .el-button.submit {
-  margin-left: 20px;
+  margin-left: 12%;
 }
 .el-button {
-  margin-left: 100px;
+  margin-left: 25%;
 }
 
 .login-container {
@@ -230,8 +230,8 @@ export default {
 }
 
 .login-card {
-  width: 530px;
-  height: 500px;
+  width: 35%;
+  height: 63%;
 }
 
 .formItem {
@@ -248,5 +248,9 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
   opacity: 0;
+}
+
+.btn-content >>> .el-form-item__content {
+  margin-left: 13% !important;
 }
 </style>
