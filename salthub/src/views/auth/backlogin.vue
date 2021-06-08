@@ -131,8 +131,13 @@ export default {
 
 .login-card {
   width: 35%;
-  height: 80%;
+  height: 70%;
+  min-width: 440px;
+  max-width: 510px;
+  min-height: 440px;
+  max-height: 600px;
   background-color:rgba(236, 236, 236, 0.949019607843137)
+  
 }
 
 .formItem {

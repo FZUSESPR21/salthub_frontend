@@ -173,7 +173,7 @@ export default {
   margin-left: 12%;
 }
 .el-button {
-  margin-left: 25%;
+  margin-left: 20%;
 }
 
 .form-container {
@@ -189,6 +189,10 @@ export default {
 .login-card {
   width: 35%;
   height: 75%;
+  min-width: 440px;
+  max-width: 510px;
+  min-height: 510px;
+  max-height: 600px;
 }
 
 .btn-content >>> .el-form-item__content {

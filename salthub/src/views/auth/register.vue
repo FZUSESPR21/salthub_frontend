@@ -336,7 +336,12 @@ export default {
 
 .register-card {
   width: 35%;
-  height: 80%;
+  height: 75%;
+  min-width: 440px;
+  max-width: 510px;
+  min-height: 500px;
+  max-height: 600px;
+
 }
 
 .formItem {

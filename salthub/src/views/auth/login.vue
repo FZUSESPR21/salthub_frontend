@@ -231,7 +231,11 @@ export default {
 
 .login-card {
   width: 35%;
-  height: 63%;
+  height: 55%;
+  min-width: 440px;
+  max-width: 510px;
+  min-height: 400px;
+  max-height: 600px;
 }
 
 .formItem {
