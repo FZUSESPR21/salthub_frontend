@@ -117,7 +117,6 @@ export default {
             //将后面页码的数据和之前的数据拼合
             for (let i in data.data.records) {
               this.articleList.push(data.data.blogList[0]);
-              console.log("success");
             }
           }
       })
@@ -131,7 +130,6 @@ export default {
           console.log(vm.page.current); //打印当前页码
           this.init(this.activeName); //拉取数据
         } else {
-          this.$message('到底啦~看看前面的帖子吧');
         }
       }
     },
