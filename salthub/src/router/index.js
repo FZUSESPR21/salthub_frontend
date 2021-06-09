@@ -250,6 +250,20 @@ export default new Router({
       component: () => import('@/views/client/community/Community'),
       meta: { title: '晒研论坛-社区' }
     },
+    //树洞
+    {
+      path: '/treeHollow',
+      name: 'TreeHollow',
+      component: () => import('@/views/client/treeHollow/TreeHollow'),
+      meta: { title: '晒研论坛-树洞' }
+    },
+    //树洞
+    {
+      path: '/getTreeHollow',
+      name: 'GetTreeHollow',
+      component: () => import('@/views/client/treeHollow/GetTreeHollow'),
+      meta: { title: '晒研论坛-树洞' }
+    },
     // 检索
     {
       path: '/search',

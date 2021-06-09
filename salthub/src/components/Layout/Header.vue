@@ -37,7 +37,7 @@
           资讯
         </b-navbar-item>
 
-        <b-navbar-item tag="router-link" :to="{ path: '/home' }" class="px-5">
+        <b-navbar-item tag="router-link" :to="{ path: '/treeHollow' }" class="px-5">
           树洞
         </b-navbar-item>
       </template>
