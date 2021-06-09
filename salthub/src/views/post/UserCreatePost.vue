@@ -215,6 +215,47 @@ export default {
         enable: false,
       },
       mode: "sv",
+      toolbar: [
+        'emoji',
+        'headings',
+        'bold',
+        'italic',
+        'strike',
+        'link',
+        '|',
+        'list',
+        'ordered-list',
+        'check',
+        'outdent',
+        'indent',
+        '|',
+        'quote',
+        'line',
+        'code',
+        'inline-code',
+        'insert-before',
+        'insert-after',
+        '|',
+        // 'record',
+        'table',
+        '|',
+        'undo',
+        'redo',
+        '|',
+        'edit-mode',
+        // 'content-theme',
+        'code-theme',
+        'export',
+        {
+            name: 'more',
+            toolbar: [
+                'fullscreen',
+                'both',
+                'preview',
+                'info',
+                'help',
+            ],
+        }],
     });
   },
   methods: {
@@ -260,7 +301,7 @@ export default {
             // console.log(data.data);
             //展示刚发布的文章详情页  !!先返回首页
             var id = {
-              id: data.data 
+              id: data.data
             }
             var tags = [
               this.ruleForm.tagId
@@ -300,7 +341,7 @@ export default {
         path: "/Detail",
         query: { key: id },
       });
-      window.open(routeData.href, "_blank");
+      window.open(routeData.href, "_self");
     },
   },
 };
