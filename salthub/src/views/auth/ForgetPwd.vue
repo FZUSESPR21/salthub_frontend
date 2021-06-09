@@ -46,7 +46,7 @@
             />
           </el-form-item>
 
-          <el-form-item>
+          <el-form-item class="btn-content">
             <el-button class="submit" type="primary" @click="submitForm('ruleForm')"
               >确认修改</el-button
             >
@@ -170,10 +170,10 @@ export default {
   font-family:Arial, Helvetica, sans-serif;
 }
 .el-button.submit {
-  margin-left: 20px;
+  margin-left: 12%;
 }
 .el-button {
-  margin-left: 100px;
+  margin-left: 20%;
 }
 
 .form-container {
@@ -187,7 +187,15 @@ export default {
 }
 
 .login-card {
-  width: 530px;
-  height: 560px;
+  width: 35%;
+  height: 75%;
+  min-width: 440px;
+  max-width: 510px;
+  min-height: 510px;
+  max-height: 600px;
+}
+
+.btn-content >>> .el-form-item__content {
+  margin-left: 13% !important;
 }
 </style>

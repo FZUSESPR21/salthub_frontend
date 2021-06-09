@@ -1,3 +1,12 @@
+<!--
+ * @description:
+ * @fileName: createnotice.vue
+ * @author: 庄威龙
+ * @date: 2021-06-08 19:46:35
+ * @后台人员:
+ * @path:
+ * @version: V1.0.5
+!-->
 <template>
   <div>
     <v-createnotice></v-createnotice>

@@ -1,3 +1,12 @@
+<!--
+ * @description:
+ * @fileName: CreateComment.vue
+ * @author: 庄威龙
+ * @date: 2021-06-08 19:51:34
+ * @后台人员:
+ * @path:
+ * @version: V1.0.5
+!-->
 <template>
   <div class="box comments" style="back-groudcolor:#f3f3f3">
     <h3 class="title is-5">评论</h3>

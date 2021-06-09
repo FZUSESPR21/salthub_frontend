@@ -1,3 +1,12 @@
+<!--
+ * @description:
+ * @fileName: CreateSecondComment.vue
+ * @author: 庄威龙
+ * @date: 2021-06-08 19:51:49
+ * @后台人员:
+ * @path:
+ * @version: V1.0.5
+!-->
 <template>
   <!-- <div>父评论id:{{firstCommentId}}</div> -->
   <div class="box comments" style="background:#f3f3f3">
