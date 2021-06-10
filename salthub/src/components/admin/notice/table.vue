@@ -149,7 +149,7 @@ export default {
         },
       ],
       tableDataAll: [],
-      total: 14,
+      total: 0,
       currentPage: 1,
       pageSize: 20,
     };
@@ -234,6 +234,7 @@ export default {
         // console.log("notice=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
+        this.total = len;
         for (var i = 0; i < len; i++) {
           this.tableData.push({
             releaseTime: "",
