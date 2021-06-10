@@ -11,7 +11,6 @@
   <div class="block">
     <el-timeline>
       <el-timeline-item
-        timestamp="2018/4/12"
         placement="top"
         v-for="(item, index) in noticeList"
         :key="index"
