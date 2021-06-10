@@ -1,9 +1,9 @@
 <template>
-  <el-popover placement="bottom" trigger="click">
-    <el-button class="emoji emoji-1" type="primary"></el-button>
-    <el-button class="emoji emoji-7" type="primary"></el-button>
-    <el-button class="emoji emoji-8" type="primary"></el-button>
-    <el-button class="emoji emoji-26" type="primary"></el-button>
+  <el-popover ref="popover" placement="bottom" trigger="click">
+    <el-button class="emoji emoji-1" @click="reply" type="primary"></el-button>
+    <el-button class="emoji emoji-7" @click="reply" type="primary"></el-button>
+    <el-button class="emoji emoji-8" @click="reply" type="primary"></el-button>
+    <el-button class="emoji emoji-26" @click="reply" type="primary"></el-button>
     <el-button slot="reference" class="submit" type="submit"
       >回应树洞</el-button
     >
@@ -12,6 +12,16 @@
 <script>
 export default {
   name: "ReplyPopover",
+  methods: {
+    reply() {
+      this.$message({
+        message: "回复成功",
+        type: "success",
+        duration: 2000,
+      });
+      this.$refs.popover.showPopper = false;
+    },
+  },
 };
 </script>
 <style scoped>
@@ -27,7 +37,7 @@ export default {
 .emoji-26 {
   background: url("~@/assets/treeHollow/emoji/emoji-26.png") no-repeat;
 }
-.emoji{
+.emoji {
   width: 36px;
   height: 36px;
   background-size: cover;
