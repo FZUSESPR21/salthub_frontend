@@ -149,7 +149,7 @@ export default {
         },
       ],
       tableDataAll: [],
-      total: 0,
+      total: 14,
       currentPage: 1,
       pageSize: 20,
     };
