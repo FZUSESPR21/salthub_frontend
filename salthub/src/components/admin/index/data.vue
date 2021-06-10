@@ -33,7 +33,7 @@
             <el-tag type="warning" size="mini">实时</el-tag>
           </div>
           <div class="i-data">
-            <span>{{ userNum }}</span>
+            <span>{{ blogNum }}</span>
           </div>
           <div class="i-detail">
             <span>当前分类总记录数</span>
@@ -55,11 +55,11 @@
         </div>
         <div :class="'item'">
           <div class="i-title">
-            <span>昨日新增文章数</span>
+            <span>今日新增文章数</span>
             <el-tag type="danger" size="mini">实时</el-tag>
           </div>
           <div class="i-data">
-            <span>{{ userNum }}</span>
+            <span>{{ intradayBlog }}</span>
           </div>
           <div class="i-detail">
             <span>当前分类总记录数</span>
@@ -121,11 +121,40 @@ $grey: #dddddd;
 </style>
 
 <script>
+import { countAccount } from "@/api/account";
+import { countBlog, intradayBlog } from "@/api/blog";
 export default {
   data() {
     return {
-      userNum: 1024,
+      userNum: 0,
+      blogNum: 0,
+      intradayUser: 0,
+      intradayBlog: 0,
     };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      // 获取用户个数
+      countAccount().then((response) => {
+        this.userNum = response.data.data;
+        // console.log("countAccount()=>", response.data.data);
+      });
+
+      // 获取博客总数
+      countBlog().then((response) => {
+        this.blogNum = response.data.data;
+        // console.log("countBlog()=>", response.data.data);
+      });
+
+      // 获取当日博客数
+      intradayBlog().then((response) => {
+        this.intradayBlog = response.data.data;
+        // console.log("intradayBlog()=>", response.data.data);
+      });
+    },
   },
 };
 </script>
