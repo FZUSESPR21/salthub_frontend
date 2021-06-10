@@ -38,6 +38,13 @@ $white: #dcdfe6;
   width: 275px;
   height: auto;
   margin: 30px 15px;
+  .title {
+    margin: 18px;
+    font-weight: lighter;
+    .el-icon-bell {
+      color: #409eff;
+    }
+  }
 }
 .wrap {
   margin-top: 20px;

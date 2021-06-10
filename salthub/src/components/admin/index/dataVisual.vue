@@ -31,6 +31,13 @@
   width: 900px;
   height: auto;
   margin: 0 30px;
+  .title {
+    margin: 18px;
+    font-weight: lighter;
+    .el-icon-data-line {
+      color: #409eff;
+    }
+  }
 }
 </style>
 

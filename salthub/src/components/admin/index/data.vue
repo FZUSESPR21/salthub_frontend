@@ -38,6 +38,10 @@ $grey: #dddddd;
   margin: 30px 15px;
   .title {
     margin: 18px;
+    font-weight: lighter;
+    .el-icon-s-marketing {
+      color: #409eff;
+    }
   }
 }
 
