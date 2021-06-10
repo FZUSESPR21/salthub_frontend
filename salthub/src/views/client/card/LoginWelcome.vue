@@ -17,8 +17,7 @@
       <el-button type="primary" plain @click="toUserCreatePost()" outlined>✍ 发表想法</el-button>
     </div>
     <div v-else class="has-text-centered">
-      <el-button type="primary" plain @click="toRegister()" outlined>马上入驻</el-button>
-      <el-button type="warning" plain @click="toLogin()" outlined class="ml-2"> 论坛登录</el-button>
+      <el-button type="warning" plain @click="toLogin()" outlined> 论坛登录</el-button>
     </div>
   </el-card>
 </template>
