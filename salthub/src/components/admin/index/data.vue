@@ -130,6 +130,17 @@ export default {
       blogNum: 0,
       intradayUser: 0,
       intradayBlog: 0,
+      // 最新通知
+      notice: [
+        {
+          releaseTime: "2021-4-28",
+          id: "KaoYanRen",
+          blog: "福大计算机考研复试之人工智能分析篇",
+          noticeId: "1",
+          content: "最后一次！！！",
+          accountName: "KaoYanRen",
+        },
+      ],
     };
   },
   mounted() {
