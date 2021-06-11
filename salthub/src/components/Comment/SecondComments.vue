@@ -76,7 +76,6 @@
 import { mapGetters } from "vuex";
 import { url } from "@/utils/interface.js";
 import store from "@/store";
-import { url } from '@/utils/interface.js'
 export default {
   name: "Detail",
   props: {

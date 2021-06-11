@@ -114,7 +114,6 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 import { url } from "@/utils/interface.js";
 import store from "@/store";
-import { url } from '@/utils/interface.js'
 export default {
   name: "Detail",
   components: {

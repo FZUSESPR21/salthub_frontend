@@ -94,7 +94,6 @@ import SecondComment from "@/components/Comment/SecondComments";
 import CreateSecondComment from "@/components/Comment/CreateSecondComment";
 import { url } from "@/utils/interface.js";
 import store from "@/store";
-import { url } from '@/utils/interface.js'
 export default {
   name: "Detail",
   components: {
