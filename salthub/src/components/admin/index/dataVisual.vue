@@ -29,7 +29,7 @@
 
 .box-card {
   width: 900px;
-  height: auto;
+  height: 470px;
   margin: 0 30px;
   .title {
     margin: 18px;

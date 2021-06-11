@@ -176,3 +176,32 @@ export function getAllTags() {
     method: 'get',
   })
 }
+/** 
+ *@functionName: countBlog
+ *@param: 
+ *@description: 获取博客总数
+ *@author: NoMornings
+ *@date: 2021-06-10 22:15:15
+ *@version: V1.0.0
+*/
+export function countBlog() {
+  return request({
+    url: '/blog/count',
+    method: 'get',
+  })
+}
+
+/**
+ *@functionName: intradayBlog
+ *@param: 
+ *@description: 获取当日博客数
+ *@author: NoMornings
+ *@date: 2021-06-10 22:18:13
+ *@version: V1.0.0
+*/
+export function intradayBlog() {
+  return request({
+    url: '/blog/count/intraday',
+    method: 'get',
+  })
+}

@@ -250,6 +250,13 @@ export default new Router({
       component: () => import('@/views/client/community/Community'),
       meta: { title: '晒研论坛-社区' }
     },
+    //官方资讯
+    {
+      path: '/news',
+      name: 'News',
+      component: () => import('@/views/client/officalnews/OfficalNews'),
+      meta: { title: '晒研论坛-资讯' }
+    },
     //树洞
     {
       path: '/treeHollow',

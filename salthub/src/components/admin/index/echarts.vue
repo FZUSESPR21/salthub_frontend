@@ -1,8 +1,8 @@
 <!-- 
- * @description: 晒研论坛-后台首页-数据可视化动态排序折线图
- * @fileName: echarts.vue 
+ * @description: 晒研论坛-后台首页-数据可视化折线图堆叠
+ * @fileName: echartsTest.vue 
  * @author: NoMornings 
- * @date: 2021-04-28 12:13:12 
+ * @date: 2021-06-11 11:58:18 
  * @后台人员:  
  * @path:  
  * @version: V1.0.1 
@@ -13,8 +13,8 @@
 
 <style lang="scss" scoped>
 #echarts {
-  width: 870px;
-  height: 400px;
+  width: 830px;
+  height: 350px;
   margin-top: 20px;
 }
 </style>
@@ -24,108 +24,73 @@ import * as echarts from "echarts";
 import $ from "jquery";
 export default {
   data() {
-    return {
-    }
+    return {};
   },
   mounted: function () {
     this.init();
   },
   methods: {
     init: function () {
-      var ROOT_PATH =
-        "https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples";
       var chartDom = document.getElementById("echarts");
       var myChart = echarts.init(chartDom);
       var option;
-      $.get(
-        // 测试数据
-        ROOT_PATH + "/data/asset/data/life-expectancy-table.json",
-        function (_rawData) {
-          var countries = [
-            "Finland",
-            "France",
-            "Germany",
-            "Iceland",
-            "Norway",
-            "Poland",
-            "Russia",
-            "United Kingdom",
-          ];
-          var datasetWithFilters = [];
-          var seriesList = [];
-          echarts.util.each(countries, function (country) {
-            var datasetId = "dataset_" + country;
-            datasetWithFilters.push({
-              id: datasetId,
-              fromDatasetId: "dataset_raw",
-              transform: {
-                type: "filter",
-                config: {
-                  and: [
-                    { dimension: "Year", gte: 1950 },
-                    { dimension: "Country", "=": country },
-                  ],
-                },
-              },
-            });
-            seriesList.push({
-              type: "line",
-              datasetId: datasetId,
-              showSymbol: false,
-              name: country,
-              endLabel: {
-                show: true,
-                formatter: function (params) {
-                  return params.value[3] + ": " + params.value[0];
-                },
-              },
-              labelLayout: {
-                moveOverlap: "shiftY",
-              },
-              emphasis: {
-                focus: "series",
-              },
-              encode: {
-                x: "Year",
-                y: "Income",
-                label: ["Country", "Income"],
-                itemName: "Year",
-                tooltip: ["Income"],
-              },
-            });
-          });
 
-          option = {
-            animationDuration: 10000,
-            dataset: [
-              {
-                id: "dataset_raw",
-                source: _rawData,
-              },
-            ].concat(datasetWithFilters),
-            title: {
-              text: "Page Views of SaltHub",
-            },
-            tooltip: {
-              order: "valueDesc",
-              trigger: "axis",
-            },
-            xAxis: {
-              type: "category",
-              nameLocation: "middle",
-            },
-            yAxis: {
-              name: "Page Views",
-            },
-            grid: {
-              right: 140,
-            },
-            series: seriesList,
-          };
-
-          myChart.setOption(option);
-        }
-      );
+      option = {
+        title: {
+          text: " ",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        legend: {
+          data: ["用户数量", "文章数量", "新增用户", "新增文章"],
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {},
+          },
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            name: "用户数量",
+            type: "line",
+            stack: "总量",
+            data: [120, 132, 101, 134, 90, 230, 210],
+          },
+          {
+            name: "文章数量",
+            type: "line",
+            stack: "总量",
+            data: [220, 182, 191, 234, 290, 330, 310],
+          },
+          {
+            name: "新增用户",
+            type: "line",
+            stack: "总量",
+            data: [150, 232, 201, 154, 190, 330, 410],
+          },
+          {
+            name: "新增文章",
+            type: "line",
+            stack: "总量",
+            data: [320, 332, 301, 334, 390, 330, 320],
+          },
+        ],
+      };
 
       option && myChart.setOption(option);
     },
