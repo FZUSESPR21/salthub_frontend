@@ -104,8 +104,8 @@ $size: 50px;
 import CountDownCard from "@/views/client/card/CountDown";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
-import { url } from "@/utils/interface.js";
 import store from "@/store";
+import { url } from '@/utils/interface.js'
 export default {
   components: {
     "v-count-down": CountDownCard,

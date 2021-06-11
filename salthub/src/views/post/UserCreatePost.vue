@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { postBlog, updateTag } from "@/api/blog";
+import { postBlog, updateTag, getAllTags } from "@/api/blog";
 import { getNowTime } from "@/utils/time";
 import store from "@/store";
 import Vditor from "vditor";
@@ -167,7 +167,7 @@ export default {
       ],
       tags: [
         {
-          label: "tagId",
+          label: "文章标签",
           options: [
             {
               value: "0",
@@ -257,6 +257,10 @@ export default {
             ],
         }],
     });
+    this.getTags()
+    
+  },
+  created() {
   },
   methods: {
     /**
@@ -343,6 +347,30 @@ export default {
       });
       window.open(routeData.href, "_self");
     },
+    /**
+     *@functionName: getTags 
+     *@description: 获取数据库中的标签
+     *@author: lw
+     *@date: 2021-06-11 16:15:31
+     *@version: V1.0.0
+    */
+    getTags() {
+      console.log(this.tags)
+      let _this = this
+      getAllTags().
+        then((response) => {
+          var data = response.data.data
+          var tags = {}
+          tags = new Array()
+          for(let i=0; i<data.length; i++) {
+            var o = {value:"321", label:"123"}
+            o.label = data[i].name
+            o.value = data[i].id
+            tags.push(o)
+          }
+          _this.tags[0].options = tags
+        })
+    }
   },
 };
 </script>
