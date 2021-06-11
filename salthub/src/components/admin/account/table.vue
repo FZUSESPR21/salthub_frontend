@@ -178,7 +178,7 @@ export default {
       tableDataAll: [],
       total: 0,
       currentPage: 1,
-      pageSize: 20,
+      pageSize: 10,
     };
   },
   mounted() {
@@ -306,7 +306,7 @@ export default {
           // 权限
           this.tableData[i].auth = this.judgeAuth(info[i].roleId);
         }
-        this.tableData.pop();
+        // this.tableData.pop();
       });
     },
     // 判断用户权限
