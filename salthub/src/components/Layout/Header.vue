@@ -37,7 +37,11 @@
           资讯
         </b-navbar-item>
 
-        <b-navbar-item tag="router-link" :to="{ path: '/treeHollow' }" class="px-5">
+        <b-navbar-item
+          tag="router-link"
+          :to="{ path: '/treeHollow' }"
+          class="px-5"
+        >
           树洞
         </b-navbar-item>
       </template>
@@ -74,7 +78,7 @@
         <b-navbar-item v-if="token == null || token === ''"> </b-navbar-item>
 
         <b-navbar-item @click="toInfo()" class="mr-5" v-else>
-          <img :src="Url" class="avatar" />
+          <img :src="imgUrl" class="avatar" />
         </b-navbar-item>
 
         <b-navbar-item v-if="token == null || token === ''" tag="div">
@@ -97,6 +101,7 @@
 <script>
 import { mapGetters } from "vuex";
 import "buefy/dist/buefy.css";
+import { url } from "@/utils/interface.js";
 import store from "@/store";
 export default {
   name: "Header",
@@ -105,10 +110,10 @@ export default {
       logoImg: require("@/assets/ForumLogo.png"),
       fits: ["cover"],
       searchKey: "",
-      Url:
+      imgUrl:
         store.getters.user == null
           ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          : "https://47.100.89.20" + store.getters.user.avatar,
+          : url + store.getters.user.avatar,
     };
   },
   computed: {
@@ -158,7 +163,7 @@ export default {
         });
         return false;
       }
-      this.$router.push({ path: '/Search?key=' + this.searchKey })
+      this.$router.push({ path: "/Search?key=" + this.searchKey });
     },
     /**
      *@functionName: logout

@@ -18,7 +18,7 @@
         <el-aside width="200px">
           <div style="padding-left: 20px; padding-top: 20px">
             <img
-              :src="url"
+              :src="imgUrl"
               alt="头像"
               style="
                 width: 100px;
@@ -92,6 +92,7 @@ import { mapGetters } from "vuex";
 import { getFirstComments } from "@/api/comment";
 import SecondComment from "@/components/Comment/SecondComments";
 import CreateSecondComment from "@/components/Comment/CreateSecondComment";
+import { url } from "@/utils/interface.js";
 import store from "@/store";
 export default {
   name: "Detail",
@@ -114,10 +115,10 @@ export default {
       comments: [],
       buttonState: "评论",
       // avatar
-      url:
+      imgUrl:
         store.getters.user == null
           ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          : "https://47.100.89.20" + store.getters.user.avatar,
+          : url + store.getters.user.avatar,
     };
   },
   created() {

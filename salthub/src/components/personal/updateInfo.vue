@@ -14,10 +14,7 @@
     <div :class="'wrap'">
       <div :class="'p-info'">
         <!-- 头像 -->
-        <el-avatar
-          :src="url"
-          :size="70"
-        ></el-avatar>
+        <el-avatar :src="imgUrl" :size="70"></el-avatar>
         <!-- 文字信息 -->
         <div :class="['column', 'info-text']">
           <div :class="'nickname'">
@@ -107,6 +104,7 @@ $size: 50px;
 import CountDownCard from "@/views/client/card/CountDown";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
+import { url } from "@/utils/interface.js";
 import store from "@/store";
 export default {
   components: {
@@ -124,7 +122,7 @@ export default {
         slogan: "努力！奋斗！",
       },
       // avatar
-      url: 'https://47.100.89.20'+store.getters.user.avatar
+      imgUrl: url + store.getters.user.avatar,
     };
   },
   mounted() {

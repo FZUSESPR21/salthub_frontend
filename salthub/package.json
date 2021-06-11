@@ -14,16 +14,11 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-<<<<<<< Updated upstream
     "buefy": "^0.9.7",
     "echarts": "^5.1.1",
     "element-ui": "^2.15.1",
     "jquery": "^3.6.0",
     "vditor": "^3.8.4",
-=======
-    "element-ui": "^2.15.1",
-    "jquery": "^3.6.0",
->>>>>>> Stashed changes
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.6.2"
