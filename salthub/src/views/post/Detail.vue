@@ -31,7 +31,7 @@
           <el-aside width="200px">
             <div style="padding-left: 20px; padding-top: 20px">
               <img
-                :src="url"
+                :src="imgUrl"
                 alt="头像"
                 style="
                   width: 100px;
@@ -72,7 +72,7 @@
                   round
                   style="background-color: #ff4949; color: white"
                   @click="thumb()"
-                >{{thumbname}}
+                  >{{ thumbname }}
                 </el-button>
                 <el-button
                   type="warning"
@@ -82,11 +82,9 @@
                 ></el-button>
                 <br />
                 <span style="font-size: 15px">{{ blog.releaseTime }}</span>
-                <el-button
-                  type="text"
-                  style="color: black"
-                  @click="tipOff()"
-                >举报</el-button>
+                <el-button type="text" style="color: black" @click="tipOff()"
+                  >举报</el-button
+                >
               </div>
             </el-footer>
           </el-container>
@@ -108,12 +106,13 @@ import Header from "@/components/Layout/Header";
 import { mapGetters } from "vuex";
 import { getBlogById } from "@/api/blog";
 import { collectBlog } from "@/api/blog";
-import { tipOffBlog } from '@/api/blog'
-import { thumbBlog } from '@/api/blog'
+import { tipOffBlog } from "@/api/blog";
+import { thumbBlog } from "@/api/blog";
 import CreateComment from "@/components/Comment/CreateComment";
 import Comments from "@/components/Comment/Comments";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
+import { url } from "@/utils/interface.js";
 import store from "@/store";
 export default {
   name: "Detail",
@@ -139,13 +138,13 @@ export default {
       title: "",
       content: "",
       authorName: "",
-      canthumb: true,//是否可以点赞
+      canthumb: true, //是否可以点赞
       thumbname: "点赞",
       // avatar
-      url:
+      imgUrl:
         store.getters.user == null
           ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          : "https://47.100.89.20" + store.getters.user.avatar,
+          : url + store.getters.user.avatar,
     };
   },
   created() {

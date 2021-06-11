@@ -13,10 +13,7 @@
     <div :class="'title'">
       <div :class="'p-info'">
         <!-- 头像 -->
-        <el-avatar
-          :src="url"
-          :size="70"
-        ></el-avatar>
+        <el-avatar :src="imgUrl" :size="70"></el-avatar>
         <!-- 文字信息 -->
         <div :class="['column', 'info-text']">
           <p :class="'nickname'" v-cloak>昵称：{{ nickname }}</p>
@@ -41,8 +38,8 @@
     <!-- 个人收藏 -->
     <div :class="['wrap', 'columns']">
       <div :class="['blog', 'column is-three-quarters']">
-        <span :class="'collection'" @click=" init() ">我的收藏</span>
-        <span :class="'my-blog'" @click=" mypost() ">我的帖子</span>
+        <span :class="'collection'" @click="init()">我的收藏</span>
+        <span :class="'my-blog'" @click="mypost()">我的帖子</span>
         <div
           :class="'blog-list'"
           v-for="(item, index) in blogList"
@@ -170,8 +167,9 @@ import CountDownCard from "@/views/client/card/CountDown";
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
-import { getCollectList,getMyList} from "@/api/postlist";
-import { delCollect , delBlog } from "@/api/blog";
+import { getCollectList, getMyList } from "@/api/postlist";
+import { delCollect, delBlog } from "@/api/blog";
+import { url } from "@/utils/interface.js";
 import store from "@/store";
 export default {
   components: {
@@ -192,8 +190,8 @@ export default {
       },
       blogListTitle: [],
       // avatar
-      url: 'https://47.100.89.20'+store.getters.user.avatar,
-      flag:1//记录是收藏还是用户发布的文章
+      imgUrl: url + store.getters.user.avatar,
+      flag: 1, //记录是收藏还是用户发布的文章
     };
   },
   created() {
@@ -243,7 +241,7 @@ export default {
      *@version: V1.0.0
      */
     init() {
-      this.flag = 1
+      this.flag = 1;
       getCollectList(this.page.current).then((response) => {
         const { data } = response;
         this.page.current = data.data.current;
@@ -268,11 +266,11 @@ export default {
      *@version: V1.0.0
      */
     mypost() {
-      this.page.current = 1
-      this.page.totalpage = 1
-      this.page.total = 0
-      this.flag = 0
-      getMyList(this.userId,this.page.current).then((response) => {
+      this.page.current = 1;
+      this.page.totalpage = 1;
+      this.page.total = 0;
+      this.flag = 0;
+      getMyList(this.userId, this.page.current).then((response) => {
         const { data } = response;
         this.page.current = data.data.current;
         if (this.page.current === 1) {
