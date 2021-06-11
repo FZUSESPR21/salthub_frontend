@@ -47,7 +47,7 @@
             <el-tag type="success" size="mini">实时</el-tag>
           </div>
           <div class="i-data">
-            <span>{{ userNum }}</span>
+            <span>{{ intradayUser }}</span>
           </div>
           <div class="i-detail">
             <span>当前分类总记录数</span>
@@ -128,7 +128,7 @@ export default {
     return {
       userNum: 0,
       blogNum: 0,
-      intradayUser: 0,
+      intradayUser: 2,
       intradayBlog: 0,
       // 最新通知
       notice: [
