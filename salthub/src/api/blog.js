@@ -164,6 +164,19 @@ export function tipOffBlog(id) {
 }
 
 /**
+ *@functionName: getAllTags
+ *@description: 获取所有tag
+ *@author: lw
+ *@date: 2021-06-10 21:24:42
+ *@version: V1.0.0
+*/
+export function getAllTags() {
+  return request({
+    url: '/tag/all',
+    method: 'get',
+  })
+}
+/** 
  *@functionName: countBlog
  *@param: 
  *@description: 获取博客总数

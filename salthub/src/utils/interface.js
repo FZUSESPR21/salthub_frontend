@@ -1,0 +1,1 @@
+export const url = 'http://47.100.89.20:8080'

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import store from '@/store'
 import { Message, MessageBox } from 'element-ui'
-const https = require('https');  //忽略HTTPS证书验证
+import { url } from '@/utils/interface.js'
+// const https = require('https');  //忽略HTTPS证书验证
 import { getToken } from '@/utils/auth'
 
 // 1.创建axios实例
@@ -10,16 +11,13 @@ const service = axios.create({
   //   baseURL: process.env.VUE_APP_URL,
 
   //demo接口url
-  baseURL: 'https://47.100.89.20',
+  baseURL: url,
   //build
   // baseURL: 'https://localhost',
 
   // 超时时间 单位是ms，这里设置了5s的超时时间
   timeout: 5 * 1000,
   //忽略HTTPS证书验证
-  httpsAgent: new https.Agent({  
-    rejectUnauthorized: false
-  })
 
 })
 
@@ -120,4 +118,5 @@ service.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+// export default {service, url}
 export default service
