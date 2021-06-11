@@ -115,6 +115,7 @@ import Comments from "@/components/Comment/Comments";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
 import store from "@/store";
+import { url } from '@/utils/interface.js'
 export default {
   name: "Detail",
   components: {
@@ -145,7 +146,7 @@ export default {
       url:
         store.getters.user == null
           ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          : "https://47.100.89.20" + store.getters.user.avatar,
+          : url + store.getters.user.avatar,
     };
   },
   created() {
