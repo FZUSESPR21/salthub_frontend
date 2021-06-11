@@ -14,10 +14,7 @@
     <div :class="'wrap'">
       <div :class="'p-info'">
         <!-- 头像 -->
-        <el-avatar
-          :src="url"
-          :size="70"
-        ></el-avatar>
+        <el-avatar :src="imgUrl" :size="70"></el-avatar>
         <!-- 文字信息 -->
         <div :class="['column', 'info-text']">
           <div :class="'nickname'">
@@ -125,7 +122,7 @@ export default {
         slogan: "努力！奋斗！",
       },
       // avatar
-      url: url+store.getters.user.avatar
+      imgUrl: url + store.getters.user.avatar,
     };
   },
   mounted() {

@@ -26,7 +26,7 @@
         <el-aside width="200px">
           <div>
             <img
-              :src="url"
+              :src="imgUrl"
               alt="头像"
               style="
                 width: 50px;
@@ -34,8 +34,6 @@
                 margin: 0;
                 padding: 0;
                 line-height: 0;
-                position: relative;
-                left: -10px;
               "
             />
             <div
@@ -43,7 +41,7 @@
                 font-size: 18px;
                 width: 100%;
                 padding: 0;
-                margin: 0;
+                margin-left: 4%;
                 word-break: break-all;
                 white-space: normal;
                 line-height: 20px;
@@ -76,6 +74,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { url } from "@/utils/interface.js";
 import store from "@/store";
 export default {
   name: "Detail",
@@ -98,10 +97,10 @@ export default {
         { name: "李四", content: "收藏" },
       ],
       // avatar
-      url:
+      imgUrl:
         store.getters.user == null
           ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          : "https://47.100.89.20" + store.getters.user.avatar,
+          : url + store.getters.user.avatar,
     };
   },
   methods: {},
