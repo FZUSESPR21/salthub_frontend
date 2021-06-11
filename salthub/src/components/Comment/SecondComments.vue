@@ -34,8 +34,6 @@
                 margin: 0;
                 padding: 0;
                 line-height: 0;
-                position: relative;
-                left: -10px;
               "
             />
             <div
@@ -43,7 +41,7 @@
                 font-size: 18px;
                 width: 100%;
                 padding: 0;
-                margin: 0;
+                margin-left: 4%;
                 word-break: break-all;
                 white-space: normal;
                 line-height: 20px;
@@ -78,6 +76,7 @@
 import { mapGetters } from "vuex";
 import { url } from "@/utils/interface.js";
 import store from "@/store";
+import { url } from '@/utils/interface.js'
 export default {
   name: "Detail",
   props: {
