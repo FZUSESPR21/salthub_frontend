@@ -103,7 +103,6 @@ import { mapGetters } from "vuex";
 import "buefy/dist/buefy.css";
 import { url } from "@/utils/interface.js";
 import store from "@/store";
-import { url } from '@/utils/interface.js'
 export default {
   name: "Header",
   data() {
