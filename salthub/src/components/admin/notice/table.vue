@@ -226,9 +226,9 @@ export default {
       });
     },
     init() {
-      //获取所有公告
+      // 获取所有公告
       getAllNotice({
-        //当前页码
+        // 当前页码
         current: 1,
       }).then((response) => {
         // console.log("notice=>", response.data.data.records);
