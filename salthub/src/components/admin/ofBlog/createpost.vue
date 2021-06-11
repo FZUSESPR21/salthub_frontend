@@ -99,6 +99,7 @@ export default {
       contentEditor: {},
       ruleForm: {
         title: '', // 标题
+        moduleId: 2,//官方文章默认资讯模块
         tags: [], // 标签
         content: '' // 内容
       },
@@ -268,12 +269,15 @@ export default {
 
           postBlog(this.ruleForm).then((response) => {
             const { data } = response
+            this.$message({
+              message: "发布成功",
+              type: "success",
+              duration: 2000,
+            });
             setTimeout(() => {
-              this.$router.push({
-                name: 'post-detail',
-                params: { id: data.id }
-              })
-            }, 800)
+              this.loading = false;
+              this.$router.push({ path: this.redirect || "/admin/ofBlog" });
+            }, 0.5 * 1000);
           })
 
         } else {
