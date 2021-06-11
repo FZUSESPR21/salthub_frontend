@@ -98,6 +98,7 @@
 import { mapGetters } from "vuex";
 import "buefy/dist/buefy.css";
 import store from "@/store";
+import { url } from '@/utils/interface.js'
 export default {
   name: "Header",
   data() {
@@ -108,7 +109,7 @@ export default {
       Url:
         store.getters.user == null
           ? "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          : "https://47.100.89.20" + store.getters.user.avatar,
+          : url + store.getters.user.avatar,
     };
   },
   computed: {
@@ -117,7 +118,7 @@ export default {
   // created() {
   //   //有token时候加上头像地址
   //   if (this.token !== null || this.token != "") {
-  //     this.Url = "https://47.100.89.20" + store.getters.user.avatar;
+  //     this.Url = "http://47.100.89.20" + store.getters.user.avatar;
   //   }
   //   // console.log(store.getters.user)
   //   // console.log(JSON.parse(sessionStorage.getItem('user')))

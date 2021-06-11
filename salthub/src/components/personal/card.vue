@@ -170,6 +170,7 @@ import CountDownCard from "@/views/client/card/CountDown";
 import { getScrollHeight, getScrollTop, getWindowHeight } from "@/utils/screen";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
+import { url } from '@/utils/interface.js'
 import { getCollectList,getMyList} from "@/api/postlist";
 import { delCollect , delBlog } from "@/api/blog";
 import store from "@/store";
@@ -192,7 +193,7 @@ export default {
       },
       blogListTitle: [],
       // avatar
-      url: 'https://47.100.89.20'+store.getters.user.avatar,
+      url: url+store.getters.user.avatar,
       flag:1//记录是收藏还是用户发布的文章
     };
   },

@@ -108,6 +108,7 @@ import CountDownCard from "@/views/client/card/CountDown";
 import "buefy/dist/buefy.css";
 import { putInfo } from "@/api/account";
 import store from "@/store";
+import { url } from '@/utils/interface.js'
 export default {
   components: {
     "v-count-down": CountDownCard,
@@ -124,7 +125,7 @@ export default {
         slogan: "努力！奋斗！",
       },
       // avatar
-      url: 'https://47.100.89.20'+store.getters.user.avatar
+      url: url+store.getters.user.avatar
     };
   },
   mounted() {
