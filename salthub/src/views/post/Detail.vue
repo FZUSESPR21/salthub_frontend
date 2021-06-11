@@ -2,7 +2,7 @@
  * @description: 晒研论坛-文章详情
  * @fileName: Detail.vue
  * @author: 庄威龙
- * @date: 2021-04-30 17:26:37
+ * @date: 2021-04-30 17:26:38
  * @后台人员:
  * @path:
  * @version: V1.0.0
