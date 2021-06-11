@@ -79,7 +79,7 @@ $grey: #dddddd;
 .box-card {
   width: 595px;
   height: auto;
-  margin: 30px 15px;
+  margin: 0 15px 30px 15px;
   .title {
     margin: 18px;
     font-weight: lighter;
