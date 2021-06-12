@@ -70,7 +70,7 @@ export function deleteNotice(params) {
  *@params1: params
  *@description: 获取所有公告
  *@author: NoMornings
- *@date: 2021-05-011 23:10:05
+ *@date: 2021-05-11 23:10:05
  *@version: V1.0.0
 */
 export function getAllNotice(params) {
@@ -78,5 +78,20 @@ export function getAllNotice(params) {
         url: '/admin/notice/all',
         method: 'get',
         params
+    })
+}
+
+/**
+ *@functionName: countNotice
+ *@params1:
+ *@description: 获取公告总数
+ *@author: NoMornings
+ *@date: 2021-06-12 23:16:13
+ *@version: V1.0.0
+*/
+export function countNotice() {
+    return request({
+        url: '/notice/getamount',
+        method: 'get',
     })
 }

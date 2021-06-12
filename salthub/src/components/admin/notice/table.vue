@@ -132,7 +132,7 @@
 </style>
 
 <script>
-import { getAllNotice, deleteNotice, getNotice } from "@/api/notice";
+import { getAllNotice, deleteNotice, getNotice, countNotice } from "@/api/notice";
 import store from "@/store";
 export default {
   data() {
@@ -262,6 +262,12 @@ export default {
       });
     },
     init() {
+      // 获取公告总数
+      countNotice().then((response) => {
+        this.total = response.data.data;
+        // console.log("countNotice()=>", response.data.data);
+      });
+
       // 获取所有公告
       getAllNotice({
         // 当前页码
@@ -270,7 +276,6 @@ export default {
         // console.log("notice=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
-        this.total = 18;
         for (var i = 0; i < len; i++) {
           this.tableData.push({
             releaseTime: "",
