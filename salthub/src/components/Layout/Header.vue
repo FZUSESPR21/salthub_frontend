@@ -122,7 +122,7 @@ export default {
   // created() {
   //   //有token时候加上头像地址
   //   if (this.token !== null || this.token != "") {
-  //     this.Url = "https://47.100.89.20" + store.getters.user.avatar;
+  //     this.Url = "http://47.100.89.20" + store.getters.user.avatar;
   //   }
   //   // console.log(store.getters.user)
   //   // console.log(JSON.parse(sessionStorage.getItem('user')))

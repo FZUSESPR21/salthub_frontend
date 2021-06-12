@@ -151,7 +151,7 @@ export default {
       tableDataAll: [],
       total: 0,
       currentPage: 1,
-      pageSize: 20,
+      pageSize: 10,
     };
   },
   mounted() {
@@ -222,7 +222,7 @@ export default {
           // 用户名
           this.tableData[i].accountName = info[i].accountName;
         }
-        this.tableData.pop();
+        // this.tableData.pop();
       });
     },
     init() {
@@ -234,7 +234,7 @@ export default {
         // console.log("notice=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
-        this.total = len;
+        this.total = 18;
         for (var i = 0; i < len; i++) {
           this.tableData.push({
             releaseTime: "",
