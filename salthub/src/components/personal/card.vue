@@ -339,7 +339,6 @@ export default {
         if (vm.page.current < vm.page.totalpage) {
           //先判断下一页是否有数据
           vm.page.current += 1; //查询条件的页码+1
-          console.log(vm.page.current); //打印当前页码
           this.init(vm.activeName); //拉取数据
         } else {
         }
