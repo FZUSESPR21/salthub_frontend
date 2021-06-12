@@ -205,3 +205,33 @@ export function intradayBlog() {
     method: 'get',
   })
 }
+
+/**
+ *@functionName: postTreeHollow 
+ *@params: data
+ *@description: 发布树洞参数
+ *@author: lw
+ *@date: 2021-06-12 21:21:54
+ *@version: V1.0.0
+*/
+export function postTreeHollow(data) {
+  return request({
+    url: '/blog/treeHole',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ *@functionName: getTreeHollow 
+ *@description: 随机获取树洞
+ *@author: lw
+ *@date: 2021-06-12 21:22:26
+ *@version: V1.0.0
+*/
+export function getTreeHollow() {
+  return request({
+    url: '/blog/hole',
+    method: 'get',
+  })
+}
