@@ -176,6 +176,14 @@ export function getAllTags() {
     method: 'get',
   })
 }
+
+export function getAllModules() {
+  return request({
+    url: '/blog/module/all',
+    method: 'get',
+  })
+}
+
 /** 
  *@functionName: countBlog
  *@param: 

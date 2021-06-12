@@ -69,7 +69,7 @@
                 </el-select>
               </div>
             </div>
-            <br/>
+            <br />
 
             <div style="padding-top: 20px">
               <el-form-item>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { postBlog, updateTag, getAllTags } from "@/api/blog";
+import { postBlog, updateTag, getAllTags, getAllModules } from "@/api/blog";
 import { getNowTime } from "@/utils/time";
 import store from "@/store";
 import Vditor from "vditor";
@@ -103,7 +103,7 @@ export default {
         title: "", // 标题
         moduleId: [], // 标签
         content: "", // 内容
-        tagId: [],  //标签
+        tagId: [], //标签
       },
       rules: {
         title: [
@@ -118,7 +118,7 @@ export default {
       },
       modules: [
         {
-          label: "杂谈",
+          label: "模块",
           options: [
             {
               value: "2",
@@ -127,40 +127,6 @@ export default {
             {
               value: "21",
               label: "找研友",
-            },
-          ],
-        },
-        {
-          label: "拼课",
-          options: [
-            {
-              value: "3",
-              label: "数学",
-            },
-            {
-              value: "41",
-              label: "英语",
-            },
-            {
-              value: "42",
-              label: "政治",
-            },
-            {
-              value: "43",
-              label: "专业课",
-            },
-          ],
-        },
-        {
-          label: "院校",
-          options: [
-            {
-              value: "0",
-              label: "福州大学",
-            },
-            {
-              value: "1",
-              label: "外校",
             },
           ],
         },
@@ -216,52 +182,46 @@ export default {
       },
       mode: "sv",
       toolbar: [
-        'emoji',
-        'headings',
-        'bold',
-        'italic',
-        'strike',
-        'link',
-        '|',
-        'list',
-        'ordered-list',
-        'check',
-        'outdent',
-        'indent',
-        '|',
-        'quote',
-        'line',
-        'code',
-        'inline-code',
-        'insert-before',
-        'insert-after',
-        '|',
+        "emoji",
+        "headings",
+        "bold",
+        "italic",
+        "strike",
+        "link",
+        "|",
+        "list",
+        "ordered-list",
+        "check",
+        "outdent",
+        "indent",
+        "|",
+        "quote",
+        "line",
+        "code",
+        "inline-code",
+        "insert-before",
+        "insert-after",
+        "|",
         // 'record',
-        'table',
-        '|',
-        'undo',
-        'redo',
-        '|',
-        'edit-mode',
+        "table",
+        "|",
+        "undo",
+        "redo",
+        "|",
+        "edit-mode",
         // 'content-theme',
-        'code-theme',
-        'export',
+        "code-theme",
+        "export",
         {
-            name: 'more',
-            toolbar: [
-                'fullscreen',
-                'both',
-                'preview',
-                'info',
-                'help',
-            ],
-        }],
+          name: "more",
+          toolbar: ["fullscreen", "both", "preview", "info", "help"],
+        },
+      ],
     });
-    this.getTags()
-    
+    this.getTags();
+    this.getModules();
   },
-  created() {
-  },
+  created() {},
   methods: {
     /**
      *@functionName:    submitForm
@@ -305,15 +265,12 @@ export default {
             // console.log(data.data);
             //展示刚发布的文章详情页  !!先返回首页
             var id = {
-              id: data.data
-            }
-            var tags = [
-              this.ruleForm.tagId
-            ]
-            updateTag(id, tags)
-              .then((response) => {
-                console.log("updateTag")
-              })
+              id: data.data,
+            };
+            var tags = [this.ruleForm.tagId];
+            updateTag(id, tags).then((response) => {
+              console.log("updateTag");
+            });
             setTimeout(() => {
               this.$message({
                 message: "成功发表",
@@ -348,36 +305,52 @@ export default {
       window.open(routeData.href, "_self");
     },
     /**
-     *@functionName: getTags 
+     *@functionName: getTags
      *@description: 获取数据库中的标签
      *@author: lw
      *@date: 2021-06-11 16:15:31
      *@version: V1.0.0
-    */
+     */
     getTags() {
-      console.log(this.tags)
-      let _this = this
-      getAllTags().
-        then((response) => {
-          var data = response.data.data
-          var tags = {}
-          tags = new Array()
-          for(let i=0; i<data.length; i++) {
-            var o = {value:"321", label:"123"}
-            o.label = data[i].name
-            o.value = data[i].id
-            tags.push(o)
-          }
-          _this.tags[0].options = tags
-        })
-    }
+      console.log(this.tags);
+      let _this = this;
+      getAllTags().then((response) => {
+        var data = response.data.data;
+        var tags = {};
+        tags = new Array();
+        for (let i = 0; i < data.length; i++) {
+          var o = { value: "321", label: "123" };
+          o.label = data[i].name;
+          o.value = data[i].id;
+          tags.push(o);
+        }
+        _this.tags[0].options = tags;
+      });
+    },
+
+    getModules() {
+      let _this = this;
+      getAllModules().then((response) => {
+        console.log(response.data)
+        var data = response.data.data;
+        var modules = {};
+        modules = new Array();
+        for (let i = 0; i < data.length; i++) {
+          var o = { value: "321", label: "123" };
+          o.label = data[i].name;
+          o.value = data[i].id;
+          modules.push(o);
+        }
+        _this.modules[0].options = modules;
+      })
+    },
   },
 };
 </script>
 
 <style>
 .droplist {
-  width:100%;
+  width: 100%;
   margin-top: 20px;
   display: inline-flex;
 }
