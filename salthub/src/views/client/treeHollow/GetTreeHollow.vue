@@ -25,6 +25,7 @@
 import Header from "@/components/Layout/Header";
 import Popover from "@/components/treeHollow/ReplyPopover";
 import Footer from "@/components/Layout/Footer";
+import { getTreeHollow } from "@/api/blog"
 export default {
   name: "GetTreeHollow",
   components: {
@@ -39,6 +40,17 @@ export default {
                 "加油！读书人,"
     };
   },
+  created() {
+    this.getContent()
+  },
+  methods: {
+    getContent() {
+      getTreeHollow().then((response) => {
+        console.log(response.data.data)
+        this.textarea = response.data.data.content
+      })
+    }
+  }
 };
 </script>
 <style scoped>

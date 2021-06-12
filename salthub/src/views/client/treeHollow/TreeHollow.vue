@@ -6,6 +6,7 @@
     <div class="main">
       <el-card class="card">
         <el-input
+          id="content"
           class="content"
           type="textarea"
           :rows="12"
@@ -15,9 +16,21 @@
           v-model="textarea"
         >
         </el-input>
-        <el-button class="submit" type="submit">丢进树洞</el-button>
-        <div style="height: 20px"></div>
-        <el-button class="submit" @click="toGetTreeHollow" type="submit">倾听树洞</el-button>
+        <el-button class="submit" @click="sendTreeHollow" type="submit"
+          >丢进树洞</el-button
+        >
+        <transition name="listen">
+          <div v-show="isSent">
+            <div style="height: 20px"></div>
+            <el-button
+              class="submit"
+              @click="toGetTreeHollow"
+              type="submit"
+              v-show="isSent"
+              >倾听树洞</el-button
+            >
+          </div>
+        </transition>
       </el-card>
     </div>
   </div>
@@ -25,6 +38,7 @@
 <script>
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
+import { postTreeHollow } from "@/api/blog";
 export default {
   name: "GetTreeHollow",
   components: {
@@ -34,11 +48,39 @@ export default {
   data() {
     return {
       textarea: "",
+      isSent: false,
     };
   },
   methods: {
     toGetTreeHollow() {
       this.$router.push({ path: this.redirect || "/getTreeHollow" });
+    },
+    sendTreeHollow() {
+      if (this.textarea === "" || this.textarea === null) {
+        this.$message({
+          message: "烦恼不能为空哦",
+          type: "error",
+          duration: 2000,
+        });
+      } else {
+        var data = {
+          content: this.textarea,
+        };
+        postTreeHollow(data).then((response) => {
+          console.log(response);
+          if (response.data.message === "OK") {
+            this.$message({
+              message: "烦恼已经丢进树洞啦",
+              type: "success",
+              duration: 2000,
+            });
+          }
+          document.getElementById("content").value = "";
+          this.textarea = "";
+          this.isSent = true;
+          console.log(this.textarea);
+        });
+      }
     },
   },
 };
@@ -80,9 +122,19 @@ export default {
   font-size: 18px;
   width: fit-content;
   border: 0px;
+  transition: 1s;
 
   margin-left: 50%;
   transform: translateX(-50%);
+}
+.my-enter,
+.my-leave-to {
+  opacity: 0; /*透明度*/
+  transform: translateY(70px);
+}
+.my-enter-active,
+.my-leave-active {
+  transition: all 0.8s ease;
 }
 .el-button--submit,
 .el-button--submit:focus,
