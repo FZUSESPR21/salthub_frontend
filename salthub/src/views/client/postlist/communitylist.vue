@@ -121,7 +121,6 @@ export default {
       // this.forceRerender();
     },
     searchByTag(tag) {
-      console.log(tag);
       this.$router.push({ path: "/searchtag?key=" + tag });
     },
     //点击标题跳转详情
@@ -137,20 +136,15 @@ export default {
     init(tab) {
       if (tab === "fzu") {
         this.modules = 0;
-        console.log(this.modules);
       } else if (tab === "otherschool") {
         this.modules = 1;
-        console.log(this.modules);
       } else if (tab === "nonsense") {
         this.modules = 2;
-        console.log(this.modules);
       } else if (tab === "freeclass") {
         this.modules = 3;
-        console.log(this.modules);
       }
       getListInCommunity(this.page.current, this.modules).then((response) => {
         const { data } = response;
-        console.log(data);
         this.page.current = data.data.current;
         if (this.page.current === 1) {
           //请求第一页就直接赋值
@@ -163,7 +157,6 @@ export default {
           //将后面页码的数据和之前的数据拼合
           for (let i in data.data.records) {
             this.articleList.push(data.data.records[i]);
-            console.log("success");
           }
         }
       });
@@ -174,7 +167,6 @@ export default {
         if (vm.page.current < vm.page.totalpage) {
           //先判断下一页是否有数据
           vm.page.current += 1; //查询条件的页码+1
-          console.log(vm.page.current); //打印当前页码
           this.init(vm.activeName); //拉取数据
         } else {
         }

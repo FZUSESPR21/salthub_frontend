@@ -11,7 +11,7 @@
   <div>
     <el-card shadow="never">
       <div slot="header" class="clearfix">
-        检索到 <code>{{ articleList.length }}</code> 条关于
+        检索到 <code>{{ query.total }}</code> 条关于
         <code class="has-text-info">{{ query.keyword }}</code> 的记录
       </div>
       <div>
@@ -67,7 +67,6 @@ export default {
     fetchList() {
       getSearchList(this.query.current, this.query.keyword).then((response) => {
         const { data } = response;
-        console.log(data);
         this.query.current = data.data.current;
         if (this.query.current === 1) {
           //请求第一页就直接赋值
@@ -78,7 +77,6 @@ export default {
           //将后面页码的数据和之前的数据拼合
           for (let i in data.data.records) {
             this.articleList.push(data.data.records[i]);
-            console.log("success");
           }
         }
       });
@@ -102,7 +100,6 @@ export default {
         if (vm.query.current < vm.query.total / vm.query.size) {
           //先判断下一页是否有数据
           vm.query.current += 1; //查询条件的页码+1
-          console.log(vm.query.current); //打印当前页码
           this.fetchList(); //拉取数据
         } else {
           //到底了没数据了

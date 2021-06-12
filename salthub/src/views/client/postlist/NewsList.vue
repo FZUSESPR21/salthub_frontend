@@ -70,7 +70,6 @@ export default {
       let tag = 2
       getListByTag(this.page.current,tag).then((response) =>  {
         const { data } = response;
-        console.log(data);
         this.page.current = data.data.current;
         if (this.page.current === 1) {
           //请求第一页就直接赋值
@@ -104,7 +103,6 @@ export default {
         if (vm.page.current < vm.page.totalpage) {
           //先判断下一页是否有数据
           vm.page.current += 1; //查询条件的页码+1
-          console.log(vm.page.current); //打印当前页码
           this.init(); //拉取数据
         } else {
         }
