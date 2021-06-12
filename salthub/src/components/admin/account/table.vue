@@ -241,6 +241,7 @@ export default {
           // console.log("searchAccountByName()=>", response.data.data);
           var info = response.data.data;
           this.tableData = [];
+          this.total = 1;
           this.tableData.push({
             nickname: "",
             id: "",

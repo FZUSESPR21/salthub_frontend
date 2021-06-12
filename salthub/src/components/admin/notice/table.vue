@@ -14,7 +14,7 @@
       <div class="v-search">
         <div>
           <el-input
-            placeholder="搜索通知"
+            placeholder="请输入用户ID"
             v-model="input"
             clearable
             @keyup.enter.native="convert()"
@@ -132,7 +132,7 @@
 </style>
 
 <script>
-import { getAllNotice, deleteNotice } from "@/api/notice";
+import { getAllNotice, deleteNotice, getNotice } from "@/api/notice";
 import store from "@/store";
 export default {
   data() {
@@ -185,7 +185,43 @@ export default {
         }
       });
     },
-    convert() {},
+    // 根据用户名搜索公告
+    convert() {
+      if (this.input != "") {
+        // 根据用户名查询公告内容
+        getNotice({ accountName: this.input, current: this.currentPage }).then(
+          (response) => {
+            // console.log("getNotice()=>", response.data.data.records);
+            var len = response.data.data.records.length;
+            var info = response.data.data.records;
+            this.tableData = [];
+            this.total = len;
+            for (var i = 0; i < len; i++) {
+              this.tableData.push({
+                releaseTime: "",
+                id: "",
+                blog: "",
+                noticeId: "",
+                content: "",
+                accountName: "",
+              });
+              // 发布时间
+              this.tableData[i].releaseTime = info[i].releaseTime;
+              // 管理员ID
+              this.tableData[i].id = info[i].author;
+              // 通知标题
+              this.tableData[i].blog = info[i].title;
+              // 公告ID
+              this.tableData[i].noticeId = info[i].id;
+              // 内容
+              this.tableData[i].content = info[i].content;
+              // 用户名
+              this.tableData[i].accountName = info[i].accountName;
+            }
+          }
+        );
+      } else this.init();
+    },
     handleCurrentChange: function (currentPage) {
       // console.log("handleCurrentChange()\n");
       this.tableData = [];
