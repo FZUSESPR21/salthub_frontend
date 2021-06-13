@@ -243,3 +243,19 @@ export function getTreeHollow() {
     method: 'get',
   })
 }
+
+/** 
+ *@functionName: getAllBlog
+ *@param: data 当前页码
+ *@description: 分页获取所有博客
+ *@author: NoMornings
+ *@date: 2021-06-13 12:34:45
+ *@version: V1.0.0
+*/
+export function getAllBlog(params) {
+  return request({
+    url: '/blog/queryall',
+    method: 'get',
+    params
+  })
+}
