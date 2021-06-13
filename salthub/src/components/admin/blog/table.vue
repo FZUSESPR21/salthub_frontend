@@ -110,8 +110,9 @@
     <el-col :span="21" :class="'center'">
       <div class="block p-center pagination">
         <el-pagination
-          layout="prev, pager, next"
-          :total="this.tableDataAll.length"
+          layout="total, prev, pager, next"
+          :page-size="pageSize"
+          :total="122"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :current-size="pageSize"
@@ -208,27 +209,52 @@ export default {
     },
     convert() {},
     handleCurrentChange: function (currentPage) {
-      console.log("handleCurrentChange()\n");
+      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      console.log("currentPage=" + currentPage + "\n");
-      var i;
-      for (
-        var i = (currentPage - 1) * 10, j = 0;
-        j < 10 &&
-        this.tableDataAll.length != 0 &&
-        i + j <= this.tableDataAll.length - 1;
-        j++, i++
-      ) {
-        console.log("i=" + i + "\n");
-        this.tableData.push(this.tableDataAll[i]);
-        console.log(
-          "this.tableDataAll[i]" + JSON.stringify(this.tableDataAll[i]) + "\n"
-        );
-      }
-      if (this.tableDataAll.length == 0) {
-        this.tableData = [];
-      }
+      // console.log("currentPage=" + currentPage + "\n");
+
+      // 分页获取博客列表
+      getAllBlog({
+        // 当前页码
+        current: this.currentPage,
+      }).then((response) => {
+        // console.log("blog=>", response.data.data.records);
+        var len = response.data.data.records.length;
+        var info = response.data.data.records;
+        for (var i = 0; i < len; i++) {
+          this.tableData.push({
+            releaseTime: "",
+            author: "",
+            title: "",
+            status: 2,
+            id: "",
+            module: 0,
+            likeNumber: "",
+            collectionNumber: "",
+            content: "",
+          });
+          // 发表时间
+          this.tableData[i].releaseTime = info[i].releaseTime;
+          // 用户ID
+          this.tableData[i].author = info[i].author;
+          // 文章标题
+          this.tableData[i].title = info[i].title;
+          // 状态（ 删除 | 封禁 | 正常 | 树洞 ）
+          this.tableData[i].status = this.judgeStatus(info[i].state);
+          // 博客ID
+          this.tableData[i].id = info[i].id;
+          // 模块（ 福州大学 | 外校 | 杂谈 | 拼课 )
+          this.tableData[i].module = this.judgeModule(info[i].moduleId);
+          // 点赞数
+          this.tableData[i].likeNumber = info[i].likeNumber;
+          // 收藏数
+          this.tableData[i].collectionNumber = info[i].collectionNumber;
+          // 内容
+          this.tableData[i].content = info[i].content;
+        }
+        // this.tableData.pop();
+      });
     },
     // 判断模块类别
     judgeModule(moduleId) {
