@@ -48,7 +48,7 @@
                 position: relative;
               "
             >
-              {{ comment.name }}
+              {{ comment.author }}
             </div>
           </div>
         </el-aside>
