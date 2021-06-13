@@ -58,7 +58,12 @@
           </el-main>
           <el-footer>
             <div style="float: right">
-              <span style="font-size: 15px">2021年4月3日</span>
+              <span style="font-size: 15px">{{ comment.releaseTime }}</span>
+              <!-- <el-button
+                round
+                style="background-color: #ff4949; color: white; font-size: 3px"
+                >点赞</el-button
+              > -->
               <el-button type="text">举报</el-button>
             </div>
           </el-footer>
