@@ -88,7 +88,9 @@ export default {
             if (data.code == "200")
             {
               this.$message.success('留言成功')
-             location.reload()
+              setTimeout(() => {
+                location.reload()
+              }, 800);
             }
           }catch (e) {
             this.message({

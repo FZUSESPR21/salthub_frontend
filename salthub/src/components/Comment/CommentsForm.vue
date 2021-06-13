@@ -60,7 +60,6 @@ export default {
   methods: {
     async onSubmit() {
       this.isLoading = true
-      try {
         console.log(this.blogId)
         console.log(store.getters.user.name)
         var data = {
@@ -70,8 +69,25 @@ export default {
           "id": 0,
           "releaseTime": ""
         }
-        pushComment(data)
-        this.$message.success('留言成功')
+        pushComment(data).then((response) => {
+          try{
+            const { data } = response;
+            if (data.code == "200")
+            {
+              this.$message.success('留言成功')
+              setTimeout(() => {
+                location.reload()
+              }, 800);
+            }
+          }catch (e) {
+            this.message({
+              message: `Cannot comment this story. ${e}`,
+              type: 'is-danger'
+            })
+          } finally {
+            this.isLoading = false
+          }
+        });
         this.textarea = ''
         // let postData = {}
         // console.log(this.commentText)
@@ -80,15 +96,7 @@ export default {
         // await pushComment(postData)
         // this.$emit('loadComments', this.slug)
         // this.$message.success('留言成功')
-      } catch (e) {
-        this.$buefy.toast.open({
-          message: `Cannot comment this story. ${e}`,
-          type: 'is-danger'
-        })
-      } finally {
-        this.isLoading = false
       }
     }
   }
-}
 </script>
