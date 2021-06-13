@@ -64,7 +64,6 @@ export default {
   methods: {
     async onSubmit() {
       this.isLoading = true
-      try {
         console.log(this.firstCommentId)
         console.log(this.firstCommentAuthor)
         // var data = {
@@ -84,11 +83,20 @@ export default {
           "releaseTime": ""
         }
         pushSecondComment(data).then((response) => {
-          const { data } = response;
-          if (data.code == "200")
-          {
-            this.$message.success('留言成功')
-            location.reload()
+          try{
+            const { data } = response;
+            if (data.code == "200")
+            {
+              this.$message.success('留言成功')
+             location.reload()
+            }
+          }catch (e) {
+            this.message({
+              message: `Cannot comment this story. ${e}`,
+              type: 'is-danger'
+            })
+          } finally {
+            this.isLoading = false
           }
         });
         this.textarea = ''
@@ -99,15 +107,7 @@ export default {
         // await pushComment(postData)
         // this.$emit('loadComments', this.slug)
         // this.$message.success('留言成功')
-      } catch (e) {
-        this.message({
-          message: `Cannot comment this story. ${e}`,
-          type: 'is-danger'
-        })
-      } finally {
-        this.isLoading = false
       }
     }
   }
-}
 </script>
