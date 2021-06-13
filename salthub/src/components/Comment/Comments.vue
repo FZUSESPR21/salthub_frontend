@@ -55,9 +55,9 @@
           </el-main>
           <el-footer height="120px">
             <div style="float: right">
-              <el-button round style="background-color: #ff4949; color: white"
+              <!-- <el-button round style="background-color: #ff4949; color: white"
                 >点赞</el-button
-              >
+              > -->
               <br />
               <span style="font-size: 15px">{{ comment.releaseTime }}</span>
               <el-button type="text">举报</el-button>
