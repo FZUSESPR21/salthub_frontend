@@ -83,8 +83,14 @@ export default {
           "id": 1,
           "releaseTime": ""
         }
-        pushSecondComment(data)
-        this.$message.success('留言成功')
+        pushSecondComment(data).then((response) => {
+          const { data } = response;
+          if (data.code == "200")
+          {
+            this.$message.success('留言成功')
+            location.reload()
+          }
+        });
         this.textarea = ''
         // let postData = {}
         // console.log(this.commentText)
@@ -94,7 +100,7 @@ export default {
         // this.$emit('loadComments', this.slug)
         // this.$message.success('留言成功')
       } catch (e) {
-        this.$buefy.toast.open({
+        this.message({
           message: `Cannot comment this story. ${e}`,
           type: 'is-danger'
         })
