@@ -76,6 +76,7 @@
 import { mapGetters } from "vuex";
 import { url } from "@/utils/interface.js";
 import store from "@/store";
+import { getSecondComments } from "@/api/comment";
 export default {
   name: "Detail",
   props: {
@@ -91,11 +92,7 @@ export default {
   data() {
     const item = {};
     return {
-      comments: [
-        { name: "张三", content: "顶顶顶" },
-        { name: "王五", content: "点赞" },
-        { name: "李四", content: "收藏" },
-      ],
+      comments: [],
       // avatar
       imgUrl:
         store.getters.user == null
@@ -103,6 +100,22 @@ export default {
           : url + store.getters.user.avatar,
     };
   },
-  methods: {},
+  created() {
+    this.SecondComment();
+  },
+  methods: {
+    SecondComment: function () {
+      var params = {
+        flag: 1,
+        id: this.firstCommentId,
+      };
+      getSecondComments(params).then((response) => {
+        console.log(params.id);
+        const { data } = response;
+        this.comments = response.data.data;
+        console.log(this.comments);
+      });
+    },
+  },
 };
 </script>

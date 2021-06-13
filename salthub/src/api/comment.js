@@ -49,3 +49,21 @@ export function pushSecondComment(data) {
 }
 
 
+
+/**
+ *@functionName: getSecondComments
+ *@param: id:一级评论id flag:1
+ *@description: 获取二级评论
+ *@author: 庄威龙
+ *@date: 2021-06-13 11:08
+ *@version: V1.0.1
+*/
+export function getSecondComments(params) {
+  return request({
+    url: '/comment/2',
+    method: 'get',
+    params
+  })
+}
+
+
