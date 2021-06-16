@@ -27,7 +27,12 @@
             ></el-input>
           </el-form-item>
 
-          <el-form-item style="width: 80%" label="记住" prop="status" class="btn-content">
+          <el-form-item
+            style="width: 80%"
+            label="记住"
+            prop="status"
+            class="btn-content"
+          >
             <el-switch
               v-model="ruleForm.status"
               :active-value="1"
@@ -38,7 +43,7 @@
           </el-form-item>
 
           <el-form-item class="btn-content">
-            <el-button class="submit" type="primary" @click="submit('ruleForm')"
+            <el-button class="submit" type="primary" @click="varify"
               >登录</el-button
             >
             <!-- 注册待跳转 -->
@@ -100,31 +105,31 @@ export default {
      *@version: V1.0.0
      */
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.loading = true;
-          // console.log(this.ruleForm)
-          this.$store
-            .dispatch("user/login", this.ruleForm)
-            // .dispatch("user/logout")
-            .then(() => {
-              this.$message({
-                message: "恭喜你，登录成功",
-                type: "success",
-                duration: 2000,
-              });
-              setTimeout(() => {
-                this.loading = false;
-                this.$router.push({ path: this.redirect || "/home" });
-              }, 0.5 * 1000);
-            })
-            .catch(() => {
-              this.loading = false;
-            });
-        } else {
-          return false;
-        }
-      });
+      // this.$refs[formName].validate((valid) => {
+      //   if (valid) {
+      this.loading = true;
+      // console.log(this.ruleForm)
+      this.$store
+        .dispatch("user/login", this.ruleForm)
+        // .dispatch("user/logout")
+        .then(() => {
+          this.$message({
+            message: "恭喜你，登录成功",
+            type: "success",
+            duration: 2000,
+          });
+          setTimeout(() => {
+            this.loading = false;
+            this.$router.push({ path: this.redirect || "/home" });
+          }, 0.5 * 1000);
+        })
+        .catch(() => {
+          this.loading = false;
+        });
+      //   } else {
+      //     return false;
+      //   }
+      // });
     },
     /**
      *@functionName:    toRegister
@@ -140,8 +145,8 @@ export default {
       this.$router.push({ path: this.redirect || "/forgetpwd" });
     },
     /**
-     *@functionName: submit    
-     *@description: 点击登录 
+     *@functionName: submit
+     *@description: 点击登录
      *@author: lw
      *@date: 2021-05-02 17:50:39
      *@version: V1.0.0
@@ -150,18 +155,17 @@ export default {
       console.log(this.isVerified);
       if (this.isVerified == true) {
         this.submitForm(form);
-      }
-      else {
-        this.varify()
+      } else {
+        this.varify();
       }
     },
     /**
-     *@functionName: varify  
-     *@description: 滑块验证
+     *@functionName: varify
+     *@description: 表单验证+滑块验证
      *@author: lw
      *@date: 2021-06-06 19:25:26
      *@version: V1.0.0
-    */
+     */
     varify() {
       let appid = "2065604160"; // 腾讯云控制台中对应这个项目的 appid
       var _this = this;
@@ -171,41 +175,27 @@ export default {
         // console.log(res);
         if (res.ret === 0) {
           //成功，传递数据给后台进行验证
-          setTrue()
+          // varifyForm()
+          _this.submitForm("ruleForm");
+          console.log("成功验证");
+          setTrue();
         } else {
           // 提示用户完成验证
         }
       });
+      function varifyForm() {
+        console.log("varifyForm")
+        this.$refs["ruleForm"].validate((valid) => {
+          if (valid) {
+            _this.submitForm("ruleForm");
+          }
+        });
+      }
       function setTrue() {
         _this.isVerified = true;
-        // console.log(_this == this)
-        // console.log(abc)
       }
       // 滑块显示
       captcha.show();
-    },
-    /**
-     *@functionName:    successVerified
-     *@description: 滑块验证成功函数
-     *@author: lw
-     *@date: 2021-05-02 20:18:19
-     *@version: V1.0.0
-     */
-    successVerified() {
-      // console.log("成功验证")
-      this.isVerified = true;
-      // this.submitForm(this.ruleForm)
-    },
-    /**
-     *@functionName:    errorVerified
-     *@description: 滑块验证失败函数
-     *@author: lw
-     *@date: 2021-05-02 20:18:19
-     *@version: V1.0.0
-     */
-    errorVerified() {
-      // console.log("验证失败")
-      this.isVerified = false;
     },
   },
 };
