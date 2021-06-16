@@ -63,6 +63,12 @@ export default {
   created() {
     this.fetchList();
   },
+  mounted() {
+    window.addEventListener("scroll", this.load);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.load, false);
+  },
   methods: {
     fetchList() {
       getSearchList(this.query.current, this.query.keyword).then((response) => {
@@ -97,7 +103,7 @@ export default {
     load() {
       let vm = this;
       if (getScrollTop() + getWindowHeight() >= getScrollHeight()) {
-        if (vm.query.current < vm.query.total / vm.query.size) {
+        if (vm.query.current < vm.query.totalpage) {
           //先判断下一页是否有数据
           vm.query.current += 1; //查询条件的页码+1
           this.fetchList(); //拉取数据
@@ -106,12 +112,6 @@ export default {
         }
       }
     },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.load);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.load, false);
   },
 };
 </script>
