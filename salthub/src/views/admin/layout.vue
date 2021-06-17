@@ -8,9 +8,9 @@
  * @version: V1.0.1 
 !-->
 <template>
-  <div :class="'layout'" style="background-color: white">
-    <v-header></v-header>
-    <v-nav></v-nav>
+  <div :class="'layout'">
+    <v-header style="height: 6.5%"></v-header>
+    <v-nav style="height: 93.5%"></v-nav>
     <router-view :class="'router'"></router-view>
   </div>
 </template>
@@ -18,9 +18,13 @@
 <style scoped>
 .layout {
   height: 100%;
+  min-height: 860px;
+  background-color: white;
 }
 .router {
-  margin: 20px;
+  /* margin: 20px; */
+  padding-top: 20px;
+  height: 93.5%;
 }
 </style>
 
@@ -35,5 +39,30 @@ export default {
     // 后台侧边栏
     "v-nav": nav,
   },
+  data() {
+    return {
+      // 浏览器高度
+      h: document.documentElement.clientHeight,
+    };
+  },
+  // mounted() {
+  //   this.height();
+  //   window.onresize = this.height();
+  // },
+  // watch: {
+  //   h: "height",
+  // },
+  // methods: {
+  //   height() {
+  //     console.log("resize");
+  //     // 浏览器高度
+  //     this.h =
+  //       window.innerHeight ||
+  //       document.documentElement.clientHeight ||
+  //       document.body.clientHeight;
+  //     let height = this.h - 65;
+  //     return "height:" + height + "px";
+  //   },
+  // },
 };
 </script>

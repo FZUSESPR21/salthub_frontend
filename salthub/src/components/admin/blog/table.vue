@@ -98,12 +98,13 @@
             <el-button
               size="mini"
               @click="handleDisabled(scope.$index, scope.row)"
-              >封禁</el-button
+              >{{ isDisabled(scope.row) }}</el-button
             >
             <el-button
               size="mini"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)"
+              :disabled="isDel(scope.row)"
               >删除</el-button
             >
           </template>
@@ -172,29 +173,15 @@
 </style>
 
 <script>
-import { getAllBlog, countBlog } from "@/api/blog";
+import { getAllBlog, countBlog, delBlog, banBlog, unbanBlog } from "@/api/blog";
 import { getSearchList } from "@/api/postlist";
 export default {
   data() {
     return {
       input: "",
-      tableData: [
-        {
-          releaseTime: "2021-4-28",
-          // 用户ID
-          author: "烤盐人",
-          title: "福大计算机考研复试之人工智能分析篇",
-          status: "正常",
-          // 博客ID
-          id: 1,
-          module: "福州大学",
-          likeNumber: 0,
-          collectionNumber: 0,
-          content: "",
-        },
-      ],
+      tableData: [],
       tableDataAll: [],
-      total: 53,
+      total: 0,
       currentPage: 1,
       pageSize: 10,
     };
@@ -208,13 +195,78 @@ export default {
     },
     handleDisabled(index, row) {
       console.log(index, row);
+      // 封禁文章
+      if (row.status != "封禁")
+        banBlog({blogId:row.id} ).then((response) => {
+          if (response.data.code == 200) {
+            this.$message({
+              message: "封禁成功",
+              type: "success",
+              duration: 2000,
+            });
+            // 刷新结果
+            location.reload();
+          } else {
+            this.$message({
+              message: "该文章已是封禁状态",
+              type: "error",
+              duration: 2000,
+            });
+          }
+        });
+      // 解封文章
+      else
+        unbanBlog({blogId:row.id} ).then((response) => {
+          if (response.data.code == 200) {
+            this.$message({
+              message: "解封成功",
+              type: "success",
+              duration: 2000,
+            });
+            // 刷新结果
+            location.reload();
+          } else {
+            this.$message({
+              message: "该文章未处于封禁状态",
+              type: "error",
+              duration: 2000,
+            });
+          }
+        });
     },
     handleDelete(index, row) {
       console.log(index, row);
+      // 删除文章
+      delBlog(row.id).then((response) => {
+        console.log("response=>", response);
+        if (response.data.code == 200) {
+          this.$message({
+            message: "删除成功",
+            type: "success",
+            duration: 2000,
+          });
+          // 刷新结果
+          location.reload();
+        } else {
+          this.$message({
+            message: "该文章已删除",
+            type: "error",
+            duration: 2000,
+          });
+        }
+      });
+    },
+    // 判断是否为删除状态
+    isDel(row) {
+      return row.status == "删除" ? true : false;
+    },
+    // 按钮显示封禁或解封状态
+    isDisabled(row) {
+      return row.status == "封禁" ? "解封" : "封禁";
     },
     // 通过title模糊查询文章
     convert() {
-      console.log("convert()");
+      // console.log("convert()");
       if (this.input != "") {
         // 通过title模糊查询文章
         getSearchList(this.currentPage, this.input).then((response) => {
@@ -334,10 +386,12 @@ export default {
       else if (status == "树洞") return "";
     },
     init() {
+      this.tableData = [];
+
       // 获取博客总数
       countBlog().then((response) => {
         // this.total = response.data.data;
-        this.total = 53;
+        this.total = 55;
         // console.log("countBlog()=>", response.data.data);
       });
 
@@ -380,7 +434,7 @@ export default {
           // 内容
           this.tableData[i].content = info[i].content;
         }
-        this.tableData.pop();
+        // this.tableData.pop();
       });
     },
     filterTag(value, row) {

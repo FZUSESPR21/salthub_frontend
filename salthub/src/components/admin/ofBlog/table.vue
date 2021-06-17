@@ -89,6 +89,7 @@
               size="mini"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)"
+              :disabled="isDel(scope.row)"
               >删除</el-button
             >
           </template>
@@ -151,24 +152,12 @@
 
 <script>
 import { getListByTag } from "@/api/postlist"
+import { getAllBlog, delBlog } from "@/api/blog";
 export default {
   data() {
     return {
       input: "",
       tableData: [
-        {
-          releaseTime: "2021-4-28",
-          // 用户ID
-          author: "烤盐人",
-          title: "福大计算机考研复试之人工智能分析篇",
-          status: "正常",
-          // 博客ID
-          id: 1,
-          module: "福州大学",
-          likeNumber: 0,
-          collectionNumber: 0,
-          content: "",
-        },
       ],
       tableDataAll: [],
       total: 0,
@@ -185,6 +174,29 @@ export default {
     },
     handleDelete(index, row) {
       console.log(index, row);
+      // 删除文章
+      delBlog(row.id).then((response) => {
+        console.log("response=>", response);
+        if (response.data.code == 200) {
+          this.$message({
+            message: "删除成功",
+            type: "success",
+            duration: 2000,
+          });
+          // 刷新结果
+          location.reload();
+        } else {
+          this.$message({
+            message: "该文章已删除",
+            type: "error",
+            duration: 2000,
+          });
+        }
+      });
+    },
+    // 判断是否为删除状态
+    isDel(row) {
+      return row.status == "删除" ? true : false;
     },
     convert() {},
     handleCurrentChange: function (currentPage) {
@@ -264,6 +276,8 @@ export default {
       else if (status == "树洞") return "";
     },
     init() {
+      this.tableData = [];
+
       // 获取博客总数
       // countBlog().then((response) => {
         // this.total = response.data.data;
@@ -312,7 +326,7 @@ export default {
           // 内容
           this.tableData[i].content = info[i].content;
         }
-        this.tableData.pop();
+        // this.tableData.pop();
       });
     },
     filterTag(value, row) {

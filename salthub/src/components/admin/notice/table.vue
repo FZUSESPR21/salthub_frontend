@@ -14,7 +14,7 @@
       <div class="v-search">
         <div>
           <el-input
-            placeholder="请输入用户ID"
+            placeholder="请输入管理员ID"
             v-model="input"
             clearable
             @keyup.enter.native="convert()"
@@ -132,22 +132,18 @@
 </style>
 
 <script>
-import { getAllNotice, deleteNotice, getNotice, countNotice } from "@/api/notice";
+import {
+  getAllNotice,
+  deleteNotice,
+  getNotice,
+  countNotice,
+} from "@/api/notice";
 import store from "@/store";
 export default {
   data() {
     return {
       input: "",
-      tableData: [
-        {
-          releaseTime: "2021-4-28",
-          id: "KaoYanRen",
-          blog: "福大计算机考研复试之人工智能分析篇",
-          noticeId: "1",
-          content: "最后一次！！！",
-          accountName: "KaoYanRen",
-        },
-      ],
+      tableData: [],
       tableDataAll: [],
       total: 0,
       currentPage: 1,
@@ -262,6 +258,8 @@ export default {
       });
     },
     init() {
+      this.tableData = [];
+
       // 获取公告总数
       countNotice().then((response) => {
         this.total = response.data.data;
@@ -298,7 +296,7 @@ export default {
           // 用户名
           this.tableData[i].accountName = info[i].accountName;
         }
-        this.tableData.pop();
+        // this.tableData.pop();
       });
       // console.log("token=>", store.getters.token);
     },

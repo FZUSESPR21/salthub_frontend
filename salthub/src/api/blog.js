@@ -259,3 +259,35 @@ export function getAllBlog(params) {
     params
   })
 }
+
+/** 
+ *@functionName: banBlog
+ *@param: data 博客id
+ *@description: 根据id封禁博客
+ *@author: NoMornings
+ *@date: 2021-06-17 23:03:25
+ *@version: V1.0.0
+*/
+export function banBlog(params) {
+  return request({
+    url: '/ban/blog',
+    method: 'put',
+    params
+  })
+}
+
+/** 
+ *@functionName: unbanBlog
+ *@param: data 博客id
+ *@description: 根据id解封博客
+ *@author: NoMornings
+ *@date: 2021-06-17 23:05:23
+ *@version: V1.0.0
+*/
+export function unbanBlog(params) {
+  return request({
+    url: '/ban/blog',
+    method: 'delete',
+    params
+  })
+}

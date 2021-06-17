@@ -165,16 +165,7 @@ export default {
   data() {
     return {
       input: "",
-      tableData: [
-        {
-          nickname: "烤盐人",
-          id: "KaoYanRen",
-          blog: "福大计算机考研复试之人工智能分析篇",
-          status: "正常",
-          email: "",
-          auth: 4,
-        },
-      ],
+      tableData: [],
       tableDataAll: [],
       total: 0,
       currentPage: 1,
@@ -338,6 +329,8 @@ export default {
       else return "success";
     },
     init() {
+      this.tableData = [];
+
       // 获取用户个数
       countAccount().then((response) => {
         this.total = response.data.data;
@@ -377,7 +370,7 @@ export default {
           // 权限
           this.tableData[i].auth = this.judgeAuth(info[i].roleId);
         }
-        this.tableData.pop();
+        // this.tableData.pop();
       });
 
       // console.log("token=>", store.getters.token);
