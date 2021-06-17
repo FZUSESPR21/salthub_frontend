@@ -14,7 +14,7 @@
       <div class="v-search">
         <div>
           <el-input
-            placeholder="搜索文章"
+            placeholder="请输入文章标题"
             v-model="input"
             clearable
             @keyup.enter.native="convert()"
@@ -70,20 +70,24 @@
         <el-table-column label="用户 ID" prop="author"> </el-table-column>
         <el-table-column label="文章标题" prop="title" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column label="状态" prop="status" :filters="[
+        <el-table-column
+          label="状态"
+          prop="status"
+          :filters="[
             { text: '删除', value: '删除' },
             { text: '封禁', value: '封禁' },
             { text: '正常', value: '正常' },
             { text: '树洞', value: '树洞' },
           ]"
           :filter-method="filterTag"
-          filter-placement="bottom-end"> 
+          filter-placement="bottom-end"
+        >
           <template slot-scope="scope">
             <el-tag :type="statusTag(scope.row.status)">{{
               scope.row.status
             }}</el-tag>
           </template>
-          </el-table-column>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -112,7 +116,7 @@
         <el-pagination
           layout="total, prev, pager, next"
           :page-size="pageSize"
-          :total="122"
+          :total="total"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :current-size="pageSize"
@@ -169,6 +173,7 @@
 
 <script>
 import { getAllBlog, countBlog } from "@/api/blog";
+import { getSearchList } from "@/api/postlist";
 export default {
   data() {
     return {
@@ -189,7 +194,7 @@ export default {
         },
       ],
       tableDataAll: [],
-      total: 0,
+      total: 53,
       currentPage: 1,
       pageSize: 10,
     };
@@ -207,7 +212,51 @@ export default {
     handleDelete(index, row) {
       console.log(index, row);
     },
-    convert() {},
+    // 通过title模糊查询文章
+    convert() {
+      console.log("convert()");
+      if (this.input != "") {
+        // 通过title模糊查询文章
+        getSearchList(this.currentPage, this.input).then((response) => {
+          // console.log("getSearchList()=>", response.data.data);
+          this.tableData = [];
+          var len = response.data.data.records.length;
+          var info = response.data.data.records;
+          this.total = len;
+          for (var i = 0; i < len; i++) {
+            this.tableData.push({
+              releaseTime: "",
+              author: "",
+              title: "",
+              status: 2,
+              id: "",
+              module: 0,
+              likeNumber: "",
+              collectionNumber: "",
+              content: "",
+            });
+            // 发表时间
+            this.tableData[i].releaseTime = info[i].releaseTime;
+            // 用户ID
+            this.tableData[i].author = info[i].author;
+            // 文章标题
+            this.tableData[i].title = info[i].title;
+            // 状态（ 删除 | 封禁 | 正常 | 树洞 ）
+            this.tableData[i].status = this.judgeStatus(info[i].state);
+            // 博客ID
+            this.tableData[i].id = info[i].id;
+            // 模块（ 福州大学 | 外校 | 杂谈 | 拼课 )
+            this.tableData[i].module = this.judgeModule(info[i].moduleId);
+            // 点赞数
+            this.tableData[i].likeNumber = info[i].likeNumber;
+            // 收藏数
+            this.tableData[i].collectionNumber = info[i].collectionNumber;
+            // 内容
+            this.tableData[i].content = info[i].content;
+          }
+        });
+      } else this.init();
+    },
     handleCurrentChange: function (currentPage) {
       // console.log("handleCurrentChange()\n");
       this.tableData = [];
@@ -287,7 +336,8 @@ export default {
     init() {
       // 获取博客总数
       countBlog().then((response) => {
-        this.total = response.data.data;
+        // this.total = response.data.data;
+        this.total = 53;
         // console.log("countBlog()=>", response.data.data);
       });
 

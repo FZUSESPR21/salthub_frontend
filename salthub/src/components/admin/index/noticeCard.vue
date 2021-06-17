@@ -46,6 +46,7 @@ $white: #dcdfe6;
 }
 .wrap {
   margin-top: 20px;
+  padding: 0 20px;
   div .divider {
     width: 100%;
     height: 1px;

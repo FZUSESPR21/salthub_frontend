@@ -8,7 +8,7 @@
  * @version: V1.0.1 
 !-->
 <template>
-  <div :class="'layout'">
+  <div :class="'layout'" style="background-color: white">
     <v-header></v-header>
     <v-nav></v-nav>
     <router-view :class="'router'"></router-view>
