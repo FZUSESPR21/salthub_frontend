@@ -138,7 +138,6 @@ import {
   getNotice,
   countNotice,
 } from "@/api/notice";
-import store from "@/store";
 export default {
   data() {
     return {
@@ -158,7 +157,6 @@ export default {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      console.log(index, row);
       // 删除公告
       deleteNotice({
         // 公告id
@@ -187,7 +185,6 @@ export default {
         // 根据用户名查询公告内容
         getNotice({ accountName: this.input, current: this.currentPage }).then(
           (response) => {
-            // console.log("getNotice()=>", response.data.data.records);
             var len = response.data.data.records.length;
             var info = response.data.data.records;
             this.tableData = [];
@@ -219,17 +216,14 @@ export default {
       } else this.init();
     },
     handleCurrentChange: function (currentPage) {
-      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      // console.log("currentPage=" + currentPage + "\n");
 
       //获取所有公告
       getAllNotice({
         //当前页码
         current: currentPage,
       }).then((response) => {
-        // console.log("notice=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -254,7 +248,6 @@ export default {
           // 用户名
           this.tableData[i].accountName = info[i].accountName;
         }
-        // this.tableData.pop();
       });
     },
     init() {
@@ -263,7 +256,6 @@ export default {
       // 获取公告总数
       countNotice().then((response) => {
         this.total = response.data.data;
-        // console.log("countNotice()=>", response.data.data);
       });
 
       // 获取所有公告
@@ -271,7 +263,6 @@ export default {
         // 当前页码
         current: 1,
       }).then((response) => {
-        // console.log("notice=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -296,9 +287,7 @@ export default {
           // 用户名
           this.tableData[i].accountName = info[i].accountName;
         }
-        // this.tableData.pop();
       });
-      // console.log("token=>", store.getters.token);
     },
   },
 };

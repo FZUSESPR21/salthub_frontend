@@ -151,19 +151,16 @@ export default {
       // 获取用户个数
       countAccount().then((response) => {
         this.userNum = response.data.data;
-        // console.log("countAccount()=>", response.data.data);
       });
 
       // 获取博客总数
       countBlog().then((response) => {
         this.blogNum = response.data.data;
-        // console.log("countBlog()=>", response.data.data);
       });
 
       // 获取当日博客数
       intradayBlog().then((response) => {
         this.intradayBlog = response.data.data;
-        // console.log("intradayBlog()=>", response.data.data);
       });
     },
   },

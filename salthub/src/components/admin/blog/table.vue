@@ -194,10 +194,9 @@ export default {
       console.log(index, row);
     },
     handleDisabled(index, row) {
-      console.log(index, row);
       // 封禁文章
       if (row.status != "封禁")
-        banBlog({blogId:row.id} ).then((response) => {
+        banBlog({ blogId: row.id }).then((response) => {
           if (response.data.code == 200) {
             this.$message({
               message: "封禁成功",
@@ -216,7 +215,7 @@ export default {
         });
       // 解封文章
       else
-        unbanBlog({blogId:row.id} ).then((response) => {
+        unbanBlog({ blogId: row.id }).then((response) => {
           if (response.data.code == 200) {
             this.$message({
               message: "解封成功",
@@ -266,11 +265,9 @@ export default {
     },
     // 通过title模糊查询文章
     convert() {
-      // console.log("convert()");
       if (this.input != "") {
         // 通过title模糊查询文章
         getSearchList(this.currentPage, this.input).then((response) => {
-          // console.log("getSearchList()=>", response.data.data);
           this.tableData = [];
           var len = response.data.data.records.length;
           var info = response.data.data.records;
@@ -310,17 +307,14 @@ export default {
       } else this.init();
     },
     handleCurrentChange: function (currentPage) {
-      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      // console.log("currentPage=" + currentPage + "\n");
 
       // 分页获取博客列表
       getAllBlog({
         // 当前页码
         current: this.currentPage,
       }).then((response) => {
-        // console.log("blog=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -354,7 +348,6 @@ export default {
           // 内容
           this.tableData[i].content = info[i].content;
         }
-        // this.tableData.pop();
       });
     },
     // 判断模块类别
@@ -392,7 +385,6 @@ export default {
       countBlog().then((response) => {
         // this.total = response.data.data;
         this.total = 55;
-        // console.log("countBlog()=>", response.data.data);
       });
 
       // 分页获取博客列表
@@ -400,7 +392,6 @@ export default {
         // 当前页码
         current: this.currentPage,
       }).then((response) => {
-        // console.log("blog=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -434,7 +425,6 @@ export default {
           // 内容
           this.tableData[i].content = info[i].content;
         }
-        // this.tableData.pop();
       });
     },
     filterTag(value, row) {

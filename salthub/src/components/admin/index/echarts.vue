@@ -21,7 +21,6 @@
 
 <script>
 import * as echarts from "echarts";
-import $ from "jquery";
 export default {
   data() {
     return {};

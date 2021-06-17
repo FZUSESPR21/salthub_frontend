@@ -24,13 +24,6 @@
 
 <style lang="scss" scoped>
 $white: #dcdfe6;
-// .text {
-//   font-size: 14px;
-// }
-
-// .item {
-//   padding: 18px 0;
-// }
 
 .box-card {
   width: 275px;
@@ -84,7 +77,6 @@ export default {
         // 当前页码
         current: 1,
       }).then((response) => {
-        // console.log("notice=>", response.data.data.records);
         // var len = response.data.data.records.length;
         var len = 6;
         var info = response.data.data.records;

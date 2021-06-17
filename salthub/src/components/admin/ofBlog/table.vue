@@ -62,22 +62,30 @@
         </el-table-column>
         <el-table-column label="发表时间" prop="releaseTime"> </el-table-column>
         <el-table-column label="管理员 ID" prop="author"> </el-table-column>
-        <el-table-column label="官方文章标题" prop="title" show-overflow-tooltip>
+        <el-table-column
+          label="官方文章标题"
+          prop="title"
+          show-overflow-tooltip
+        >
         </el-table-column>
-        <el-table-column label="状态" prop="status" :filters="[
+        <el-table-column
+          label="状态"
+          prop="status"
+          :filters="[
             { text: '删除', value: '删除' },
             { text: '封禁', value: '封禁' },
             { text: '正常', value: '正常' },
             { text: '树洞', value: '树洞' },
           ]"
           :filter-method="filterTag"
-          filter-placement="bottom-end"> 
+          filter-placement="bottom-end"
+        >
           <template slot-scope="scope">
             <el-tag :type="statusTag(scope.row.status)">{{
               scope.row.status
             }}</el-tag>
           </template>
-          </el-table-column>
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -151,21 +159,20 @@
 </style>
 
 <script>
-import { getListByTag } from "@/api/postlist"
+import { getListByTag } from "@/api/postlist";
 import { getAllBlog, delBlog } from "@/api/blog";
 export default {
   data() {
     return {
       input: "",
-      tableData: [
-      ],
+      tableData: [],
       tableDataAll: [],
       total: 0,
       currentPage: 1,
       pageSize: 10,
     };
   },
-    mounted() {
+  mounted() {
     this.init();
   },
   methods: {
@@ -173,7 +180,6 @@ export default {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      console.log(index, row);
       // 删除文章
       delBlog(row.id).then((response) => {
         console.log("response=>", response);
@@ -200,17 +206,14 @@ export default {
     },
     convert() {},
     handleCurrentChange: function (currentPage) {
-      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      // console.log("currentPage=" + currentPage + "\n");
 
       // 分页获取博客列表
       getAllBlog({
         // 当前页码
         current: this.currentPage,
       }).then((response) => {
-        // console.log("blog=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -244,7 +247,6 @@ export default {
           // 内容
           this.tableData[i].content = info[i].content;
         }
-        // this.tableData.pop();
       });
     },
     // 判断模块类别
@@ -280,9 +282,8 @@ export default {
 
       // 获取博客总数
       // countBlog().then((response) => {
-        // this.total = response.data.data;
-        this.total = 3;
-        // console.log("countBlog()=>", response.data.data);
+      // this.total = response.data.data;
+      this.total = 3;
       // });
 
       // 分页获取博客列表
@@ -326,7 +327,6 @@ export default {
           // 内容
           this.tableData[i].content = info[i].content;
         }
-        // this.tableData.pop();
       });
     },
     filterTag(value, row) {

@@ -159,7 +159,6 @@ import {
   countAccount,
   searchAccountByName,
 } from "@/api/account";
-import store from "@/store";
 
 export default {
   data() {
@@ -180,7 +179,6 @@ export default {
       console.log(index, row);
     },
     handleDisabled(index, row) {
-      console.log(index, row);
       // 封禁用户
       if (row.status != "封禁")
         banAccount({ name: row.id }).then((response) => {
@@ -229,7 +227,6 @@ export default {
       if (this.input != "") {
         // 查询单个用户信息
         searchAccountByName({ name: this.input }).then((response) => {
-          // console.log("searchAccountByName()=>", response.data.data);
           var info = response.data.data;
           this.tableData = [];
           this.total = 1;
@@ -260,17 +257,14 @@ export default {
       } else this.init();
     },
     handleCurrentChange: function (currentPage) {
-      // console.log("handleCurrentChange()\n");
       this.tableData = [];
       this.currentPage = currentPage;
-      // console.log("currentPage=" + currentPage + "\n");
 
       //获取用户列表
       getAccount({
         //当前页码
         current: this.currentPage,
       }).then((response) => {
-        // console.log("account=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -334,7 +328,6 @@ export default {
       // 获取用户个数
       countAccount().then((response) => {
         this.total = response.data.data;
-        // console.log("countAccount()=>", response.data.data);
       });
 
       //获取用户列表
@@ -342,7 +335,6 @@ export default {
         //当前页码
         current: this.currentPage,
       }).then((response) => {
-        // console.log("account=>", response.data.data.records);
         var len = response.data.data.records.length;
         var info = response.data.data.records;
         for (var i = 0; i < len; i++) {
@@ -370,10 +362,7 @@ export default {
           // 权限
           this.tableData[i].auth = this.judgeAuth(info[i].roleId);
         }
-        // this.tableData.pop();
       });
-
-      // console.log("token=>", store.getters.token);
     },
     filterTag(value, row) {
       return row.status === value;
