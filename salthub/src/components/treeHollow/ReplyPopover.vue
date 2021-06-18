@@ -63,4 +63,7 @@ export default {
   border-color: #b87115;
   color: #fff;
 }
+.el-button--emoji:hover {
+  color: rgba(255, 255, 255, 0);
+}
 </style>

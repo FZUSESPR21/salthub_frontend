@@ -16,9 +16,9 @@
         :key="index"
       >
         <el-card>
-          <p class="is-size-5">{{item.title}}</p>
-          <h4>{{item.content}}</h4>
-          <p>{{item.accountName}} 发布于 {{item.releaseTime}}</p>
+          <p class="is-size-5">{{ item.title }}</p>
+          <h4>{{ item.content }}</h4>
+          <p>{{ item.accountName }} 发布于 {{ item.releaseTime }}</p>
         </el-card>
       </el-timeline-item>
     </el-timeline>
@@ -26,7 +26,8 @@
 </template>
 
 <script>
-import { getAllNotice } from "@/api/notice";
+import { getNotice } from "@/api/notice";
+import store from "@/store";
 export default {
   data() {
     return {
@@ -44,12 +45,22 @@ export default {
   },
   methods: {
     init() {
-      let params = { current: this.page.current };
+      let params = {
+        accountName: store.getters.user.name,
+        current: this.page.current,
+      };
       //获取所有公告
-      getAllNotice(params).then((response) => {
+      getNotice(params).then((response) => {
         const { data } = response;
         console.log(data);
         this.page.current = data.data.current;
+        getNotice({ accountName:"***", current: this.page.current}).then((response) => {
+          const { data } = response;
+          for (let i in data.data.records) {
+            data.data.records[i].accountName = "管理员"
+            this.noticeList.push(data.data.records[i]);
+          }
+        })
         if (this.page.current === 1) {
           //请求第一页就直接赋值
           this.page.total = data.data.total;

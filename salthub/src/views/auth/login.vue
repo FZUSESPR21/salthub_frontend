@@ -39,7 +39,8 @@
               :inactive-value="0"
             >
             </el-switch>
-            <a style="float: right" @click="toForgetPwd()">忘记密码？</a>
+            <!-- <a style="float: right" @click="toForgetPwd()">忘记密码？</a> -->
+            <a style="float: right">忘记密码？</a>
           </el-form-item>
 
           <el-form-item class="btn-content">
